@@ -1,8 +1,43 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import Gotham from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import Nav from "@/components/navigation/nav";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+import Footer from "@/components/navigation/footer";
+
+const gotham = Gotham({
+  src: "../public/fonts/fitgree/Figtree-VariableFont_wght.ttf",
+  weight: "700",
+  variable: "--font-gotham",
+});
+const gothamBlack = Gotham({
+  src: "../public/fonts/fitgree/Figtree-VariableFont_wght.ttf",
+  weight: "900",
+  variable: "--font-gothamBlack",
+});
+const gothamXLight = Gotham({
+  src: "../public/fonts/fitgree/Figtree-VariableFont_wght.ttf",
+  weight: "400",
+  variable: "--font-gothamXLight",
+});
+const gothamLight = Gotham({
+  src: "../public/fonts/fitgree/Figtree-VariableFont_wght.ttf",
+  weight: "500",
+  variable: "--font-gothamLight",
+});
+const gothamThin = Gotham({
+  src: "../public/fonts/fitgree/Figtree-VariableFont_wght.ttf",
+  weight: "600",
+  variable: "--font-gothamThin",
+});
+const gothamBook = Gotham({
+  src: "../public/fonts/fitgree/Figtree-VariableFont_wght.ttf",
+  weight: "300",
+  variable: "--font-gothamBook",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +50,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${gotham.variable} ${gothamBlack.variable} ${gothamXLight.variable} ${gothamLight.variable} ${gothamThin.variable} ${gothamBook.variable}`}
+      >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Nav />
+          <Toaster />
+          {children}
+          <Footer />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
