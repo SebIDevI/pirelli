@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Video from "@/components/catalog/video";
 
 const select = [
   {
@@ -94,35 +95,10 @@ function Home() {
 
   return (
     <div className="bg-secondary font-gotham">
-      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-primary-foreground relative overflow-hidden lg:px-24 px-8 p-6 bg-black">
+      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden lg:px-24 px-8 p-6 bg-black">
         <div className="w-full h-full absolute top-0 left-0 scale-[1.5]">
-          {/* <ReactPlayer
-            url="https://www.youtube.com/watch?v=g0Oah5C5ppA"
-            playing={true}
-            pip={false}
-            loop={true}
-            controls={false}
-            volume={0}
-            muted
-            width={"100%"}
-            height={"100%"}
-            className="w-full h-full"
-          /> */}
-          <video
-            autoPlay
-            muted
-            playsInline
-            controls
-            loop
-            className="w-full h-full"
-          >
-            <source src={"/Pirelli Design.mp4"} />
-            Your browser does not support the video tag...
-          </video>
+          <Video />
         </div>
-        {/* <div className="w-full h-full absolute top-0 left-0 bg-black">
-          <Image src={tyre} alt="Tyre" className="absolute right-0 scale-90" />
-        </div> */}
         <div className="w-full h-full relative mt-10">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col gap-10 md:gap-0 justify-between w-full h-full">
@@ -130,7 +106,7 @@ function Home() {
                 <div className="font-gothamLight uppercase text-sm">
                   <Link
                     href={"/"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-white hover:after:w-full after:transition-all after:duration-500"
                   >
                     Homepage
                   </Link>{" "}
@@ -157,7 +133,7 @@ function Home() {
                         <div className="relative w-full">
                           <DropdownMenuTrigger asChild className="w-full">
                             <Button
-                              className="w-full rounded-none h-16 bg-transparent border-2 font-medium border-primary hover:bg-primary text-primary hover:text-primary-foreground text-left px-10 uppercase flex items-center justify-between transition-all duration-300 ease-in-out"
+                              className="w-full rounded-none h-16 bg-transparent border-2 text-lg font-medium border-primary hover:bg-primary text-primary hover:text-primary-foreground text-left px-10 uppercase flex items-center justify-between transition-all duration-300 ease-in-out"
                               ref={triggerRef}
                             >
                               {types.title} <ChevronDown size={18} />
@@ -192,7 +168,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="h-auto w-full container py-10">
+      <div className="h-auto w-full px-8 lg:px-24 py-10">
         <p className="font-gothamBook">
           Catalogul de anvelope este împărțit pe categorii în funcție de anumite
           caracteristici specifice: <br />

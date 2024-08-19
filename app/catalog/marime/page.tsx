@@ -6,6 +6,7 @@ import React, { useState, useEffect, useRef } from "react";
 import poza from "@/public/pirelli-wheel.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Video from "@/components/catalog/video";
 
 function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -390,9 +391,9 @@ function Home() {
 
   return (
     <div className="bg-secondary font-gotham">
-      <div className="w-full xs:h-[60vh] text-primary-foreground relative overflow-hidden py-6">
-        {/* <div className="w-full h-full absolute top-0 left-0 scale-125">
-          <ReactPlayer
+      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden lg:px-24 px-8 p-6 bg-black">
+        <div className="w-full h-full absolute top-0 left-0 scale-[1.5]">
+          {/* <ReactPlayer
             url="https://www.youtube.com/watch?v=g0Oah5C5ppA"
             playing={true}
             loop={true}
@@ -402,26 +403,27 @@ function Home() {
             width={"100%"}
             height={"100%"}
             className="w-full h-full"
-          />
-        </div> */}
-        <div className="w-full h-full absolute top-0 left-0 bg-black">
-          <Image src={poza} alt="Tyre" className="absolute right-0 scale-90" />
+          /> */}
+          <Video />
         </div>
-        <div className="w-full h-full relative mt-10 container">
+        {/* <div className="w-full h-full absolute top-0 left-0 bg-black">
+          <Image src={poza} alt="Tyre" className="absolute right-0 scale-90" />
+        </div> */}
+        <div className="w-full h-full relative mt-10">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col justify-between w-full h-full">
               <div className="lg:w-1/2">
                 <p className="font-gothamLight uppercase text-sm">
                   <Link
                     href={"/"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-white hover:after:w-full after:transition-all after:duration-500"
                   >
                     Homepage
                   </Link>
                   {" / "}
                   <Link
                     href={"/catalog"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-white hover:after:w-full after:transition-all after:duration-500"
                   >
                     Catalog anvelope
                   </Link>{" "}
@@ -446,7 +448,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full container py-10">
+      <div className="w-full px-8 lg:px-24 py-10">
         {sizes.map((size, i) => (
           <div key={i}>
             <p className="py-6">{size.size[1] + size.size[2]} RIM</p>
@@ -466,7 +468,7 @@ function Home() {
             </div>
           </div>
         ))}
-        <p className="max-w-[1200px] text-sm mx-auto font-gothamBook mt-20">
+        <p className="max-w-[1400px] text-sm mx-auto font-gothamBook mt-20">
           WARNING! By selecting the dimensions, the interactive application will
           show the list of Pirelli tyres best suited to your vehicle according
           to its technical features and homologation.{" "}

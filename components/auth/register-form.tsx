@@ -48,9 +48,9 @@ export const RegisterForm = () => {
   };
   return (
     <AuthCard
-      cardTitle="Create an account 🎉"
+      cardTitle="Creați un cont nou 🎉"
       backButtonHref="/auth/login"
-      backButtonLabel="Already have an account?"
+      backButtonLabel="Aveți deja un cont?"
       showSocials
     >
       <div>
@@ -64,7 +64,7 @@ export const RegisterForm = () => {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder="sebdev" type="text" />
+                      <Input {...field} placeholder="Pirelli" type="text" />
                     </FormControl>
                     <FormDescription />
                     <FormMessage />
@@ -95,11 +95,11 @@ export const RegisterForm = () => {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>Parolă</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="******"
+                        placeholder="*********"
                         type="password"
                         autoComplete="current-password"
                       />
@@ -111,9 +111,9 @@ export const RegisterForm = () => {
               />
               <FormSuccess message={success} />
               <FormError message={error} />
-              <Button size={"sm"} variant={"link"}>
-                <Link href="/auth/reset">Forgot your password</Link>
-              </Button>
+              {/* <Button size={"sm"} variant={"link"}>
+                <Link href="/auth/reset">Ați uitat parola?</Link>
+              </Button> */}
             </div>
             <Button
               type="submit"
@@ -122,7 +122,7 @@ export const RegisterForm = () => {
                 status === "executing" ? "animate-pulse" : ""
               )}
             >
-              {"Register"}
+              {"Înregistrați-vă"}
             </Button>
           </form>
         </Form>

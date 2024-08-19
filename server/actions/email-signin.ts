@@ -3,7 +3,7 @@ import { LoginSchema } from "@/types/login-schema";
 import { createSafeActionClient } from "next-safe-action";
 import { db } from "..";
 import { eq } from "drizzle-orm";
-import { twoFactorTokens, users } from "../schema";
+import { accounts, twoFactorTokens, users } from "../schema";
 import {
   generateEmailVerificationToken,
   generateTwoFactorToken,
@@ -18,15 +18,21 @@ const action = createSafeActionClient();
 export const emailSignIn = action(
   LoginSchema,
   async ({ email, password, code }) => {
-    console.log("code");
-    console.log(code);
     try {
       const existingUser = await db.query.users.findFirst({
         where: eq(users.email, email),
       });
 
-      if (existingUser?.email !== email) {
-        return { error: "Email not found" };
+      if (existingUser?.email !== email || !existingUser) {
+        return { error: "Email-ul nu a fost găsit" };
+      }
+
+      const existingAcc = await db.query.accounts.findFirst({
+        where: eq(accounts.userId, existingUser.id),
+      });
+
+      if (existingAcc?.provider === "google") {
+        return { error: "Contul este autentificat prin google" };
       }
 
       if (!existingUser!.emailVerified) {
@@ -37,7 +43,7 @@ export const emailSignIn = action(
           verificationToken[0].email,
           verificationToken[0].token
         );
-        return { success: "Confirmation email sent" };
+        return { success: "Confirmarea email-ului a fost trimisă" };
       }
 
       if (existingUser?.twoFactorEnabled && existingUser.email) {
@@ -46,25 +52,23 @@ export const emailSignIn = action(
             existingUser.email
           );
           if (!twoFactorToken) {
-            return { error: "No token" };
+            return { error: "Niciun token" };
           }
-          console.log("twoFactorToken");
-          console.log(twoFactorToken);
           if (twoFactorToken.token !== code) {
-            return { error: "Invalid token" };
+            return { error: "Token invalid" };
           }
           const hasExpired = new Date(twoFactorToken.expires) < new Date();
           if (hasExpired) {
-            return { error: "Token has expired" };
+            return { error: "Token-ul a expirat" };
           }
           await db
             .delete(twoFactorTokens)
             .where(eq(twoFactorTokens.id, twoFactorToken.id));
         } else {
           const token = await generateTwoFactorToken(existingUser.email);
-          if (!token) return { error: "Token not generated" };
+          if (!token) return { error: "Token-ul nu a fost generat" };
           await sendTwoFactorTokenByEmail(token[0].email, token[0].token);
-          return { twoFactor: "Two factor token sent successfully!" };
+          return { twoFactor: "Token-ul doi factori a fost setat cu succes!" };
         }
       }
 
@@ -80,13 +84,13 @@ export const emailSignIn = action(
       if (error instanceof AuthError) {
         switch (error.type) {
           case "CredentialsSignin":
-            return { error: "Email or password incorrect" };
+            return { error: "Email sau parolă incorecte" };
           case "AccessDenied":
             return { error: error.message };
           case "OAuthSignInError":
             return { error: error.message };
           default:
-            return { error: "An error occurred" };
+            return { error: "A intervenit o eroare" };
         }
       }
       throw error;

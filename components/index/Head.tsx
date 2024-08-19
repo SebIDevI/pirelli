@@ -29,7 +29,7 @@ function Head() {
           className="lg:w-2/5 lg:h-2/5 w-3/5 h-3/5 pt-20"
         />
       </motion.div>
-      <div className="absolute w-full h-full dark:bg-[#00000064] bg-[#ffffff9d]"></div>
+      <div className="absolute block lg:hidden w-full h-full dark:bg-[#00000064] bg-[#ffffff9d]"></div>
       <div className="lg:w-1/2 lg:py-20 z-0 px-6 md:px-12">
         <Image src={pzero} alt="Logo PZERO WORLD" className="mt-20 py-8" />
         <hr className="w-[60%] border-primary animate-grow" />

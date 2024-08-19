@@ -6,7 +6,7 @@ import wheels from "@/public/index/cursePirelli.jpeg";
 
 function Section1() {
   return (
-    <div className="w-full bg-secondary lcontainer py-12 px-6 md:px-12">
+    <div className="w-full dark:bg-black bg-white lcontainer py-12 px-6 md:px-12">
       <div className="border-2 grid lg:grid-cols-2 gap-5 p-8 py-10 text-secondary-foreground border-primary w-full">
         <div className="p-4 lg:pe-16 lg:self-center">
           <span className="relative py-2 uppercase text-sm before:absolute before:top-0 before:left-0 before:w-2/3 before:h-full before:border-b-2 before:border-primary">

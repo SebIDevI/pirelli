@@ -57,9 +57,9 @@ export const LoginForm = () => {
   };
   return (
     <AuthCard
-      cardTitle="Welcome back!"
+      cardTitle="Bine ați revenit!"
       backButtonHref="/auth/register"
-      backButtonLabel="Create a new account"
+      backButtonLabel="Nu aveți cont? Creați unul nou aici!"
       showSocials
     >
       <div>
@@ -72,7 +72,9 @@ export const LoginForm = () => {
                   name="code"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>We ve sent you a two factor code</FormLabel>
+                      <FormLabel>
+                        Am trimis un cod de autentificare cu doi factori
+                      </FormLabel>
                       <FormControl>
                         <InputOTP
                           disabled={status === "executing"}
@@ -121,7 +123,7 @@ export const LoginForm = () => {
                     name="password"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Parolă</FormLabel>
                         <FormControl>
                           <Input
                             {...field}
@@ -141,7 +143,7 @@ export const LoginForm = () => {
               <FormError message={error} />
 
               <Button size={"sm"} className="px-0" variant={"link"}>
-                <Link href="/auth/reset">Forgot your password</Link>
+                <Link href="/auth/reset">Am uitat parola</Link>
               </Button>
             </div>
             <Button
@@ -151,7 +153,7 @@ export const LoginForm = () => {
                 status === "executing" ? "animate-pulse" : ""
               )}
             >
-              {showTwoFactor ? "Verify" : "Sign in"}
+              {showTwoFactor ? "Verificați" : "Intră în cont"}
             </Button>
           </form>
         </Form>

@@ -9,6 +9,7 @@ import formatPrice from "@/lib/format-price";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ProductsTypes, ProductTypes } from "@/types/filtering-types";
+import NoProduct from "./no-product";
 
 export const revalidate = 10;
 
@@ -114,45 +115,49 @@ export default function Products({ products }: ProductsTypes) {
   console.log(paramTags);
   return (
     <main className="grid sm:grid-cols-1 md:grid-cols-2 gap-12 lg:grid-cols-3">
-      {filtered.map((product) => (
-        <div key={product.id}>
-          <Link
-            className="pt-2"
-            href={`/products/${product.title}?id=${product.productVariants[0].id}&productID=${product.id}&price=${product.productVariants[0].price}&title=${product.title}&type=${product.productVariants[0].productType}&image=${product.productVariants[0].variantImages[0].url}`}
-          >
-            <Image
-              className="rounded-md mb-2"
-              src={product.productVariants[0].variantImages[0].url}
-              width={720}
-              height={480}
-              alt={product.productVariants[0].product.title}
-              loading="lazy"
-            />
-            <div className="flex justify-between">
-              <div className="font-medium">
-                <h2>{product.productVariants[0].product.title}</h2>
+      {filtered.length > 0 ? (
+        filtered.map((product) => (
+          <div key={product.id}>
+            <Link
+              className="pt-2"
+              href={`/products/${product.title}?id=${product.productVariants[0].id}&productID=${product.id}&price=${product.productVariants[0].price}&title=${product.title}&type=${product.productVariants[0].productType}&image=${product.productVariants[0].variantImages[0].url}`}
+            >
+              <Image
+                className="rounded-md mb-2 aspect-square"
+                src={product.productVariants[0].variantImages[0].url}
+                width={720}
+                height={480}
+                alt={product.productVariants[0].product.title}
+                loading="lazy"
+              />
+              <div className="flex justify-between">
+                <div className="font-medium">
+                  <h2>{product.productVariants[0].product.title}</h2>
+                </div>
+                <div>
+                  <Badge className="text-sm" variant={"secondary"}>
+                    {formatPrice(product.productVariants[0].price)}
+                  </Badge>
+                </div>
               </div>
-              <div>
-                <Badge className="text-sm" variant={"secondary"}>
-                  {formatPrice(product.productVariants[0].price)}
-                </Badge>
-              </div>
-            </div>
-          </Link>
-          <p className="text-sm text-muted-foreground">
-            {product.productVariants.map((variant, idx) => (
-              <Link
-                href={`/products/${product.title}?id=${product.productVariants[idx].id}&productID=${product.id}&price=${product.productVariants[idx].price}&title=${product.title}&type=${product.productVariants[idx].productType}&image=${product.productVariants[idx].variantImages[0].url}`}
-                key={variant.id}
-              >
-                {idx !== product.productVariants.length - 1
-                  ? variant.productType + ", "
-                  : variant.productType}{" "}
-              </Link>
-            ))}
-          </p>
-        </div>
-      ))}
+            </Link>
+            <p className="text-sm text-muted-foreground">
+              {product.productVariants.map((variant, idx) => (
+                <Link
+                  href={`/products/${product.title}?id=${product.productVariants[idx].id}&productID=${product.id}&price=${product.productVariants[idx].price}&title=${product.title}&type=${product.productVariants[idx].productType}&image=${product.productVariants[idx].variantImages[0].url}`}
+                  key={variant.id}
+                >
+                  {idx !== product.productVariants.length - 1
+                    ? variant.productType + ", "
+                    : variant.productType}{" "}
+                </Link>
+              ))}
+            </p>
+          </div>
+        ))
+      ) : (
+        <NoProduct />
+      )}
     </main>
   );
 }

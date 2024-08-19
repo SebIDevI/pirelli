@@ -9,7 +9,7 @@ export default function Socials() {
     <div className="flex flex-col items-center w-full gap-4">
       <Button
         variant={"outline"}
-        className="flex gap-4 w-full"
+        className="flex gap-2 w-full"
         onClick={() =>
           signIn("google", {
             redirect: false,
@@ -17,7 +17,7 @@ export default function Socials() {
           })
         }
       >
-        <p>Sign in with Google</p> <FcGoogle className="w-5 h-5" />
+        <p>Intrați în cont cu Google</p> <FcGoogle className="w-5 h-5" />
       </Button>
     </div>
   );

@@ -117,12 +117,16 @@ async function Page({ params }: { params: { slug: string } }) {
       : "";
 
   return (
-    <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] bg-fixed font-gotham pb-10">
-      <div className="w-full h-auto text-primary-foreground relative overflow-hidden py-6">
-        <div className="w-full h-full absolute top-0 left-0 bg-black">
-          <Image src={tyre} alt="Tyre" className="absolute right-0 scale-90" />
+    <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] dark:to-[#000] dark:from-[#1f1f1f] bg-fixed font-gotham pb-10">
+      <div className="w-full h-auto min-h-[50vh] text-primary-foreground relative overflow-hidden py-6">
+        <div className="w-full h-full absolute top-0 left-0 bg-secondary-foreground">
+          <Image
+            src={tyre}
+            alt="Tyre"
+            className="absolute right-0 scale-[.8]"
+          />
         </div>
-        <div className="w-full h-full relative mt-10 container">
+        <div className="w-full h-full relative mt-10 px-8 lg:px-24">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col justify-between w-full h-full">
               <div className="md:w-1/2">
@@ -159,7 +163,7 @@ async function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="px-8 lg:px-24">
         <ProductTags tagCount={tagCount} avoid="Toate sezoanele" />
         <Products products={data} />
       </div>

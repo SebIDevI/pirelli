@@ -50,7 +50,7 @@ export default function ProductShowcase({
                   {img.url ? (
                     <Image
                       priority
-                      className="rounded-md"
+                      className="rounded-md aspect-square"
                       width={1028}
                       height={720}
                       src={img.url}
@@ -77,7 +77,7 @@ export default function ProductShowcase({
                         index === activeThumbnail[0]
                           ? "opacity-100"
                           : "opacity-75",
-                        "rounded-md transition-all duration-300 ease-in-out cursor-pointer hover:opacity-75"
+                        "rounded-md transition-all duration-300 ease-in-out cursor-pointer hover:opacity-75 aspect-square"
                       )}
                       width={72}
                       height={48}
