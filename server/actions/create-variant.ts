@@ -6,7 +6,7 @@ import { db } from "..";
 import {
   products,
   productVariants,
-  variantImages,
+  productImages,
   variantTags,
 } from "../schema";
 import { eq } from "drizzle-orm";
@@ -73,23 +73,23 @@ export const createVariant = action(
             variantID: editVariant[0].id,
           }))
         );
-        await db
-          .delete(variantImages)
-          .where(eq(variantImages.variantID, editVariant[0].id));
-        await db.insert(variantImages).values(
-          newImgs.map(
-            (
-              img: { name: string; size: number; url: string },
-              idx: number
-            ) => ({
-              name: img.name,
-              size: img.size,
-              url: img.url,
-              variantID: editVariant[0].id,
-              order: idx,
-            })
-          )
-        );
+        // await db
+        //   .delete(variantImages)
+        //   .where(eq(variantImages.variantID, editVariant[0].id));
+        // await db.insert(variantImages).values(
+        //   newImgs.map(
+        //     (
+        //       img: { name: string; size: number; url: string },
+        //       idx: number
+        //     ) => ({
+        //       name: img.name,
+        //       size: img.size,
+        //       url: img.url,
+        //       variantID: editVariant[0].id,
+        //       order: idx,
+        //     })
+        //   )
+        // );
         algoliaIndex.partialUpdateObject({
           objectID: editVariant[0].id.toString(),
           id: editVariant[0].productID.toString(),
@@ -127,20 +127,20 @@ export const createVariant = action(
             variantID: newVariant[0].id,
           }))
         );
-        await db.insert(variantImages).values(
-          newImgs.map(
-            (
-              img: { name: string; size: number; url: string },
-              idx: number
-            ) => ({
-              name: img.name,
-              size: img.size,
-              url: img.url,
-              variantID: newVariant[0].id,
-              order: idx,
-            })
-          )
-        );
+        // await db.insert(variantImages).values(
+        //   newImgs.map(
+        //     (
+        //       img: { name: string; size: number; url: string },
+        //       idx: number
+        //     ) => ({
+        //       name: img.name,
+        //       size: img.size,
+        //       url: img.url,
+        //       variantID: newVariant[0].id,
+        //       order: idx,
+        //     })
+        //   )
+        // );
         if (product) {
           algoliaIndex.saveObject({
             objectID: newVariant[0].id.toString(),
