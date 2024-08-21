@@ -10,6 +10,12 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ProductsTypes, ProductTypes } from "@/types/filtering-types";
 import NoProduct from "./no-product";
+import { GiRaceCar } from "react-icons/gi";
+import { PiCarProfileFill, PiVanFill } from "react-icons/pi";
+import { BsFillSunFill, BsSnow } from "react-icons/bs";
+import { LuSunSnow } from "react-icons/lu";
+import { FaFlagCheckered } from "react-icons/fa";
+import Tagz from "./tags";
 
 export const revalidate = 10;
 
@@ -59,13 +65,16 @@ export default function Products({ products }: ProductsTypes) {
       ? "ALL SEASON"
       : slug === "vara"
       ? "SUMMER"
-      : slug;
+      : slug === "carrier"
+      ? "CARRIER"
+      : (slug as string).toUpperCase();
   if (trueSlug[0] <= "9" && trueSlug[0] >= "0") trueSlug = "";
   else
     paramTags.push([
       (trueSlug as string).replaceAll("%20", "").replaceAll("_", "/"),
     ]);
 
+  console.log("products");
   console.log(products);
   products
     .filter((product) => product.productVariants.length > 0)
@@ -84,12 +93,16 @@ export default function Products({ products }: ProductsTypes) {
           if (row[0][0] < "0" || row[0][0] > "9") {
             let orIndex = 0;
             row.forEach((ptag) => {
-              if (tagz.includes(ptag)) orIndex++;
+              if (tagz.includes(ptag === "CARZ" ? "CAR" : ptag)) orIndex++;
             });
             if (!orIndex) ok = false;
           }
         });
-        console.log(productVariant.size);
+        console.log("tagz");
+        console.log(
+          !tagz.includes(trueSlug as string) ? tagz + " " + trueSlug : ""
+        );
+        console.log(trueSlug);
         if (
           (!tagz.includes(trueSlug as string) && trueSlug !== "") ||
           !(!filtered[0] || filtered[filtered.length - 1].id !== product.id)
@@ -120,19 +133,23 @@ export default function Products({ products }: ProductsTypes) {
           <div key={product.id}>
             <Link
               className="pt-2"
-              href={`/products/${product.title}?id=${product.productVariants[0].id}&productID=${product.id}&price=${product.productVariants[0].price}&title=${product.title}&type=${product.productVariants[0].productType}&image=${product.productVariants[0].variantImages[0].url}`}
+              href={`/products/${product.title}?id=${product.productVariants[0].id}&productID=${product.id}&price=${product.productVariants[0].price}&title=${product.title}&type=${product.productVariants[0].productType}&image=${product.productImages[0].url}`}
             >
               <Image
                 className="rounded-md mb-2 aspect-square"
-                src={product.productVariants[0].variantImages[0].url}
+                src={product.productImages[0].url}
                 width={720}
                 height={480}
                 alt={product.productVariants[0].product.title}
                 loading="lazy"
               />
+              <Tagz variantTags={product.productVariants[0]} />
               <div className="flex justify-between">
                 <div className="font-medium">
-                  <h2>{product.productVariants[0].product.title}</h2>
+                  <h2 className="text-xl">
+                    {product.productVariants[0].product.title} -{" "}
+                    {product.productVariants[0].size}
+                  </h2>
                 </div>
                 <div>
                   <Badge className="text-sm" variant={"secondary"}>
@@ -140,19 +157,15 @@ export default function Products({ products }: ProductsTypes) {
                   </Badge>
                 </div>
               </div>
+              <p className="font-gothamLight">{product.smalldesc}</p>
             </Link>
-            <p className="text-sm text-muted-foreground">
-              {product.productVariants.map((variant, idx) => (
-                <Link
-                  href={`/products/${product.title}?id=${product.productVariants[idx].id}&productID=${product.id}&price=${product.productVariants[idx].price}&title=${product.title}&type=${product.productVariants[idx].productType}&image=${product.productVariants[idx].variantImages[0].url}`}
-                  key={variant.id}
-                >
-                  {idx !== product.productVariants.length - 1
-                    ? variant.productType + ", "
-                    : variant.productType}{" "}
-                </Link>
-              ))}
-            </p>
+
+            <Link
+              href={`/products/${product.title}?id=${product.productVariants[0].id}&productID=${product.id}&price=${product.productVariants[0].price}&title=${product.title}&type=${product.productVariants[0].productType}&image=${product.productImages[0].url}`}
+              className="text-sm text-muted-foreground underline"
+            >
+              Vedeți toate mărimile aici
+            </Link>
           </div>
         ))
       ) : (

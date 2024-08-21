@@ -218,6 +218,20 @@
       "when": 1721470119729,
       "tag": "0030_colossal_master_mold",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1724163141028,
+      "tag": "0031_pink_penance",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1724240567294,
+      "tag": "0032_unknown_tomorrow_man",
+      "breakpoints": true
     }
   ]
 }

@@ -24,7 +24,7 @@ import { useAction } from "next-safe-action/hooks";
 import { deleteProduct } from "@/server/actions/delete-product";
 import { toast } from "sonner";
 import Link from "next/link";
-import { VariantsWithImagesTags } from "@/lib/infer-type";
+import { ProductImages, VariantsWithImagesTags } from "@/lib/infer-type";
 import { ProductVariant } from "./product-variant";
 
 type ProductColumn = {
@@ -89,8 +89,9 @@ export const columns: ColumnDef<ProductColumn>[] = [
     header: "Variants",
     cell: ({ row }) => {
       const variants = row.getValue("variants") as VariantsWithImagesTags[];
+      const images = row.getValue("images") as ProductImages[];
       return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {variants.map((variant) => (
             <div key={variant.id}>
               <TooltipProvider>

@@ -12,7 +12,8 @@ export default async function Products() {
 
   const products = await db.query.products.findMany({
     with: {
-      productVariants: { with: { variantImages: true, variantTags: true } },
+      productVariants: { with: { variantTags: true } },
+      productImages: true,
     },
     orderBy: (products, { desc }) => [desc(products.id)],
   });
@@ -24,9 +25,8 @@ export default async function Products() {
       title: product.title,
       variants: product.productVariants,
       image:
-        product.productVariants[0] &&
-        product.productVariants[0].variantImages[0]
-          ? product.productVariants[0].variantImages[0].url
+        product.productVariants[0] && product.productImages[0]
+          ? product.productImages[0].url
           : placeholder.src,
     };
   });

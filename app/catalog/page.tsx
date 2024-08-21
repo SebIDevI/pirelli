@@ -30,31 +30,10 @@ const select = [
       { text: "P ZERO™", link: "/catalog/linie-de-produse/p-zero" },
       { text: "CINTURATO™", link: "/catalog/linie-de-produse/cinturato" },
       { text: "SCORPION™", link: "/catalog/linie-de-produse/scorpion" },
-      { text: "SOTTOZERO™", link: "/catalog/linie-de-produse/sottozero" },
+      { text: "CARRIER™", link: "/catalog/linie-de-produse/carrier" },
     ],
   },
 ];
-
-const variantsDropdown: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.9,
-    translateY: "-100%",
-    transition: {
-      ease: "easeInOut",
-      duration: 0.2,
-    },
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    translateY: "-100%",
-    transition: {
-      ease: "easeInOut",
-      duration: 0.2,
-    },
-  },
-};
 
 function Home() {
   const triggerRef = useRef<HTMLButtonElement>(null);

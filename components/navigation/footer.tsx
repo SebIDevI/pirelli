@@ -1,5 +1,13 @@
+"use client";
+
 import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTiktok,
+  FaYoutube,
+} from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
@@ -22,11 +30,18 @@ function Footer() {
           <div className="flex gap-4 items-center">
             <p className="font-gothamBook">Urmați-ne</p>
             <div className="flex gap-4 items-center text-2xl">
-              <FaFacebook />
-              <FaXTwitter />
-              <FaYoutube />
-              <FaLinkedin />
-              <FaInstagram />
+              <Link href="https://www.facebook.com/Racebox.ro/?locale=ro_RO">
+                <FaFacebook />
+              </Link>
+              <Link href="https://www.tiktok.com/@racebox?is_from_webapp=1&sender_device=pc">
+                <FaTiktok />
+              </Link>
+              <Link href="https://www.youtube.com/c/RaceboxRomania">
+                <FaYoutube />
+              </Link>
+              <Link href="https://www.instagram.com/racebox.ro/">
+                <FaInstagram />
+              </Link>
             </div>
           </div>
         </header>
@@ -59,9 +74,21 @@ function Footer() {
               <b>INFORMATII DESPRE COMPANIE</b>
             </p>
             <ul className="text-primary-foreground/70 flex flex-col gap-2 font-gothamBook">
-              <li>De ce pirelli</li>
-              <li>Companie</li>
-              <li>Contactați-ne</li>
+              <li>
+                <Link
+                  href={
+                    "https://www.pirelli.com/tyres/ro-ro/vehicule/about/de-ce-pirelli"
+                  }
+                >
+                  De ce pirelli
+                </Link>
+              </li>
+              <li>
+                <Link href={"https://www.racebox.ro"}>Companie</Link>
+              </li>
+              <li>
+                <Link href={"/contact"}>Contactați-ne</Link>
+              </li>
             </ul>
           </div>
         </div>

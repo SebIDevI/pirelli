@@ -47,6 +47,8 @@ export default function ProductTags({
   };
   avoid: string;
 }) {
+  console.log("tagCount");
+  console.log(tagCount);
   const router = useRouter();
   const params = useSearchParams();
   const { slug } = useParams();
@@ -62,7 +64,7 @@ export default function ProductTags({
       if (season.includes(type)) season.splice(season.indexOf(type), 1);
       else season.push(type);
     }
-    if (type === "CAR" || type === "SUV" || type === "VAN") {
+    if (type === "CARZ" || type === "SUV" || type === "VAN") {
       if (vehicleType.includes(type))
         vehicleType.splice(vehicleType.indexOf(type), 1);
       else vehicleType.push(type);
@@ -147,7 +149,7 @@ export default function ProductTags({
         },
         {
           name: "CAR",
-          val: "CAR",
+          val: "CARZ",
           numb: tagCount.car,
         },
         {

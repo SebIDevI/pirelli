@@ -12,18 +12,6 @@ import { productVariants } from "@/server/schema";
 export const revalidate = 0;
 
 export default async function Home() {
-  const data = await db.query.products.findMany({
-    with: {
-      productVariants: {
-        with: {
-          variantImages: true,
-          variantTags: true,
-          product: true,
-        },
-      },
-    },
-    orderBy: (products, { desc }) => [desc(products.id)],
-  });
   return (
     <main>
       {/* <Algolia /> */}

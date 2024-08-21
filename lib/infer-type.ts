@@ -20,19 +20,21 @@ export type InferResultType<
   With extends IncludeRelations<TableName> | undefined = undefined
 > = BuildQueryResult<TSchema, TSchema[TableName], { with: With }>;
 
+export type ProductImages = InferResultType<"productImages">;
+
 export type VariantsWithImagesTags = InferResultType<
   "productVariants",
-  { variantImages: true; variantTags: true }
+  { variantTags: true }
 >;
 
 export type VariantsWithProduct = InferResultType<
   "productVariants",
-  { variantImages: true; variantTags: true; product: true }
+  { variantTags: true; product: true }
 >;
 
 export type ProductVariantsWithImagesTags = InferResultType<
   "productVariants",
-  { variantImages: true; variantTags: true; product: true }
+  { variantTags: true; product: true }
 >;
 
 export type TotalOrders = InferResultType<
@@ -40,9 +42,7 @@ export type TotalOrders = InferResultType<
   {
     order: { with: { user: true } };
     product: true;
-    productVariants: {
-      with: { variantImages: true };
-    };
+    productVariants: true;
   }
 >;
 
@@ -52,7 +52,7 @@ export type TagsWithVariantsAndAll = InferResultType<
     productVariants: {
       with: {
         product: {
-          with: { productVariants: { with: { variantImages: true } } };
+          with: { productVariants: true };
         };
       };
     };

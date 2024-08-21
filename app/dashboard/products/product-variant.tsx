@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { VariantsWithImagesTags } from "@/lib/infer-type";
+import { ProductImages, VariantsWithImagesTags } from "@/lib/infer-type";
 import {
   Dialog,
   DialogContent,
@@ -50,7 +50,7 @@ export const ProductVariant = ({
     resolver: zodResolver(VariantSchema),
     defaultValues: {
       tags: [],
-      variantImages: [],
+      // variantImages: [],
       editMode,
       id: undefined,
       productID,
@@ -86,14 +86,14 @@ export const ProductVariant = ({
         "tags",
         variant.variantTags.map((tag) => tag.tag)
       );
-      form.setValue(
-        "variantImages",
-        variant.variantImages.map((img) => ({
-          name: img.name,
-          size: img.size,
-          url: img.url,
-        }))
-      );
+      // form.setValue(
+      //   "variantImages",
+      //   images.map((img) => ({
+      //     name: img.name,
+      //     size: img.size,
+      //     url: img.url,
+      //   }))
+      // );
       form.setValue("price", variant.price);
       form.setValue("pirelliId", variant.pirelliId);
       form.setValue("ean", variant.ean);
@@ -354,7 +354,7 @@ export const ProductVariant = ({
                 </FormItem>
               )}
             />
-            <VariantImages />
+            {/* <VariantImages /> */}
             <div className="flex gap-4 items-center justify-center">
               {editMode && variant && (
                 <Button

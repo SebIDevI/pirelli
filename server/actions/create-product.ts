@@ -12,6 +12,7 @@ const action = createSafeActionClient();
 export const createProduct = action(
   ProductSchema,
   async ({
+    smalldesc,
     description,
     price,
     title,
@@ -40,6 +41,7 @@ export const createProduct = action(
         const editedProduct = await db
           .update(products)
           .set({
+            smalldesc,
             description,
             // price,
             title,
@@ -67,6 +69,7 @@ export const createProduct = action(
         const newProduct = await db
           .insert(products)
           .values({
+            smalldesc,
             description,
             // price,
             title,
@@ -88,6 +91,7 @@ export const createProduct = action(
         return { success: `Product ${newProduct[0].title} has been created` };
       }
     } catch (err) {
+      console.log(err);
       return { error: "Failed to create product" };
     }
   }

@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { VariantsWithImagesTags } from "@/lib/infer-type";
+import { ProductImages, VariantsWithImagesTags } from "@/lib/infer-type";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -16,8 +16,10 @@ import { useEffect, useState } from "react";
 
 export default function ProductShowcase({
   variants,
+  images,
 }: {
   variants: VariantsWithImagesTags[];
+  images: ProductImages[];
 }) {
   const [api, setApi] = useState<CarouselApi>();
   const [activeThumbnail, setActiveThumbnail] = useState([0]);
@@ -44,7 +46,7 @@ export default function ProductShowcase({
         {variants.map(
           (variant) =>
             variant.productType === selectedColor &&
-            variant.variantImages.map((img) => {
+            images.map((img) => {
               return (
                 <CarouselItem key={img.url}>
                   {img.url ? (
@@ -66,7 +68,7 @@ export default function ProductShowcase({
         {variants.map(
           (variant) =>
             variant.productType === selectedColor &&
-            variant.variantImages.map((img, index) => {
+            images.map((img, index) => {
               return (
                 <div key={img.url}>
                   {img.url ? (

@@ -8,6 +8,9 @@ export const ProductSchema = z.object({
   description: z
     .string()
     .min(10, { message: "Description must be at least 10 characters long" }),
+  smalldesc: z
+    .string()
+    .min(10, { message: "Description must be at least 10 characters long" }),
 });
 
 export type zProductSchema = z.infer<typeof ProductSchema>;

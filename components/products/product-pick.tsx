@@ -27,8 +27,8 @@ export default function ProductPick({
     <div
       //   style={{ backgroundColor: color }}
       className={cn(
-        "bg-slate-200/60 p-1 px-2 rounded-md cursor-pointer transition-all duration-300 ease-in-out hover:opacity-75",
-        selectedColor === productType ? "opacity-100" : "opacity-50"
+        "py-3 px-6 cursor-pointer transition-all duration-300 ease-in-out hover:bg-secondary-foreground/10",
+        selectedColor === productType ? "bg-secondary-foreground/10" : ""
       )}
       onClick={() =>
         router.push(

@@ -1,0 +1,1 @@
+ALTER TABLE "products" ADD COLUMN "smalldesc" text NOT NULL;

@@ -45,6 +45,7 @@ export default function ProductForm() {
     defaultValues: {
       title: "",
       description: "",
+      smalldesc: "",
     },
     mode: "onChange",
   });
@@ -65,6 +66,7 @@ export default function ProductForm() {
         const id = parseInt(editMode);
         form.setValue("title", data.success.title);
         form.setValue("description", data.success.description);
+        form.setValue("smalldesc", data.success.smalldesc);
       }
     }
   };
@@ -115,6 +117,19 @@ export default function ProductForm() {
                   <FormLabel>Product title</FormLabel>
                   <FormControl>
                     <Input placeholder="Saekdong Stripe" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="smalldesc"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Small Description</FormLabel>
+                  <FormControl>
+                    <Input placeholder="SmallDesc" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
