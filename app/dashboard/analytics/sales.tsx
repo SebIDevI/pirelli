@@ -79,7 +79,7 @@ export default function Sales({ totalOrders }: { totalOrders: TotalOrders[] }) {
                   <TableCell>{quantity}</TableCell>
                   <TableCell>
                     <Image
-                      src={productVariants.variantImages[0].url}
+                      src={product.productImages[0].url}
                       alt={product.title}
                       width={48}
                       height={48}

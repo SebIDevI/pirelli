@@ -26,8 +26,10 @@ export default async function Analytics() {
     limit: 10,
     with: {
       order: { with: { user: true } },
-      product: true,
-      productVariants: { with: { variantImages: true } },
+      product: {
+        with: { productImages: true },
+      },
+      productVariants: true,
     },
   });
 
