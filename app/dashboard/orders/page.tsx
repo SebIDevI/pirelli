@@ -59,10 +59,8 @@ export default async function Page() {
     with: {
       orderProduct: {
         with: {
-          product: true,
-          productVariants: {
-            with: { variantImages: true },
-          },
+          product: { with: { productImages: true } },
+          productVariants: true,
           order: true,
         },
       },
@@ -167,7 +165,7 @@ export default async function Page() {
                                 <TableRow key={product.id}>
                                   <TableCell>
                                     <Image
-                                      src={productVariants.variantImages[0].url}
+                                      src={product.productImages[0].url}
                                       alt={product.title}
                                       width={48}
                                       height={48}
