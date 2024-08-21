@@ -14,9 +14,9 @@ async function Page({ params }: { params: { slug: string } }) {
   console.log(params.slug.replaceAll("%20", "").replaceAll("_", "/"));
   const data = await db.query.products.findMany({
     with: {
+      productImages: true,
       productVariants: {
         with: {
-          variantImages: true,
           variantTags: true,
           product: true,
         },
