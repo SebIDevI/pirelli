@@ -30,8 +30,8 @@ export default function Indici({
           <ChevronDown size={16} />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          {variants.map((variant) => (
-            <DropdownMenuItem>
+          {variants.map((variant, i) => (
+            <DropdownMenuItem key={i}>
               <Link
                 href={`/products/${variant.product.title}?id=${variant.id}&productID=${variant.productID}&price=${variant.price}&title=${variant.product.title}&type=${variant.productType}&image=${variant.product.productImages[0].url}`}
                 scroll={false}
