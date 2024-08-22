@@ -15,16 +15,12 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ProductShowcase({
-  variants,
   images,
 }: {
-  variants: VariantsWithImagesTags[];
   images: ProductImages[];
 }) {
   const [api, setApi] = useState<CarouselApi>();
   const [activeThumbnail, setActiveThumbnail] = useState([0]);
-  const searchParams = useSearchParams();
-  const selectedColor = searchParams.get("type") || variants[0].productType;
 
   useEffect(() => {
     if (!api) {
@@ -43,54 +39,44 @@ export default function ProductShowcase({
   return (
     <Carousel setApi={setApi} opts={{ loop: true }}>
       <CarouselContent>
-        {variants.map(
-          (variant) =>
-            variant.productType === selectedColor &&
-            images.map((img) => {
-              return (
-                <CarouselItem key={img.url}>
-                  {img.url ? (
-                    <Image
-                      priority
-                      className="rounded-md aspect-square"
-                      width={1028}
-                      height={720}
-                      src={img.url}
-                      alt={img.name}
-                    />
-                  ) : null}
-                </CarouselItem>
-              );
-            })
-        )}
+        {images.map((img) => {
+          return (
+            <CarouselItem key={img.url}>
+              {img.url ? (
+                <Image
+                  priority
+                  className="rounded-md aspect-square"
+                  width={1028}
+                  height={720}
+                  src={img.url}
+                  alt={img.name}
+                />
+              ) : null}
+            </CarouselItem>
+          );
+        })}
       </CarouselContent>
       <div className="flex overflow-clip py-2 gap-4">
-        {variants.map(
-          (variant) =>
-            variant.productType === selectedColor &&
-            images.map((img, index) => {
-              return (
-                <div key={img.url}>
-                  {img.url ? (
-                    <Image
-                      onClick={() => updatePreview(index)}
-                      priority
-                      className={cn(
-                        index === activeThumbnail[0]
-                          ? "opacity-100"
-                          : "opacity-75",
-                        "rounded-md transition-all duration-300 ease-in-out cursor-pointer hover:opacity-75 aspect-square"
-                      )}
-                      width={72}
-                      height={48}
-                      src={img.url}
-                      alt={img.name}
-                    />
-                  ) : null}
-                </div>
-              );
-            })
-        )}
+        {images.map((img, index) => {
+          return (
+            <div key={img.url}>
+              {img.url ? (
+                <Image
+                  onClick={() => updatePreview(index)}
+                  priority
+                  className={cn(
+                    index === activeThumbnail[0] ? "opacity-100" : "opacity-75",
+                    "rounded-md transition-all duration-300 ease-in-out cursor-pointer hover:opacity-75 aspect-square"
+                  )}
+                  width={72}
+                  height={48}
+                  src={img.url}
+                  alt={img.name}
+                />
+              ) : null}
+            </div>
+          );
+        })}
       </div>
     </Carousel>
   );

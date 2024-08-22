@@ -73,9 +73,6 @@ export default function Products({ products }: ProductsTypes) {
     paramTags.push([
       (trueSlug as string).replaceAll("%20", "").replaceAll("_", "/"),
     ]);
-
-  console.log("products");
-  console.log(products);
   products
     .filter((product) => product.productVariants.length > 0)
     .forEach((product) => {
@@ -98,11 +95,6 @@ export default function Products({ products }: ProductsTypes) {
             if (!orIndex) ok = false;
           }
         });
-        console.log("tagz");
-        console.log(
-          !tagz.includes(trueSlug as string) ? tagz + " " + trueSlug : ""
-        );
-        console.log(trueSlug);
         if (
           (!tagz.includes(trueSlug as string) && trueSlug !== "") ||
           !(!filtered[0] || filtered[filtered.length - 1].id !== product.id)
@@ -125,18 +117,17 @@ export default function Products({ products }: ProductsTypes) {
         }
       }
     });
-  console.log(paramTags);
   return (
     <main className="grid sm:grid-cols-1 md:grid-cols-2 gap-12 lg:grid-cols-3">
       {filtered.length > 0 ? (
         filtered.map((product) => (
           <div key={product.id}>
             <Link
-              className="pt-2"
+              className="pt-2 text-secondary-foreground dark:text-secondary"
               href={`/products/${product.title}?id=${product.productVariants[0].id}&productID=${product.id}&price=${product.productVariants[0].price}&title=${product.title}&type=${product.productVariants[0].productType}&image=${product.productImages[0].url}`}
             >
               <Image
-                className="rounded-md mb-2 aspect-square"
+                className="rounded-md aspect-square"
                 src={product.productImages[0].url}
                 width={720}
                 height={480}
@@ -144,15 +135,15 @@ export default function Products({ products }: ProductsTypes) {
                 loading="lazy"
               />
               <Tagz variantTags={product.productVariants[0]} />
-              <div className="flex justify-between">
+              <div className="flex justify-between gap-2">
                 <div className="font-medium">
-                  <h2 className="text-xl">
+                  <h2 className="text-2xl font-gothamBlack">
                     {product.productVariants[0].product.title} -{" "}
                     {product.productVariants[0].size}
                   </h2>
                 </div>
                 <div>
-                  <Badge className="text-sm" variant={"secondary"}>
+                  <Badge className="text-base" variant={"secondaryLocal"}>
                     {formatPrice(product.productVariants[0].price)}
                   </Badge>
                 </div>

@@ -391,25 +391,11 @@ function Home() {
 
   return (
     <div className="bg-secondary font-gotham">
-      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden lg:px-24 px-8 p-6 bg-black">
+      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden py-6 bg-black">
         <div className="w-full h-full absolute top-0 left-0 scale-[1.5]">
-          {/* <ReactPlayer
-            url="https://www.youtube.com/watch?v=g0Oah5C5ppA"
-            playing={true}
-            loop={true}
-            controls={false}
-            volume={0}
-            muted
-            width={"100%"}
-            height={"100%"}
-            className="w-full h-full"
-          /> */}
           <Video />
         </div>
-        {/* <div className="w-full h-full absolute top-0 left-0 bg-black">
-          <Image src={poza} alt="Tyre" className="absolute right-0 scale-90" />
-        </div> */}
-        <div className="w-full h-full relative mt-10">
+        <div className="w-full h-full relative mt-10 container">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col justify-between w-full h-full">
               <div className="lg:w-1/2">
@@ -448,7 +434,7 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full px-8 lg:px-24 py-10">
+      <div className="w-full container py-10">
         {sizes.map((size, i) => (
           <div key={i}>
             <p className="py-6">{size.size[1] + size.size[2]} RIM</p>

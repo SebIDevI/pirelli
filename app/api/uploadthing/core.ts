@@ -14,7 +14,7 @@ export const ourFileRouter = {
   variantUploader: f({
     image: { maxFileCount: 10, maxFileSize: "4MB" },
   }).onUploadComplete(async ({ metadata, file }) => {
-    console.log(file);
+    // console.log(file);
   }),
 } satisfies FileRouter;
 

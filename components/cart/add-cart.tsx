@@ -24,7 +24,7 @@ export default function AddCart() {
   }
   return (
     <>
-      <div className="flex items-center gap-4 justify-stretch my-4">
+      <div className="flex items-center gap-4 justify-stretch my-4 w-1/2 min-w-20">
         <Button
           onClick={() => {
             if (quantity > 1) setQuantity(quantity - 1);
@@ -56,7 +56,7 @@ export default function AddCart() {
             image,
           });
         }}
-        className="w-full"
+        className="w-1/2 min-w-20"
       >
         Add to cart
       </Button>

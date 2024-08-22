@@ -47,8 +47,6 @@ export default function ProductTags({
   };
   avoid: string;
 }) {
-  console.log("tagCount");
-  console.log(tagCount);
   const router = useRouter();
   const params = useSearchParams();
   const { slug } = useParams();

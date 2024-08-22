@@ -10,8 +10,8 @@ import { NavWrapper } from "./nav-wrapper";
 export default async function Nav() {
   const session = await auth();
   return (
-    <NavWrapper className="fixed top-0 left-0 w-full bg-secondary z-50 transition-all px-6 md:px-12">
-      <nav>
+    <NavWrapper className="fixed top-0 left-0 w-full z-50 transition-all">
+      <nav className="container">
         <ul className="flex justify-between items-center md:gap-8 gap-4 md:flex-row">
           <li className="flex flex-1 items-center justify-start">
             <Link href={"/"} aria-label="Pirelli Logo">

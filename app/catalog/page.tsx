@@ -12,6 +12,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Video from "@/components/catalog/video";
+import Sel from "@/components/index/select";
 
 const select = [
   {
@@ -74,11 +75,11 @@ function Home() {
 
   return (
     <div className="bg-secondary font-gotham">
-      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden lg:px-24 px-8 p-6 bg-black">
+      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden p-6 bg-black">
         <div className="w-full h-full absolute top-0 left-0 scale-[1.5]">
           <Video />
         </div>
-        <div className="w-full h-full relative mt-10">
+        <div className="w-full h-full relative mt-10 container">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col gap-10 md:gap-0 justify-between w-full h-full">
               <div className="lg:w-1/2">
@@ -105,49 +106,13 @@ function Home() {
                 <h1 className="text-2xl font-black uppercase py-4">
                   Anvelopele noastre
                 </h1>
-                <div className="flex flex-col lg:flex-row w-full gap-4">
-                  {select.map((types, index) => (
-                    <>
-                      <DropdownMenu modal={false}>
-                        <div className="relative w-full">
-                          <DropdownMenuTrigger asChild className="w-full">
-                            <Button
-                              className="w-full rounded-none h-16 bg-transparent border-2 text-lg font-medium border-primary hover:bg-primary text-primary hover:text-primary-foreground text-left px-10 uppercase flex items-center justify-between transition-all duration-300 ease-in-out"
-                              ref={triggerRef}
-                            >
-                              {types.title} <ChevronDown size={18} />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent
-                            style={{ width: contentWidth || "auto" }}
-                            className={`bg-black/90 rounded-none text-primary border-primary`}
-                          >
-                            {types.subselect.map((type, index) => (
-                              <DropdownMenuItem
-                                key={index}
-                                className={`text-md uppercase relative cursor-pointer rounded-none hover:bg-primary hover:text-black focus:bg-primary focus:text-black h-14 px-8 m-1`}
-                              >
-                                <Link href={type.link}>{type.text}</Link>
-                              </DropdownMenuItem>
-                            ))}
-                          </DropdownMenuContent>
-                        </div>
-                      </DropdownMenu>
-                    </>
-                  ))}
-                  <Link
-                    href={"/catalog/marime"}
-                    className="w-full border-2 border-yellow-400 relative text-yellow-400 py-4 px-10 hover:bg-yellow-400 hover:text-primary-foreground transition cursor-pointer text-lg uppercase"
-                  >
-                    Pe mărime
-                  </Link>
-                </div>
+                <Sel />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="h-auto w-full px-8 lg:px-24 py-10">
+      <div className="h-auto w-full container py-10">
         <p className="font-gothamBook">
           Catalogul de anvelope este împărțit pe categorii în funcție de anumite
           caracteristici specifice: <br />

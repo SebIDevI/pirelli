@@ -14,9 +14,6 @@ export default function Payment() {
   const totalRoundedPrice = cart.reduce((acc, item) => {
     return acc + Math.round(item.variant.price * 100) * item.variant.quantity;
   }, 0);
-
-  console.log("totalRoundedPrice", totalRoundedPrice);
-
   const { theme } = useTheme();
 
   return (

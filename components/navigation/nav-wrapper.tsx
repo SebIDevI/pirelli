@@ -27,7 +27,10 @@ export const NavWrapper = React.forwardRef<
   return (
     <div
       ref={ref}
-      className={cn(isScrolled ? "py-5" : "py-8", className)}
+      className={cn(
+        isScrolled ? "py-5 bg-secondary" : "py-8 bg-transparent",
+        className
+      )}
       {...props}
     />
   );

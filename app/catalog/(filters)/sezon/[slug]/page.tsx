@@ -11,13 +11,13 @@ export const revalidate = 0;
 async function Page({ params }: { params: { slug: string } }) {
   const data = await db.query.products.findMany({
     with: {
-      productImages: true,
       productVariants: {
         with: {
           variantTags: true,
-          product: true,
+          product: { with: { productImages: true } },
         },
       },
+      productImages: true,
     },
     orderBy: (products, { desc }) => [desc(products.id)],
   });
@@ -51,9 +51,7 @@ async function Page({ params }: { params: { slug: string } }) {
       ? "ALL SEASON"
       : params.slug === "vara"
       ? "SUMMER"
-      : params.slug === "carrier"
-      ? "CARRIER"
-      : params.slug.toUpperCase();
+      : params.slug;
 
   data.forEach((product) => {
     let tagV = {
@@ -109,7 +107,7 @@ async function Page({ params }: { params: { slug: string } }) {
             ? tagCount.cint++
             : tag.tag === "SCORPION" && !tagV.scorp
             ? tagCount.scorp++
-            : tag.tag.includes("CARRIER") && !tagV.carrier
+            : tag.tag === "CARRIER" && !tagV.carrier
             ? tagCount.carrier++
             : null;
         tag.tag === "ALL SEASON"
@@ -140,7 +138,7 @@ async function Page({ params }: { params: { slug: string } }) {
           ? (tagV.cint = 1)
           : tag.tag === "SCORPION"
           ? (tagV.scorp = 1)
-          : tag.tag.includes("CARRIER")
+          : tag.tag === "CARRIER"
           ? (tagV.carrier = 1)
           : null;
       });
@@ -167,45 +165,45 @@ async function Page({ params }: { params: { slug: string } }) {
       : "";
 
   return (
-    <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] dark:to-[#000] dark:from-[#1f1f1f] bg-fixed font-gotham pb-10">
-      <div className="w-full h-auto min-h-[50vh] text-primary-foreground relative overflow-hidden py-6">
-        <div className="w-full h-full absolute top-0 left-0 bg-secondary-foreground">
+    <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] bg-fixed font-gotham pb-10">
+      <div className="w-full h-auto min-h-[50vh] text-secondary-foreground relative overflow-hidden py-6">
+        <div className="w-full h-full absolute top-0 left-0 bg-secondary">
           <Image
             src={tyre}
             alt="Tyre"
             className="absolute right-0 scale-[.8]"
           />
         </div>
-        <div className="w-full h-full relative mt-10 px-8 lg:px-24">
+        <div className="w-full h-full relative mt-10 container">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col justify-between w-full h-full">
               <div className="md:w-1/2">
                 <p className="font-gothamLight uppercase text-sm">
                   <Link
                     href={"/"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
                   >
                     Homepage
                   </Link>{" "}
                   /{" "}
                   <Link
                     href={"/catalog"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
                   >
                     Catalog anvelope
                   </Link>{" "}
                   /{" "}
                   <Link
                     href={"/catalog"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
                   >
-                    Familie
+                    Sezon
                   </Link>
                   {" > "}
-                  <span className="font-gotham">{params.slug}™️</span>
+                  <span className="font-gotham">{params.slug}</span>
                 </p>
                 <h1 className="text-5xl font-gothamBlack py-4 uppercase">
-                  Gama {params.slug}™️
+                  Anvelope de {params.slug}
                 </h1>
                 <p className="text-base">{desc}</p>
               </div>
@@ -213,8 +211,8 @@ async function Page({ params }: { params: { slug: string } }) {
           </div>
         </div>
       </div>
-      <div className="px-8 lg:px-24">
-        <ProductTags tagCount={tagCount} avoid="Toate familiile" />
+      <div className="container">
+        <ProductTags tagCount={tagCount} avoid="Toate sezoanele" />
         <Products products={data} />
       </div>
     </div>

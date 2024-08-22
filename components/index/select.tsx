@@ -94,7 +94,9 @@ function Sel() {
                     key={index}
                     className={`text-md uppercase relative cursor-pointer rounded-none hover:bg-primary hover:text-black focus:bg-primary focus:text-black h-14 px-8 m-1`}
                   >
-                    <Link href={type.link}>{type.text}</Link>
+                    <Link href={type.link} className="w-full">
+                      {type.text}
+                    </Link>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>

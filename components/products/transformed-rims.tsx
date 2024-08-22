@@ -21,6 +21,7 @@ import size4 from "@/public/tyre-size/size4.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { transform } from "next/dist/build/swc";
 
 interface TransformedRimsProps {
   transformedRims: Record<string, VariantsWithImagesTags[]>;
@@ -227,22 +228,33 @@ const TransformedRims: React.FC<TransformedRimsProps> = ({
               ))}
             </TabsList>
           </div>
-          {Object.keys(transformedRims).map((rim2, k) => (
-            <TabsContent value={rim2} key={k}>
-              {transformedRims[rim2].map((tr, l) => (
-                <ProductPick
-                  key={l}
-                  id={tr.id}
-                  size={tr.size}
-                  productType={tr.productType}
-                  title={title}
-                  price={tr.price}
-                  productID={tr.productID}
-                  image={imageUrl}
-                />
-              ))}
-            </TabsContent>
-          ))}
+          {Object.keys(transformedRims).map((rim2, k) => {
+            const aFost: string[] = [];
+
+            return (
+              <TabsContent value={rim2} key={k}>
+                {transformedRims[rim2].map((tr, l) => {
+                  if (!aFost.includes(tr.size)) {
+                    aFost.push(tr.size);
+                    return (
+                      <ProductPick
+                        key={l}
+                        id={tr.id}
+                        size={tr.size}
+                        productType={tr.productType}
+                        title={title}
+                        price={tr.price}
+                        productID={tr.productID}
+                        image={imageUrl}
+                      />
+                    );
+                  }
+                  aFost.push(tr.size);
+                  return "";
+                })}
+              </TabsContent>
+            );
+          })}
         </Tabs>
       </SheetContent>
     </Sheet>

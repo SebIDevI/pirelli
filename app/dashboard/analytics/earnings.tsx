@@ -103,7 +103,7 @@ export default function Earnings({
                 content={(props) => (
                   <div>
                     {props.payload?.map((item) => {
-                      console.log(item);
+                      // console.log(item);
                       return (
                         <div
                           className="bg-secondary py-2 px-4 rounded-md shadow-lg"
