@@ -33,17 +33,17 @@ function Section1() {
         <div className="grid lg:grid-cols-2 gap-5 text-secondary-foreground border-primary w-full">
           <div className="py-4 lg:pe-16 lg:self-center">
             <span className="relative py-2 uppercase text-sm before:absolute before:top-0 before:left-0 before:w-2/3 before:h-full before:border-b-2 before:border-primary">
-              We have no limits
+              NICIO LIMITĂ
             </span>
-            <h2 className="font-gotham uppercase text-4xl py-6">
-              AN AWARD WINNING TUNING COMPANY
+            <h2 className="font-gotham uppercase text-5xl py-6">
+              O COMPANIE DE TUNING PREMIATĂ
             </h2>
             <p className="font-gothamBook text-lg">
-              We are a tuning company with over 17 years of experience in the
-              field, holding multiple world records for various tuning
-              configurations. We are specialized in modifying premium and
-              superpremium vehicles, but we have also achieved notable
-              performance for base models.
+              Suntem o companie de tuning cu peste 17 ani de experiență în
+              domeniu, deținând mai multe recorduri mondiale pentru diverse
+              configurații de tuning. Suntem specializați în modificarea
+              vehiculelor premium si superpremium, dar am obținut performanțe
+              notabile și pentru modelele de bază.
             </p>
           </div>
           <div className="w-full h-full relative">

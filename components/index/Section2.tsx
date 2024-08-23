@@ -64,7 +64,7 @@ export default function Section2() {
   return (
     <div className="lcontainer py-20 bg-[repeating-linear-gradient(45deg,#f0f0f0,#f0f0f0_50%,#ffffff_50%,#ffffff_100%)] dark:bg-[repeating-linear-gradient(45deg,#0e0e0e,#0e0e0e_50%,#070707_50%,#070707_100%)]">
       <div className="container">
-        <h2 className="font-gotham text-secondary-foreground text-center uppercase text-4xl pb-16">
+        <h2 className="font-gotham text-secondary-foreground text-center uppercase text-5xl pb-16">
           Găsește anvelopa care ți se potrivește
         </h2>
         <div className="w-full">

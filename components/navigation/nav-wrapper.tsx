@@ -11,7 +11,7 @@ export const NavWrapper = React.forwardRef<
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY >= 200) {
+      if (window.scrollY >= 80) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);

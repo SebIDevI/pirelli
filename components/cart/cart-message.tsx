@@ -14,22 +14,26 @@ export default function CartMessage() {
       initial={{ opacity: 0, x: 10 }}
     >
       <DrawerTitle>
-        {checkoutProgress === "cart-page" ? "Your cart items" : null}
-        {checkoutProgress === "payment-page" ? "Choose a payment method" : null}
-        {checkoutProgress === "confirmation-page" ? "Order confirmed" : null}
+        {checkoutProgress === "cart-page" ? "Coșul dumneavoastă" : null}
+        {checkoutProgress === "payment-page"
+          ? "Alegeți o metodă de plată"
+          : null}
+        {checkoutProgress === "confirmation-page" ? "Comandă confirmată" : null}
       </DrawerTitle>
       <DrawerDescription className="py-1">
-        {checkoutProgress === "cart-page" ? "View and edit your bag" : null}
+        {checkoutProgress === "cart-page"
+          ? "Analizați și modificați coșul dumneavoastră"
+          : null}
         {checkoutProgress === "payment-page" ? (
           <span
             onClick={() => setCheckoutProgress("cart-page")}
             className="flex items-center justify-center gap-1.5 cursor-pointer hover:text-primary transition duration-300 ease-in-out"
           >
-            <ArrowLeft size={14} /> Head back to cart
+            <ArrowLeft size={14} /> Înapoi la coș
           </span>
         ) : null}
         {checkoutProgress === "confirmation-page"
-          ? "You will recieve an email with your receipt!"
+          ? "Veți primi un email cu factura în scurt timp!"
           : null}
       </DrawerDescription>
     </motion.div>

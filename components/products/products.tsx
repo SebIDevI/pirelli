@@ -90,7 +90,12 @@ export default function Products({ products }: ProductsTypes) {
           if (row[0][0] < "0" || row[0][0] > "9") {
             let orIndex = 0;
             row.forEach((ptag) => {
-              if (tagz.includes(ptag === "CARZ" ? "CAR" : ptag)) orIndex++;
+              if (
+                tagz.includes(ptag === "CARZ" ? "CAR" : ptag) ||
+                (ptag === "Sport" &&
+                  productVariant.fullSize.split(" ")[1].includes("W"))
+              )
+                orIndex++;
             });
             if (!orIndex) ok = false;
           }
@@ -134,7 +139,7 @@ export default function Products({ products }: ProductsTypes) {
                 alt={product.productVariants[0].product.title}
                 loading="lazy"
               />
-              <Tagz variantTags={product.productVariants[0]} />
+              <Tagz variantTags={product.productVariants[0]} page="choosing" />
               <div className="flex justify-between gap-2">
                 <div className="font-medium">
                   <h2 className="text-2xl font-gothamBlack">

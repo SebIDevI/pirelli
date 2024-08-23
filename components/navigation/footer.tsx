@@ -30,16 +30,28 @@ function Footer() {
           <div className="flex gap-4 items-center">
             <p className="font-gothamBook">Urmați-ne</p>
             <div className="flex gap-4 items-center text-2xl">
-              <Link href="https://www.facebook.com/Racebox.ro/?locale=ro_RO">
+              <Link
+                href="https://www.facebook.com/Racebox.ro/?locale=ro_RO"
+                target="_blank"
+              >
                 <FaFacebook />
               </Link>
-              <Link href="https://www.tiktok.com/@racebox?is_from_webapp=1&sender_device=pc">
+              <Link
+                href="https://www.tiktok.com/@racebox?is_from_webapp=1&sender_device=pc"
+                target="_blank"
+              >
                 <FaTiktok />
               </Link>
-              <Link href="https://www.youtube.com/c/RaceboxRomania">
+              <Link
+                href="https://www.youtube.com/c/RaceboxRomania"
+                target="_blank"
+              >
                 <FaYoutube />
               </Link>
-              <Link href="https://www.instagram.com/racebox.ro/">
+              <Link
+                href="https://www.instagram.com/racebox.ro/"
+                target="_blank"
+              >
                 <FaInstagram />
               </Link>
             </div>
@@ -52,21 +64,26 @@ function Footer() {
               <b>Catalog anvelope</b>
             </p>
             <ul className="text-primary-foreground/70 flex flex-col gap-2 font-gothamBook">
-              <li>Toate anvelopele</li>
-              <li>Caută după sezon</li>
-              <li>Anvelope de vară</li>
-              <li>Anvelope de iarnă</li>
-              <li>Anvelope all season</li>
-              <li>Caută după familie</li>
-            </ul>
-          </div>
-          <div className="uppercase">
-            <p className="pb-3 font-gotham">
-              <b>Dealeri pirelli</b>
-            </p>
-            <ul className="text-primary-foreground/70 flex flex-col gap-2 font-gothamBook">
-              <li>Caută un dealer</li>
-              <li>Toate orașele</li>
+              <li>
+                <Link href={"/catalog/"}>Toate anvelopele</Link>
+              </li>
+              <li>
+                <Link href={"/catalog/marime"}>Caută după mărime</Link>
+              </li>
+              <li>
+                <Link href={"/catalog/sezon/vara"}>Anvelope de vară</Link>
+              </li>
+              <li>
+                <Link href={"/catalog/sezon/iarna"}>Anvelope de iarnă</Link>
+              </li>
+              <li>
+                <Link href={"/catalog/sezon/all-season"}>
+                  Anvelope all season
+                </Link>
+              </li>
+              <li>
+                <Link href={"/catalog/"}>Caută după familie</Link>
+              </li>
             </ul>
           </div>
           <div className="uppercase">
@@ -79,12 +96,15 @@ function Footer() {
                   href={
                     "https://www.pirelli.com/tyres/ro-ro/vehicule/about/de-ce-pirelli"
                   }
+                  target="_blank"
                 >
                   De ce pirelli
                 </Link>
               </li>
               <li>
-                <Link href={"https://www.racebox.ro"}>Companie</Link>
+                <Link href={"https://www.racebox.ro"} target="_blank">
+                  Companie
+                </Link>
               </li>
               <li>
                 <Link href={"/contact"}>Contactați-ne</Link>
@@ -102,26 +122,26 @@ function Footer() {
             </AccordionTrigger>
             <AccordionContent>
               <ul className="text-primary-foreground/70 flex flex-col gap-4 font-gothamBook mt-3 uppercase">
-                <li>Toate anvelopele</li>
-                <li>Caută după sezon</li>
-                <li>Anvelope de vară</li>
-                <li>Anvelope de iarnă</li>
-                <li>Anvelope all season</li>
-                <li>Caută după familie</li>
-              </ul>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem
-            value="item-2"
-            className="border-b-primary-foreground/20"
-          >
-            <AccordionTrigger className="font-gotham uppercase">
-              Dealeri Pirelli
-            </AccordionTrigger>
-            <AccordionContent>
-              <ul className="text-primary-foreground/70 flex flex-col gap-4 font-gothamBook mt-1 uppercase">
-                <li>Caută un dealer</li>
-                <li>Toate orașele</li>
+                <li>
+                  <Link href={"/catalog/"}>Toate anvelopele</Link>
+                </li>
+                <li>
+                  <Link href={"/catalog/marime"}>Caută după mărime</Link>
+                </li>
+                <li>
+                  <Link href={"/catalog/sezon/vara"}>Anvelope de vară</Link>
+                </li>
+                <li>
+                  <Link href={"/catalog/sezon/iarna"}>Anvelope de iarnă</Link>
+                </li>
+                <li>
+                  <Link href={"/catalog/sezon/all-season"}>
+                    Anvelope all season
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/catalog/"}>Caută după familie</Link>
+                </li>
               </ul>
             </AccordionContent>
           </AccordionItem>
@@ -134,9 +154,24 @@ function Footer() {
             </AccordionTrigger>
             <AccordionContent>
               <ul className="text-primary-foreground/70 flex flex-col gap-4 font-gothamBook mt-1 uppercase">
-                <li>De ce pirelli</li>
-                <li>Companie</li>
-                <li>Contactați-ne</li>
+                <li>
+                  <Link
+                    href={
+                      "https://www.pirelli.com/tyres/ro-ro/vehicule/about/de-ce-pirelli"
+                    }
+                    target="_blank"
+                  >
+                    De ce pirelli
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"https://www.racebox.ro"} target="_blank">
+                    Companie
+                  </Link>
+                </li>
+                <li>
+                  <Link href={"/contact"}>Contactați-ne</Link>
+                </li>
               </ul>
             </AccordionContent>
           </AccordionItem>

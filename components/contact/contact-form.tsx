@@ -50,23 +50,25 @@ export const ContactForm = () => {
   };
   return (
     <div className="mb-20">
-      <div className="min-h-[400px] bg-secondary-foreground text-secondary px-8 lg:px-24 pt-40 pb-20">
-        <p className="uppercase text-sm">
-          <Link
-            href={"/"}
-            className="uppercase font-gothamXLight relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
-          >
-            Homepage
-          </Link>{" "}
-          / <span className="font-gothamThin">Contactați-ne</span>
-        </p>
-        <h1 className="text-6xl font-gothamBlack py-5">Contactați-ne</h1>
-        <p className="text-2xl font-gothamXLight lg:w-1/2">
-          Pe aceasta pagina puteti gasi date de contact Racebox precum si
-          informatii despre compania noastră
-        </p>
+      <div className="min-h-[400px] bg-secondary-foreground text-secondary pt-40 pb-20">
+        <div className="container">
+          <p className="uppercase text-sm">
+            <Link
+              href={"/"}
+              className="uppercase font-gothamXLight relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
+            >
+              Homepage
+            </Link>{" "}
+            / <span className="font-gothamThin">Contactați-ne</span>
+          </p>
+          <h1 className="text-6xl font-gothamBlack py-5">Contactați-ne</h1>
+          <p className="text-2xl font-gothamXLight lg:w-1/2">
+            Pe aceasta pagina puteti gasi date de contact Racebox precum si
+            informatii despre compania noastră
+          </p>
+        </div>
       </div>
-      <div className="mx-8 lg:mx-24 my-20">
+      <div className="container my-20">
         <p className="text-6xl font-gothamBlack">Trimiteți-ne un mesaj</p>
         <div className="grid lg:grid-cols-3 gap-10">
           <Form {...form}>

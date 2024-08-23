@@ -1,6 +1,6 @@
 "use client";
 
-import { VariantSchema } from "@/types/variant-schema";
+import { ProductSchema } from "@/types/product-schema";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import * as z from "zod";
 import {
@@ -31,7 +31,7 @@ import { useState } from "react";
 
 export default function VariantImages() {
   const { getValues, control, setError } =
-    useFormContext<z.infer<typeof VariantSchema>>();
+    useFormContext<z.infer<typeof ProductSchema>>();
 
   const { fields, remove, append, update, move } = useFieldArray({
     control,

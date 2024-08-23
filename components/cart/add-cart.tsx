@@ -19,7 +19,7 @@ export default function AddCart() {
   const image = params.get("image");
 
   if (!id || !productID || !title || !type || !price || !image) {
-    toast.error("Product not found");
+    toast.error("Produsul nu a fost găsit");
     redirect("/");
   }
   return (
@@ -34,7 +34,7 @@ export default function AddCart() {
         >
           <Minus size={18} strokeWidth={3} />
         </Button>
-        <Button className="flex-1">Quantity: {quantity}</Button>
+        <Button className="flex-1">Cantitate: {quantity}</Button>
         <Button variant={"secondary"} className="text-primary">
           <Plus
             onClick={() => {
@@ -47,7 +47,9 @@ export default function AddCart() {
       </div>
       <Button
         onClick={() => {
-          toast.success(`Added ${title + " " + type} to your cart`);
+          toast.success(
+            `Ați adăugat ${title + " " + type} în coșul dumneavoastră`
+          );
           addToCart({
             id: productID,
             variant: { variantID: id, quantity, price },
@@ -58,7 +60,7 @@ export default function AddCart() {
         }}
         className="w-1/2 min-w-20"
       >
-        Add to cart
+        Adăugați în coș
       </Button>
       <div className="h-80"></div>
     </>

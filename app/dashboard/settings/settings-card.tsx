@@ -65,7 +65,7 @@ export default function SettingsCard(session: SettingsForm) {
       if (data?.error) setError(data.error);
     },
     onError: (error) => {
-      setError("Something went wrong");
+      setError("A intervenit o eroare");
     },
   });
 
@@ -76,8 +76,8 @@ export default function SettingsCard(session: SettingsForm) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Your settings</CardTitle>
-        <CardDescription>Update your account settings</CardDescription>
+        <CardTitle>Setările dumneavoastră</CardTitle>
+        <CardDescription>Actualizați setările contului</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -87,7 +87,7 @@ export default function SettingsCard(session: SettingsForm) {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nume</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Matei Andrei"
@@ -96,7 +96,7 @@ export default function SettingsCard(session: SettingsForm) {
                     />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    Acesta este username-ul dumneavoastră.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -144,8 +144,8 @@ export default function SettingsCard(session: SettingsForm) {
                       }}
                       content={{
                         button({ ready }) {
-                          if (ready) return <div>Change avatar</div>;
-                          return <div>Uploading...</div>;
+                          if (ready) return <div>Schimbați avatarul</div>;
+                          return <div>Se încarcă...</div>;
                         },
                       }}
                     />
@@ -159,7 +159,7 @@ export default function SettingsCard(session: SettingsForm) {
                     />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    Aceasta este poza dumneavoastră de profil.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -170,7 +170,7 @@ export default function SettingsCard(session: SettingsForm) {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Parolă</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="********"
@@ -189,7 +189,7 @@ export default function SettingsCard(session: SettingsForm) {
               name="newPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>New Password</FormLabel>
+                  <FormLabel>Parolă nouă</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="********"
@@ -208,9 +208,10 @@ export default function SettingsCard(session: SettingsForm) {
               name="isTwoFactorEnabled"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Two Factor Authentication</FormLabel>
+                  <FormLabel>Autentificarea prin doi factori</FormLabel>
                   <FormDescription>
-                    Enable two factor authentication for your account
+                    Activați autentificarea prin doi factori pentru contul
+                    dumneavoastră
                   </FormDescription>
                   <FormControl>
                     <Switch
@@ -232,7 +233,7 @@ export default function SettingsCard(session: SettingsForm) {
               type="submit"
               disabled={status === "executing" || avatarUploading}
             >
-              Update your settings
+              Actualizați setările
             </Button>
           </form>
         </Form>

@@ -8,6 +8,7 @@ export async function getProduct(id: number) {
   try {
     const product = await db.query.products.findFirst({
       where: eq(products.id, id),
+      with: { productImages: true },
     });
     if (!product) throw new Error("Product not found");
     return { success: product };

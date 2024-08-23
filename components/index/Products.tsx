@@ -17,21 +17,21 @@ import {
 
 const prods = [
   {
-    mini: "for suv",
+    mini: "pentru suv",
     name: "Scroprion",
-    desc: "The best in wet conditions, rolling resistance and driving comfort",
+    desc: "Cea mai bună în condiții umede, rezistență la rulare și confort pentru condus",
     img: scorpion,
   },
   {
-    mini: "the most loved",
+    mini: "cele mai iubite",
     name: "P ZERO",
-    desc: "The perfect fit for all the performances you want to satisfy",
+    desc: "Opțiunea perfectă pentru toate performanțele pe care doriți să le obțineți",
     img: pzero,
   },
   {
-    mini: "for car and crossovers",
+    mini: "pentru mașini și crossovers",
     name: "Cinturato P7",
-    desc: "The best in wet conditions, rolling resistance and driving comfort",
+    desc: "Cea mai bună în condiții umede, rezistență la rulare și confort pentru condus",
     img: cinturato,
   },
 ];
@@ -40,8 +40,8 @@ function Products() {
   return (
     <div className="pt-8 lcontainer bg-[#f0f0f0] dark:bg-[#0e0e0e] text-secondary-foreground px-6 md:px-12 pb-8">
       <div className="container">
-        <h3 className="font-gotham text-center text-5xl mb-16 py-10">
-          Featured Tyres
+        <h3 className="font-gotham text-center text-5xl mb-16 py-10 uppercase">
+          Anvelope populare
         </h3>
         <div className="lg:grid hidden grid-cols-3 gap-4">
           {prods.map((prod, i) => (

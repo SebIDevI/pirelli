@@ -11,12 +11,12 @@ export default async function DashboardLayout({
 
   const userLinks = [
     {
-      label: "Orders",
+      label: "Comenzi",
       path: "/dashboard/orders",
       icon: <Truck size={16} />,
     },
     {
-      label: "Settings",
+      label: "Setări",
       path: "/dashboard/settings",
       icon: <Settings size={16} />,
     },
@@ -46,7 +46,7 @@ export default async function DashboardLayout({
   const allLinks = [...adminLinks, ...userLinks];
 
   return (
-    <div className="mt-32 px-8 md:px-12 mb-10">
+    <div className="mt-32 container mb-10 min-h-screen">
       <DashboardNav allLinks={allLinks} />
       {children}
     </div>

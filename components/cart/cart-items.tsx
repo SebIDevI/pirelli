@@ -44,7 +44,7 @@ export default function CartItems() {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <h2 className="text-2xl text-muted-foreground text-center">
-              Your cart is empty
+              Coșul dumneavoastă este gol
             </h2>
             <Lottie className="h-64" animationData={emptyCard} />
           </motion.div>
@@ -55,10 +55,10 @@ export default function CartItems() {
           <Table className="max-w-3xl mx-auto">
             <TableHeader>
               <TableRow>
-                <TableCell>Product</TableCell>
-                <TableCell>Price</TableCell>
-                <TableCell>Image</TableCell>
-                <TableCell>Quantity</TableCell>
+                <TableCell>Produs</TableCell>
+                <TableCell>Preț</TableCell>
+                <TableCell>Imagine</TableCell>
+                <TableCell>Cantitate</TableCell>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -146,7 +146,7 @@ export default function CartItems() {
         disabled={cart.length === 0}
         className="max-w-md w-full"
       >
-        Checkout
+        Continuați cu plata
       </Button>
     </motion.div>
   );

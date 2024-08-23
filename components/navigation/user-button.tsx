@@ -99,7 +99,7 @@ export const UserButton = ({ user }: Session) => {
                 size={14}
                 className="mr-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
               />{" "}
-              My orders
+              Comenzile mele
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => router.push("/dashboard/settings")}
@@ -109,7 +109,7 @@ export const UserButton = ({ user }: Session) => {
                 size={14}
                 className="mr-3 group-hover:rotate-180 transition-all duration-500 ease-in-out"
               />{" "}
-              Settings
+              Setări
             </DropdownMenuItem>
             {theme && (
               <DropdownMenuItem className="py-2 font-medium cursor-pointer transition-all duration-500">

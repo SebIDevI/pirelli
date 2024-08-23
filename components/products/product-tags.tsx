@@ -23,7 +23,15 @@ import {
 } from "../ui/accordion";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { ProductsTypes } from "@/types/filtering-types";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 export default function ProductTags({
   tagCount,
   avoid,
@@ -44,6 +52,7 @@ export default function ProductTags({
     cint: number;
     scorp: number;
     carrier: number;
+    sport: number;
   };
   avoid: string;
 }) {
@@ -54,6 +63,7 @@ export default function ProductTags({
   const [vehicleType, setVehicleType] = useState<string[]>([]);
   const [tech, setTech] = useState<string[]>([]);
   const [fam, setFam] = useState<string[]>([]);
+  const [util, setUtil] = useState<string[]>([]);
 
   // season=ALL%20SEASON&vehicleType=CAR,%20SUV
 
@@ -77,6 +87,10 @@ export default function ProductTags({
     ) {
       if (tech.includes(type)) tech.splice(tech.indexOf(type), 1);
       else tech.push(type);
+    }
+    if (type === "Sport") {
+      if (util.includes(type)) util.splice(util.indexOf(type), 1);
+      else util.push(type);
     }
     if (
       type === "POWERGY" ||
@@ -102,6 +116,9 @@ export default function ProductTags({
     if (fam.length) {
       string += `${string !== "?" ? "&" : ""}family=${fam.join(", ")}`;
     }
+    if (util.length) {
+      string += `${string !== "?" ? "&" : ""}utils=${util.join(", ")}`;
+    }
 
     router.push(string, { scroll: false });
   };
@@ -118,7 +135,7 @@ export default function ProductTags({
         {
           name: "Sport",
           val: "Sport",
-          numb: 0,
+          numb: tagCount.sport,
         },
         {
           name: "Controlul puterii",
@@ -322,197 +339,6 @@ export default function ProductTags({
                                                   ? true
                                                   : false
                                               }
-                                              // checked={
-                                              //   filter.name === "Toate tipurile"
-                                              //     ? filterStore.type.includes(
-                                              //         type.name as typeType
-                                              //       )
-                                              //     : filter.name ===
-                                              //       "Toate familiile"
-                                              //     ? filterStore.fam.includes(
-                                              //         type.name as famType
-                                              //       )
-                                              //     : filter.name ===
-                                              //       "Toate utilizările"
-                                              //     ? filterStore.util.includes(
-                                              //         type.name as utilType
-                                              //       )
-                                              //     : filter.name ===
-                                              //       "Toate sezoanele"
-                                              //     ? filterStore.season.includes(
-                                              //         type.name.toUpperCase() as seasonType
-                                              //       )
-                                              //     : filter.name ===
-                                              //       "Toate tehnologiile"
-                                              //     ? filterStore.tech.includes(
-                                              //         type.val as techType
-                                              //       )
-                                              //     : false
-                                              // }
-                                              // className="w-6 h-6"
-                                              // onCheckedChange={() => {
-                                              //   if (
-                                              //     filter.name === "Toate tipurile"
-                                              //   ) {
-                                              //     if (
-                                              //       filterStore.type[0] === "All"
-                                              //     ) {
-                                              //       // If "All" is selected, set the type to only the current type name
-                                              //       filterStore.setType([
-                                              //         type.name as typeType,
-                                              //       ]);
-                                              //     } else {
-                                              //       // If "All" is not selected, toggle the type selection
-                                              //       const updatedTypes =
-                                              //         filterStore.type.includes(
-                                              //           type.name as typeType
-                                              //         )
-                                              //           ? filterStore.type.filter(
-                                              //               (item) =>
-                                              //                 item !== type.name
-                                              //             )
-                                              //           : [
-                                              //               ...filterStore.type,
-                                              //               type.name,
-                                              //             ];
-                                              //       updatedTypes.length === 0
-                                              //         ? filterStore.setType(["All"])
-                                              //         : filterStore.setType(
-                                              //             updatedTypes as typeType[]
-                                              //           );
-                                              //     }
-                                              //   } else if (
-                                              //     filter.name === "Toate familiile"
-                                              //   ) {
-                                              //     if (
-                                              //       filterStore.fam[0] === "All"
-                                              //     ) {
-                                              //       // If "All" is selected, set the type to only the current type name
-                                              //       filterStore.setFamily([
-                                              //         type.name as famType,
-                                              //       ]);
-                                              //     } else {
-                                              //       // If "All" is not selected, toggle the type selection
-                                              //       const updatedFams =
-                                              //         filterStore.fam.includes(
-                                              //           type.name as famType
-                                              //         )
-                                              //           ? filterStore.fam.filter(
-                                              //               (item) =>
-                                              //                 item !== type.name
-                                              //             )
-                                              //           : [
-                                              //               ...filterStore.fam,
-                                              //               type.name,
-                                              //             ];
-                                              //       updatedFams.length === 0
-                                              //         ? filterStore.setFamily([
-                                              //             "All",
-                                              //           ])
-                                              //         : filterStore.setFamily(
-                                              //             updatedFams as famType[]
-                                              //           );
-                                              //     }
-                                              //   } else if (
-                                              //     filter.name ===
-                                              //     "Toate tehnologiile"
-                                              //   ) {
-                                              //     if (
-                                              //       filterStore.tech[0] === "All"
-                                              //     ) {
-                                              //       // If "All" is selected, set the type to only the current type name
-                                              //       filterStore.setTech([
-                                              //         type.val as techType,
-                                              //       ]);
-                                              //     } else {
-                                              //       // If "All" is not selected, toggle the type selection
-                                              //       const updatedTechs =
-                                              //         filterStore.tech.includes(
-                                              //           type.val as techType
-                                              //         )
-                                              //           ? filterStore.tech.filter(
-                                              //               (item) =>
-                                              //                 item !== type.val
-                                              //             )
-                                              //           : [
-                                              //               ...filterStore.tech,
-                                              //               type.val,
-                                              //             ];
-                                              //       updatedTechs.length === 0
-                                              //         ? filterStore.setTech(["All"])
-                                              //         : filterStore.setTech(
-                                              //             updatedTechs as techType[]
-                                              //           );
-                                              //     }
-                                              //   } else if (
-                                              //     filter.name ===
-                                              //     "Toate utilizările"
-                                              //   ) {
-                                              //     if (
-                                              //       filterStore.util[0] === "All"
-                                              //     ) {
-                                              //       // If "All" is selected, set the type to only the current type name
-                                              //       filterStore.setUtil([
-                                              //         type.name as utilType,
-                                              //       ]);
-                                              //     } else {
-                                              //       // If "All" is not selected, toggle the type selection
-                                              //       const updatedUtils =
-                                              //         filterStore.util.includes(
-                                              //           type.name as utilType
-                                              //         )
-                                              //           ? filterStore.util.filter(
-                                              //               (item) =>
-                                              //                 item !== type.name
-                                              //             )
-                                              //           : [
-                                              //               ...filterStore.util,
-                                              //               type.name,
-                                              //             ];
-                                              //       updatedUtils.length === 0
-                                              //         ? filterStore.setUtil(["All"])
-                                              //         : filterStore.setUtil(
-                                              //             updatedUtils as utilType[]
-                                              //           );
-                                              //     }
-                                              //   } else if (
-                                              //     filter.name === "Toate sezoanele"
-                                              //   ) {
-                                              //     if (
-                                              //       filterStore.season[0] === "All"
-                                              //     ) {
-                                              //       // If "All" is selected, set the type to only the current type name
-                                              //       filterStore.setSeason([
-                                              //         type.name.toUpperCase() as seasonType,
-                                              //       ]);
-                                              //     } else {
-                                              //       // If "All" is not selected, toggle the type selection
-                                              //       const updatedSeasons =
-                                              //         filterStore.season.includes(
-                                              //           type.name.toUpperCase() as seasonType
-                                              //         )
-                                              //           ? filterStore.season.filter(
-                                              //               (item) =>
-                                              //                 item !==
-                                              //                 type.name.toUpperCase()
-                                              //             )
-                                              //           : [
-                                              //               ...filterStore.season,
-                                              //               type.name.toUpperCase(),
-                                              //             ];
-                                              //       updatedSeasons.length === 0
-                                              //         ? filterStore.setSeason([
-                                              //             "All",
-                                              //           ])
-                                              //         : filterStore.setSeason(
-                                              //             updatedSeasons as seasonType[]
-                                              //           );
-                                              //     }
-                                              //   }
-                                              // }}
-                                              // disabled={
-                                              //   type.numb == 0 ? true : false
-                                              // }
                                             />
                                           </div>
                                         </li>
@@ -529,14 +355,58 @@ export default function ProductTags({
                 </div>
               </Sheet>
               <div className="md:flex hidden w-[768px]">
-                {filtersLocal.map((filter, i) => (
-                  <button
-                    key={i}
-                    className={`bg-white dark:bg-[#090909] relative text-secondary-foreground hover:bg-gray-100 hover:border-white/40 px-3 text-base font-gothamBook flex items-center justify-between p-2 gap-1.5 transition last-of-type:rounded-e-lg`}
-                  >
-                    {filter.name} <ChevronDown className="w-4 h-4 opacity-80" />
-                  </button>
-                ))}
+                {filtersLocal.map(
+                  (filter, i) =>
+                    filter.name !== avoid && (
+                      <DropdownMenu key={i} modal={false}>
+                        <DropdownMenuTrigger
+                          className={`bg-white dark:bg-[#090909] relative text-secondary-foreground hover:bg-gray-100 hover:border-white/40 dark:hover:bg-[#000000] dark:hover:border-[#000000]/40 px-3 text-base font-gothamBook flex items-center justify-between p-2 gap-1.5 transition last-of-type:rounded-e-lg group`}
+                        >
+                          {filter.name}{" "}
+                          <ChevronDown className="w-4 h-4 opacity-80 group-data-[state=open]:rotate-180 transition duration-300" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          {filter.types.map((type, index) => (
+                            <DropdownMenuItem
+                              className="flex w-full items-center justify-between p-0"
+                              key={index}
+                              disabled={type.numb == 0 ? true : false}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setFilter(type.val);
+                              }}
+                            >
+                              <label
+                                htmlFor={`checkbox` + index}
+                                className="w-full h-full cursor-pointer px-2 py-1.5 pe-4"
+                              >
+                                {type.name +
+                                  (filter.name === "Toate familiile"
+                                    ? "™️"
+                                    : "")}{" "}
+                                ({type.numb}){" "}
+                              </label>
+                              <Checkbox
+                                onCheckedChange={() => {
+                                  setFilter(type.val);
+                                }}
+                                id={`checkbox` + index}
+                                className="w-6 h-6 me-1.5"
+                                disabled={type.numb == 0 ? true : false}
+                                checked={
+                                  params
+                                    .toString()
+                                    .includes(type.val.replaceAll(" ", "+"))
+                                    ? true
+                                    : false
+                                }
+                              />
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )
+                )}
               </div>
             </div>
           </div>

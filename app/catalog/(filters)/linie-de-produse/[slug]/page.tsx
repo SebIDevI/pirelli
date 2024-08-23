@@ -167,9 +167,9 @@ async function Page({ params }: { params: { slug: string } }) {
       : "";
 
   return (
-    <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] dark:to-[#000] dark:from-[#1f1f1f] bg-fixed font-gotham pb-10">
-      <div className="w-full h-auto min-h-[50vh] text-primary-foreground relative overflow-hidden py-6">
-        <div className="w-full h-full absolute top-0 left-0 bg-secondary-foreground">
+    <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] bg-fixed font-gotham pb-10">
+      <div className="w-full h-auto min-h-[50vh] text-secondary-foreground relative overflow-hidden py-6">
+        <div className="w-full h-full absolute top-0 left-0 bg-secondary">
           <Image
             src={tyre}
             alt="Tyre"

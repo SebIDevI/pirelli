@@ -41,7 +41,6 @@ export const createVariant = action(
     prestige,
     protectieRIM,
     size,
-    variantImages: newImgs,
   }) => {
     try {
       if (editMode && id) {
@@ -94,7 +93,7 @@ export const createVariant = action(
           objectID: editVariant[0].id.toString(),
           id: editVariant[0].productID.toString(),
           productType: editVariant[0].productType,
-          variantImages: newImgs[0].url,
+          // variantImages: newImgs[0].url,
         });
         revalidatePath("/dashboard/products");
         return { success: `Edited ${productType}` };
@@ -148,7 +147,7 @@ export const createVariant = action(
             title: product.title,
             price: newVariant[0].price,
             productType: newVariant[0].productType,
-            variantImages: newImgs[0].url,
+            // variantImages: newImgs[0].url,
           });
         }
         revalidatePath("/dashboard/products");

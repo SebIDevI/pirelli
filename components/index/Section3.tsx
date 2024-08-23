@@ -3,31 +3,52 @@
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
-import dubai from "@/public/index/dubai_story.jpg";
-import dreaming from "@/public/index/dreaming_story.jpg";
-import racetrack from "@/public/index/racetrack_story.jpg";
-import { motion } from "framer-motion";
+import dubai from "@/public/urus.png";
+import dreaming from "@/public/rolls.png";
+import racetrack from "@/public/maybach.png";
+import porsche from "@/public/porsche.png";
+import ferrari from "@/public/ferrari.png";
+import brabus from "@/public/brabus.png";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "../ui/button";
 
 function Section3() {
   const dates = [
     {
-      title: "dubai",
-      header: "DUBAI’S NEW DESTINATION FOR MOTOR ENTHUSIASTS",
-      text: "You know you’re in a place that loves cars when even the police turn up in a Lamborghini Aventador.",
+      title: "lamborghini",
+      header: "LAMBORGHINI URUS",
+      text: "Urus a fost expediat din Ungaria pentru o schimbare completă: Full 1016industries Vision Widebody, cu roți VELOS de 23 inchi și înveliș complet cu pragurile ușii în mov Bespoke Satin.",
       img: dubai,
     },
     {
-      title: "dreaming",
-      header: "“DREAMING”, THE 2019 PIRELLI CALENDAR SHOT BY ALBERT WATSON",
-      text: "For this year’s Pirelli Calendar, the celebrated photographer Albert Watson has created a series of vignettes centring on the dreams and aspirations of four successful and talented women.",
+      title: "ROLLS ROYCE",
+      header: "ROLLS ROYCE CULLINAN MANSORY",
+      text: "Una dintre numeroasele construcții Mansory, dar preferata noastră, gri pe portocaliu nu dezamăgește niciodată.",
       img: dreaming,
     },
     {
-      title: "race track to road",
-      header: "FROM THE RACE TRACK TO THE ROAD",
-      text: "It is tiny, it has low horsepower and it can even be without a roof.",
+      title: "MAYBACH BRABUS",
+      header: "MAYBACH BRABUS S580",
+      text: "Primul din lume. Din Bulgaria, acest Maybach a primit tratamentul complet Brabus cu Monoblock M de 21” și un Wrap TwoTone.",
       img: racetrack,
+    },
+    {
+      title: "PORSCHE",
+      header: "992 TURBO S TECHART",
+      text: "Primul Techart 992 Turbo S din lume, și fostul deținător al recordului mondial pentru cel mai rapid 992 Turbo S: 4,0 100-200 KMH, 2,2 0-100 KMH, 9,5 1/4 mile în 2021.",
+      img: porsche,
+    },
+    {
+      title: "FERRARI",
+      header: "FERRARI F8 TRIBUTO",
+      text: "Project Car-ul nostru 2021-2022, Ferrari F8 Tributo cu un kit de caroserie complet 1016industries, evacuare Capristo și roți forjate Yido de 21-22 inci.",
+      img: ferrari,
+    },
+    {
+      title: "BRABUS",
+      header: "BRABUS G800 SQUARED WIDESTAR",
+      text: "Primul din lume. Primul client a livrat kit-ul Widestar pentru G63 4x4 Squared. Împreună cu FI Exhaust ULTRA și Stage 2 Tune-ul nostru, ajungând până la 800 CP, împreună cu un set de roți VOSSEN LC3-01T de 24 inchi.",
+      img: brabus,
     },
   ];
 
@@ -36,18 +57,18 @@ function Section3() {
       <div className="container">
         <p className="mb-8">
           <span className="relative text-secondary-foreground py-2 uppercase text-sm before:absolute before:top-0 before:left-0 before:w-2/3 before:h-full before:border-b-2 before:border-primary">
-            from pirelli
+            racebox
           </span>
         </p>
         <h2 className="text-center my-10 text-5xl font-gotham text-secondary-foreground uppercase">
-          Latest stories
+          Ultimele proiecte
         </h2>
         <Tabs
           defaultValue={dates[0].title}
           className="font-gotham grid lg:grid-cols-2 gap-8 "
         >
           <div className="me-8">
-            <TabsList className="rounded-none">
+            <TabsList className="rounded-none flex-wrap">
               {dates.map((date, index) => (
                 <TabsTrigger
                   className="text-lg rounded-none p-3 px-5 text-secondary-foreground hover:text-secondary-foreground hover:bg-background uppercase"
@@ -81,8 +102,8 @@ function Section3() {
                 >
                   {date.text}
                 </motion.p>
-                <Button className="uppercase font-gotham border-2 border-primary text-primary bg-transparent rounded-none text-sm p-2 px-5 hover:bg-primary hover:text-primary-foreground transition my-8">
-                  Read the story
+                <Button variant={"pirelli"} className="my-8">
+                  <span className="z-20">Read the story</span>
                 </Button>
               </TabsContent>
             ))}
@@ -93,19 +114,29 @@ function Section3() {
               className="border-none relative"
               key={index}
             >
-              <motion.div
-                animate={{ x: 0 }}
-                initial={{ x: -10 }}
-                exit={{ x: -10 }}
-                transition={{ duration: 0.6 }}
-                className="relative w-full h-full"
-              >
-                <Image
-                  src={date.img}
-                  alt={`${date.header} story`}
-                  className="lg:absolute h-full xs:max-w-96 w-full lg:w-auto aspect-square right-0 xl:-translate-x-1/2"
-                />
-              </motion.div>
+              <AnimatePresence>
+                <motion.div
+                  animate={{ x: 0 }}
+                  initial={{ x: -10 }}
+                  exit={{ x: -10 }}
+                  transition={{ duration: 0.6 }}
+                  className="relative w-full h-full"
+                >
+                  <Image
+                    src={date.img}
+                    alt={`${date.header} story`}
+                    className={`lg:absolute h-auto w-full lg:w-auto ${
+                      date.title === "MAYBACH BRABUS"
+                        ? "-top-16 -right-10"
+                        : date.title === "PORSCHE"
+                        ? "-top-10 right-20"
+                        : "-top-0 right-0"
+                    } ${date.title === "FERRARI" && "scale-75"} ${
+                      date.title === "lamborghini" && "scale-90"
+                    } ${date.title === "BRABUS" && "scale-[0.85]"}`}
+                  />
+                </motion.div>
+              </AnimatePresence>
             </TabsContent>
           ))}
         </Tabs>

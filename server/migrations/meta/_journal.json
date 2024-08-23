@@ -232,6 +232,20 @@
       "when": 1724240567294,
       "tag": "0032_unknown_tomorrow_man",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1724353475045,
+      "tag": "0033_clean_captain_cross",
+      "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1724353706356,
+      "tag": "0034_smart_baron_zemo",
+      "breakpoints": true
     }
   ]
 }

@@ -23,11 +23,11 @@ export default function Performance({
   return (
     <div className="py-16">
       <h3 className="text-secondary-foreground font-gothamBlack italic text-2xl pb-8">
-        Performance
+        Performanță
       </h3>
       <div className="text-secondary-foreground font-gothamBlack">
         <div className="py-2">
-          <span>DRY</span>
+          <span>USCAT</span>
           <Progress
             value={
               variantWID!.variantTags
@@ -37,7 +37,7 @@ export default function Performance({
           />
         </div>
         <div className="py-2">
-          <span>WET</span>
+          <span>UMEZEALĂ</span>
           <Progress
             value={
               variantWID!.wg === "A"
@@ -91,7 +91,7 @@ export default function Performance({
           />
         </div>
         <div className="py-2">
-          <span>MILEAGE</span>
+          <span>KILOMETRAJ</span>
           <Progress
             value={
               variantWID!.variantTags
@@ -101,7 +101,7 @@ export default function Performance({
           />
         </div>
         <div className="py-2">
-          <span>COMFORT</span>
+          <span>CONFORT</span>
           <Progress
             value={
               variantWID!.variantTags

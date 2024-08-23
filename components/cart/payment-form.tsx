@@ -109,7 +109,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
         className="my-4 w-full"
         disabled={!stripe || !elements || isLoading}
       >
-        {isLoading ? "Processing..." : "Pay now"}
+        {isLoading ? "Procesăm comanda..." : "Plătiți acum"}
       </Button>
     </form>
   );

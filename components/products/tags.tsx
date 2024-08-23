@@ -13,36 +13,38 @@ import { Unplug } from "lucide-react";
 
 interface VariantTagsFullSize {
   variantTags: VariantsWithImagesTags;
+  page?: string;
 }
 
-const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags }) => {
+const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags, page }) => {
   const [firstLineWidth, setFirstLineWidth] = useState<number>(0);
   const ulRef = useRef<HTMLDivElement>(null);
   const plusIconRef = useRef<HTMLDivElement>(null);
+  const fullSize = variantTags.fullSize;
 
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      if (ulRef.current && plusIconRef.current) {
-        let totalWidth = 0;
-        const lis = ulRef.current.querySelectorAll("div");
-        let firstLine = true;
-        lis.forEach((li, i) => {
-          if (firstLine) {
-            if (
-              totalWidth + Math.ceil(li.offsetWidth) >
-              Math.ceil(ulRef.current!.offsetWidth)
-            ) {
-              firstLine = false;
-            } else {
-              totalWidth += Math.ceil(li.offsetWidth);
-            }
+  const handleResize = () => {
+    if (ulRef.current && plusIconRef.current) {
+      let totalWidth = 0;
+      const lis = ulRef.current.querySelectorAll(".div-ttl");
+      let firstLine = true;
+      lis.forEach((li, i) => {
+        if (firstLine) {
+          if (
+            totalWidth + Math.ceil(li.clientWidth) >
+            Math.ceil(ulRef.current!.offsetWidth)
+          ) {
+            firstLine = false;
+          } else {
+            totalWidth += Math.ceil(li.clientWidth) + 8;
           }
-        });
-        setFirstLineWidth(totalWidth);
-        plusIconRef.current.style.left = `${totalWidth}px`;
-      }
-    };
-
+        }
+      });
+      setFirstLineWidth(totalWidth);
+      plusIconRef.current.style.left = `${totalWidth}px`;
+    }
+  };
+  useLayoutEffect(() => {
+    handleResize();
     if (ulRef.current) {
       handleResize();
       window.addEventListener("resize", handleResize);
@@ -51,35 +53,49 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [variantTags]);
+
   return (
     <div>
       <div
         ref={ulRef}
-        className="flex relative flex-wrap h-11 overflow-hidden gap-2 py-2 text-secondary-foreground dark:text-secondary"
+        className={`flex relative flex-wrap ${
+          page && page === "choosing" ? "h-11 overflow-hidden" : ""
+        } gap-2 py-2 text-secondary-foreground dark:text-secondary`}
       >
         {/* <GiRaceCar className="text-4xl text-yellow-400" /> */}
         {/* CAR */}
+        {fullSize.split(" ")[1].includes("W") && (
+          <div
+            className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200
+             rounded p-2 py-1"
+          >
+            <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
+              <FaFlagCheckered size={18} />
+              SPORT
+            </div>
+          </div>
+        )}
         {variantTags.variantTags.map((tag, i) => {
           return (
             <React.Fragment key={i}>
               {tag.tag === "CAR" ? (
-                <div className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-400/20 rounded p-2 py-1">
-                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
+                <div className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2 py-1">
+                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
                     <GiRaceCar className="text-4xl" />
-                    CAR
+                    Mașină
                   </div>
                 </div>
               ) : tag.tag === "VAN" ? (
-                <div className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-400/20 rounded p-2 py-1">
-                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
+                <div className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2 py-1">
+                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
                     <PiVanFill className="text-xl" />
                     VAN
                   </div>
                 </div>
               ) : tag.tag === "SUV" ? (
-                <div className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-400/20 rounded p-2 py-1">
-                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
+                <div className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2 py-1">
+                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
                     <PiCarProfileFill className="text-xl" />
                     SUV
                   </div>
@@ -90,22 +106,22 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags }) => {
               {/* <BsFillSunFill className="text-xl text-black" />
                   SUMMER */}
               {tag.tag === "SUMMER" ? (
-                <div className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-400/20 rounded p-2 py-1">
-                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
+                <div className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2 py-1">
+                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
                     <BsFillSunFill className="text-xl" />
-                    SUMMER
+                    Vară
                   </div>
                 </div>
               ) : tag.tag === "WINTER" ? (
-                <div className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-400/20 rounded p-2 py-1">
-                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
+                <div className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2 py-1">
+                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
                     <BsSnow className="text-xl" />
-                    WINTER
+                    Iarnă
                   </div>
                 </div>
               ) : tag.tag === "ALLSEASON" || tag.tag === "ALL SEASON" ? (
-                <div className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-400/20 rounded p-2 py-1">
-                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
+                <div className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2 py-1">
+                  <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
                     <LuSunSnow className="text-xl" />
                     ALL SEASON
                   </div>
@@ -115,7 +131,7 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags }) => {
               )}
               {tag.tag === "3PMSF" && (
                 <div
-                  className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-400/20
+                  className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200
                    rounded p-2 py-1"
                 >
                   <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
@@ -126,7 +142,7 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags }) => {
               )}
               {tag.tag === "elect" && (
                 <div
-                  className="text-xs text-green font-gothamBlack flex gap-2 items-center bg-blue-500
+                  className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-blue-500
                    rounded p-2 py-1"
                 >
                   <div className="max-h-5 text-xs text-white font-gothamBlack flex gap-2 items-center">
@@ -138,15 +154,17 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags }) => {
             </React.Fragment>
           );
         })}
-        {/* <div
+        <div
           ref={plusIconRef}
-          // style={{ left: firstLineWidth + 16 + "px" }}
-          className={`h-9 w-min absolute pb-2 top-1.5`}
+          style={{ left: firstLineWidth + "px" }}
+          className={`absolute ${
+            page && page === "choosing" ? "" : "hidden"
+          } text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2`}
         >
-          <li className="text-xs text-primary w-fit font-gothamBlack flex gap-2 items-center bg-[#f0f0f0] h-full rounded p-2">
+          <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
             <FaPlus />
-          </li>
-        </div> */}
+          </div>
+        </div>
       </div>
     </div>
   );

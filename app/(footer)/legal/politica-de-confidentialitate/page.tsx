@@ -6,7 +6,7 @@ import React from "react";
 function Page() {
   return (
     <div className="bg-secondary bg-fixed font-gotham">
-      <div className="w-full h-auto text-secondary-foreground relative overflow-hidden px-24 p-6">
+      <div className="w-full h-auto text-secondary-foreground relative overflow-hidden container p-6">
         <div className="w-full h-full relative mt-10">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col justify-between w-full h-full">

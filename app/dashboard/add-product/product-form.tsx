@@ -8,7 +8,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -17,7 +16,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -31,11 +29,9 @@ import { createProduct } from "@/server/actions/create-product";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { getProduct } from "@/server/actions/get-product";
-import { useEffect, useState } from "react";
-import { Span } from "next/dist/trace";
-import { Combobox } from "./combobox";
-import { Files } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
+import { useEffect } from "react";
+import VariantImages from "../products/variant-images";
+import { ProductImages } from "@/lib/infer-type";
 
 const toastId = toast("c-e toaster");
 
@@ -43,6 +39,7 @@ export default function ProductForm() {
   const form = useForm<zProductSchema>({
     resolver: zodResolver(ProductSchema),
     defaultValues: {
+      variantImages: [],
       title: "",
       description: "",
       smalldesc: "",
@@ -57,8 +54,9 @@ export default function ProductForm() {
   const checkProduct = async (id: number) => {
     if (editMode) {
       const data = await getProduct(id);
+
       if (data.error) {
-        -toast.error(data.error);
+        toast.error(data.error);
         router.push("/dashboard/products");
         return;
       }
@@ -67,6 +65,14 @@ export default function ProductForm() {
         form.setValue("title", data.success.title);
         form.setValue("description", data.success.description);
         form.setValue("smalldesc", data.success.smalldesc);
+        form.setValue(
+          "variantImages",
+          data.success.productImages.map((img) => ({
+            name: img.name,
+            size: img.size,
+            url: img.url,
+          }))
+        );
       }
     }
   };
@@ -148,6 +154,7 @@ export default function ProductForm() {
                 </FormItem>
               )}
             />
+            <VariantImages />
 
             <Button
               type="submit"

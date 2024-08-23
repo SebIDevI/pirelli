@@ -168,10 +168,10 @@ export const orderProduct = pgTable("orderProduct", {
   productVariantID: integer("productVariantID")
     .notNull()
     .references(() => productVariants.id, { onDelete: "cascade" }),
-  orderID: integer("orderID")
+  orderID: serial("orderID")
     .notNull()
     .references(() => orders.id, { onDelete: "cascade" }),
-  productID: integer("productID")
+  productID: serial("productID")
     .notNull()
     .references(() => products.id, { onDelete: "cascade" }),
 });
@@ -188,7 +188,7 @@ export const productVariantsRelations = relations(
       fields: [productVariants.productID],
       references: [products.id],
     }),
-    productImages: many(productImages),
+    // productImages: many(productImages),
     variantTags: many(variantTags),
   })
 );

@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import pzero from "@/public/index/logo_pzero_world.svg";
 import roata from "@/public/index/roata_pzero.png";
 import { GiCarWheel } from "react-icons/gi";
+import { Button } from "../ui/button";
 
 function Head() {
   const { scrollYProgress } = useScroll();
@@ -37,17 +38,18 @@ function Head() {
           <h1 className="relative text-[1.5em] pt-4 uppercase font-gothamXLight tracking-[1em] text-primary">
             <span className="">R</span>acebox
           </h1>
-          <p className="py-8 font-gothamXLight text-lg text-secondary-foreground w-[80%]">
-            A RETAIL AND BRAND EXPERIENCE THAT IS &quot;UNIQUELY PIRELLI&quot;
+          <p className="py-8 font-gothamXLight text-lg text-secondary-foreground w-full">
+            O EXPERIENȚĂ DE RETAIL ȘI BRAND CARE ESTE „UNICĂ PIRELLI”
           </p>
-          <button
-            className="py-2 px-8 uppercase font-bold border-secondary-foreground border bg-transparent text-primary hover:text-primary-foreground hover:border-primary transition-all duration-500 flex items-center gap-2 relative after:w-0 after:h-full after:absolute after:top-0 after:-translate-x-1/2 after:left-1/2 after:bg-primary after:z-10 hover:after:w-full after:transition-all after:duration-500 after:origin-center"
+          <Button
+            variant={"pirelli"}
+            className="px-8 border-secondary-foreground"
             onClick={() => (location.href = "/catalog")}
           >
             <span className="flex items-center justify-center gap-2 z-20">
               <GiCarWheel /> Catalog Produse
             </span>
-          </button>{" "}
+          </Button>{" "}
           <br />
           <br />
           {/* <button

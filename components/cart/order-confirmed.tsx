@@ -18,7 +18,7 @@ export default function OrderConfirmed() {
       >
         <Lottie className="h-56 my-4" animationData={orderConfirmed} />
       </motion.div>
-      <h2 className="text-2xl font-medium">Thank you for your purchase</h2>
+      <h2 className="text-2xl font-medium">Mulțumim pentru achiziție</h2>
       <Link href={"/dashboard/orders"}>
         <Button
           onClick={() => {
@@ -26,7 +26,7 @@ export default function OrderConfirmed() {
             setCartOpen(false);
           }}
         >
-          View your order
+          Vedeți comanda
         </Button>
       </Link>
     </div>
