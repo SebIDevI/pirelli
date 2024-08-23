@@ -43,6 +43,7 @@ async function Page({ params }: { params: { slug: string } }) {
     cint: 0,
     scorp: 0,
     carrier: 0,
+    sport: 0,
   };
   const trueSlug =
     params.slug == "p zero" ||
@@ -55,6 +56,24 @@ async function Page({ params }: { params: { slug: string } }) {
       : params.slug;
 
   data.forEach((product) => {
+    let tagV = {
+      allSez: 0,
+      summer: 0,
+      winter: 0,
+      suv: 0,
+      car: 0,
+      van: 0,
+      elect: 0,
+      ncs: 0,
+      rf: 0,
+      si: 0,
+      pwg: 0,
+      pzero: 0,
+      cint: 0,
+      scorp: 0,
+      carrier: 0,
+      sport: 0,
+    };
     product.productVariants.forEach((variant) => {
       let ect = 0;
 
@@ -66,38 +85,74 @@ async function Page({ params }: { params: { slug: string } }) {
           ect = 1;
       });
       variant.variantTags.forEach((tag) => {
-        if (ect)
-          tag.tag === "ALL SEASON"
+        if (ect) {
+          tag.tag === "ALL SEASON" && !tagV.allSez
             ? tagCount.allSez++
-            : tag.tag === "SUMMER"
+            : tag.tag === "SUMMER" && !tagV.summer
             ? tagCount.summer++
-            : tag.tag === "WINTER"
+            : tag.tag === "WINTER" && !tagV.winter
             ? tagCount.winter++
-            : tag.tag === "SUV"
+            : tag.tag === "SUV" && !tagV.suv
             ? tagCount.suv++
-            : tag.tag === "CAR"
+            : tag.tag === "CAR" && !tagV.car
             ? tagCount.car++
-            : tag.tag === "VAN"
+            : tag.tag === "VAN" && !tagV.van
             ? tagCount.van++
-            : tag.tag === "elect"
+            : tag.tag === "elect" && !tagV.elect
             ? tagCount.elect++
-            : tag.tag === "ncs"
+            : tag.tag === "ncs" && !tagV.ncs
             ? tagCount.ncs++
-            : tag.tag === "rf"
+            : tag.tag === "r-f" && !tagV.rf
             ? tagCount.rf++
-            : tag.tag === "si"
+            : tag.tag === "s-i" && !tagV.si
             ? tagCount.si++
-            : tag.tag === "POWERGY"
+            : tag.tag === "POWERGY" && !tagV.pwg
             ? tagCount.pwg++
-            : tag.tag === "P ZERO"
+            : tag.tag === "P ZERO" && !tagV.pzero
             ? tagCount.pzero++
-            : tag.tag === "CINTURATO"
+            : tag.tag === "CINTURATO" && !tagV.cint
             ? tagCount.cint++
-            : tag.tag === "SCORPION"
+            : tag.tag === "SCORPION" && !tagV.scorp
             ? tagCount.scorp++
-            : tag.tag === "CARRIER"
+            : tag.tag === "CARRIER" && !tagV.carrier
             ? tagCount.carrier++
             : null;
+          tag.tag === "ALL SEASON"
+            ? (tagV.allSez = 1)
+            : tag.tag === "SUMMER"
+            ? (tagV.summer = 1)
+            : tag.tag === "WINTER"
+            ? (tagV.winter = 1)
+            : tag.tag === "SUV"
+            ? (tagV.suv = 1)
+            : tag.tag === "CAR"
+            ? (tagV.car = 1)
+            : tag.tag === "VAN"
+            ? (tagV.van = 1)
+            : tag.tag === "elect"
+            ? (tagV.elect = 1)
+            : tag.tag === "ncs"
+            ? (tagV.ncs = 1)
+            : tag.tag === "r-f"
+            ? (tagV.rf = 1)
+            : tag.tag === "s-i"
+            ? (tagV.si = 1)
+            : tag.tag === "POWERGY"
+            ? (tagV.pwg = 1)
+            : tag.tag === "P ZERO"
+            ? (tagV.pzero = 1)
+            : tag.tag === "CINTURATO"
+            ? (tagV.cint = 1)
+            : tag.tag === "SCORPION"
+            ? (tagV.scorp = 1)
+            : tag.tag === "CARRIER"
+            ? (tagV.carrier = 1)
+            : null;
+          if (variant.fullSize.split(" ")[1].includes("W")) {
+            !tagV.sport ? tagCount.sport++ : "";
+            tagV.sport = 1;
+          }
+        }
       });
     });
   });
