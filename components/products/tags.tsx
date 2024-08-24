@@ -14,9 +14,10 @@ import { Unplug } from "lucide-react";
 interface VariantTagsFullSize {
   variantTags: VariantsWithImagesTags;
   page?: string;
+  title: string;
 }
 
-const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags, page }) => {
+const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags, page, title }) => {
   const [firstLineWidth, setFirstLineWidth] = useState<number>(0);
   const ulRef = useRef<HTMLDivElement>(null);
   const plusIconRef = useRef<HTMLDivElement>(null);
@@ -79,6 +80,17 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags, page }) => {
         {variantTags.variantTags.map((tag, i) => {
           return (
             <React.Fragment key={i}>
+              {tag.tag === "elect" && (
+                <div
+                  className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-blue-500
+                   rounded p-2 py-1"
+                >
+                  <div className="max-h-5 text-xs text-white font-gothamBlack flex gap-2 items-center">
+                    <Unplug size={20} />
+                    ELECT
+                  </div>
+                </div>
+              )}
               {tag.tag === "CAR" ? (
                 <div className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-gray-200 rounded p-2 py-1">
                   <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center uppercase">
@@ -136,18 +148,7 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags, page }) => {
                 >
                   <div className="max-h-5 text-xs text-green font-gothamBlack flex gap-2 items-center">
                     <Pmsf className="text-xl" />
-                    3PMSF
-                  </div>
-                </div>
-              )}
-              {tag.tag === "elect" && (
-                <div
-                  className="div-ttl text-xs text-green font-gothamBlack flex gap-2 items-center bg-blue-500
-                   rounded p-2 py-1"
-                >
-                  <div className="max-h-5 text-xs text-white font-gothamBlack flex gap-2 items-center">
-                    <Unplug size={20} />
-                    ELECT
+                    Snowflake
                   </div>
                 </div>
               )}

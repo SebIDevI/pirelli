@@ -22,7 +22,7 @@ export default function Performance({
 }) {
   return (
     <div className="py-16">
-      <h3 className="text-secondary-foreground font-gothamBlack italic text-2xl pb-8">
+      <h3 className="text-secondary-foreground font-gothamBlack italic text-5xl pb-8">
         Performanță
       </h3>
       <div className="text-secondary-foreground font-gothamBlack">

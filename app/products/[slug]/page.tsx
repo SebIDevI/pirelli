@@ -10,6 +10,7 @@ import TransformedRims from "@/components/products/transformed-rims";
 import Tagz from "@/components/products/tags";
 import Indici from "@/components/products/indici";
 import Performance from "@/components/products/performance";
+import Technology from "@/components/products/technology";
 
 export const revalidate = 60 * 60;
 
@@ -70,6 +71,7 @@ export default async function Page({
   });
   const classes = variantWID!.product.productVariants.map((variant) => ({
     rim: variant.size.slice(-3),
+    title: variantWID!.product.title,
     ...variant,
   }));
   classes.sort((a, b) => {
@@ -115,16 +117,19 @@ export default async function Page({
               <ProductShowcase images={images} />
             </div>
             <div className="pt-4">
-              <Tagz variantTags={variantWID!} />
+              <Tagz
+                variantTags={variantWID!}
+                title={variantWID!.product.title}
+              />
             </div>
-            <h1 className="text-secondary-foreground font-gothamBlack italic text-3xl py-4">
+            <h1 className="text-secondary-foreground font-gothamBlack italic text-5xl py-4">
               {variantWID!.product.title}
             </h1>
             <h3
               dangerouslySetInnerHTML={{
                 __html: variantWID!.product.description,
               }}
-              className="text-secondary-foreground text-lg pb-8"
+              className="text-secondary-foreground text-lg font-gothamBook pb-8"
             />
             <p className="text-secondary-foreground font-gothamLight text-lg">
               <span className="font-gotham">{searchParams.name}</span>{" "}
@@ -132,8 +137,8 @@ export default async function Page({
             </p>
             <Performance variantWID={variantWID!} />
           </div>
-          <div className="font-medium w-full flex-1 text-secondary-foreground sticky top-24 pb-14">
-            <h1 className="text-4xl pb-2 font-gothamBlack">
+          <div className="font-medium w-full flex-1 text-secondary-foreground sticky top-24">
+            <h1 className="text-5xl pb-2 font-gothamBlack">
               {variantWID!.product.title}
             </h1>
             <div
@@ -148,8 +153,8 @@ export default async function Page({
                 {variantWID!.size}
               </span>
             </p>
-            <div className="flex items-start gap-10 flex-wrap">
-              <div>
+            <div className="space-y-4 my-6">
+              <div className="space-y-2">
                 <p className="">Alegeți altă mărime: </p>
                 <div className="flex gap-2">
                   <TransformedRims
@@ -159,9 +164,38 @@ export default async function Page({
                   />
                 </div>
               </div>
-              <Indici variants={variants} fullSize={variantWID!.fullSize} />
+              <Indici
+                variants={variants}
+                fullSize={variantWID!.fullSize}
+                omologare={
+                  variantWID!.variantTags.filter((v) =>
+                    v.tag.includes("Omologare: ")
+                  ).length
+                    ? variantWID!.variantTags
+                        .filter((v) => v.tag.includes("Omologare: "))[0]
+                        .tag.replace("Omologare: ", "")
+                    : "-"
+                }
+                tech={
+                  variantWID!.variantTags.filter(
+                    (v) =>
+                      v.tag === "s-i" ||
+                      v.tag === "r-f" ||
+                      v.tag === "ncs" ||
+                      v.tag === "elect"
+                  ).length
+                    ? variantWID!.variantTags.filter(
+                        (v) =>
+                          v.tag === "s-i" ||
+                          v.tag === "r-f" ||
+                          v.tag === "ncs" ||
+                          v.tag === "elect"
+                      )[0].tag
+                    : "-"
+                }
+              />
             </div>
-            <p className="py-2">
+            {/* <p className="py-2">
               Omologare:{" "}
               {variantWID!.variantTags.filter((v) =>
                 v.tag.includes("Omologare: ")
@@ -170,8 +204,8 @@ export default async function Page({
                     .filter((v) => v.tag.includes("Omologare: "))[0]
                     .tag.replace("Omologare: ", "")
                 : "-"}
-            </p>
-            <div className="flex gap-2">
+            </p> */}
+            <div className="flex gap-2 pt-4">
               <p className="font-bold text-secondary-foreground font-gotham text-2xl">
                 <span className="text-sm text-secondary-foreground font-gotham">
                   PREȚ:{" "}
@@ -183,6 +217,7 @@ export default async function Page({
             <AddCart />
           </div>
         </div>
+        <Technology variantWID={variantWID!} />
       </div>
     </div>
   );

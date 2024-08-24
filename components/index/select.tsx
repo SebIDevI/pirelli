@@ -29,6 +29,7 @@ const select = [
       { text: "P ZERO™", link: "/catalog/linie-de-produse/p-zero" },
       { text: "CINTURATO™", link: "/catalog/linie-de-produse/cinturato" },
       { text: "SCORPION™", link: "/catalog/linie-de-produse/scorpion" },
+      { text: "POWERGY™", link: "/catalog/linie-de-produse/powergy" },
       { text: "CARRIER™", link: "/catalog/linie-de-produse/carrier" },
     ],
   },

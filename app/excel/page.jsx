@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
-import { add } from "@/server/actions/excel";
+import { add, edit } from "@/server/actions/excel";
 
 async function parseExcelFile(file) {
   const reader = new FileReader();
@@ -34,7 +34,8 @@ function App() {
     console.log(parsedData);
     const updatedProduse = parsedData
       .filter(
-        (data) => data.__rowNum__ > 14 && data.__EMPTY_21 === "CINTURATO P1"
+        (data) =>
+          data.__rowNum__ > 14 && data.__EMPTY_21 === "SCORPION ZERO ALL SEASON"
         // data.__EMPTY_21.includes("SF2") &&
         // (data.__EMPTY_1.includes("ALLSEASON") ||
         //   data.__EMPTY_1.includes("ALL SEASON"))
@@ -256,13 +257,27 @@ function App() {
 
             if (desc.data.includes("3PMSF")) vtags[i].push("3PMSF");
           } else if (desc.nume === "Obs.1") {
-            if (desc.data !== "std") vtags[i].push(desc.data);
+            if (desc.data !== "std") {
+              if (desc.data.includes(" + ")) {
+                const datas = desc.data.split(" + ");
+                datas.forEach((dataz) => {
+                  vtags[i].push(dataz);
+                });
+              } else {
+                vtags[i].push(desc.data);
+              }
+            }
           } else if (desc.nume === "LS/SC") {
             if (desc.data !== "-") vtags[i].push(desc.data);
-          } else if (desc.nume === "Obs.1") {
-            if (desc.data !== "-") vtags[i].push(desc.data);
           } else if (desc.nume === "Omologare") {
-            if (desc.data !== "-") vtags[i].push(desc.data);
+            if (desc.data !== "-") {
+              if (desc.data.includes("-")) {
+                const datas2 = desc.data.split("-");
+                vtags[i].push("Omologare: " + datas2.join(", "));
+              } else {
+                vtags[i].push("Omologare: " + desc.data);
+              }
+            }
           } else if (desc.nume === "Obs.2") {
             if (desc.data !== "-") vtags[i].push(desc.data);
           } else if (desc.nume === "SEVERE SNOW TYRE") {
@@ -270,23 +285,23 @@ function App() {
           } else if (desc.nume === "ICE GRIP TYRE") {
             if (desc.data !== "-") vtags[i].push("ICE GRIP TYRE");
           } else if (desc.nume === "Descriere Profil") {
-            if (desc.data !== "-") vtags[i].push("CINTURATO");
+            if (desc.data !== "-") vtags[i].push("SCORPION");
           } else {
             vtags[i].push(desc.data);
           }
         }
       });
-      vtags[i].push("DRY-70");
-      vtags[i].push("MILEAGE-90");
-      vtags[i].push("COMFORT-90");
+      vtags[i].push("DRY-83");
+      vtags[i].push("MILEAGE-69");
+      vtags[i].push("COMFORT-76");
       if (i !== updatedProduse.length - 1) vtags.push([]);
     });
 
     setDataInteresting({
-      title: "CINTURATO P1",
+      title: "SCORPION ZERO ALL SEASON",
       description:
-        "<p><strong>CINTURATO P1™</strong> offers good control in both dry and wet conditions while provides a comfortable driving experience. Dedicated materials and compounds, together with aerodynamic sidewalls and low weight have allowed a reduction of rolling resistance, especially in urban environments.</p>",
-      smalldesc: "Ideal for urban mobility",
+        "<p><strong>SCORPION™ ZERO ALL SEASON</strong> este noul produs all-season UHP pentru modele SUV dezvoltat ca echipare originală pentru producatorii auto premium. Aceasta anvelopă este construită pentru a maximiza performanțele în toate anotimpurile, pentru orice stil de condus, inclusiv pe drumuri acoperite de zăpadă. Compușii inovatori combinați cu modelul asimetric ofera performanțe UHP pe parcursul tuturor anotimpurilor, asigurand niveluri remarcabile de siguranță și confort, minimizând nivelul de zgomot.</p>",
+      smalldesc: "Performanță pe toate planurile pentru SUV-uri",
       variants: updatedProduse.map((item, i) => ({
         productType: item.descriere[12].data,
         price: item.pret,
@@ -314,7 +329,10 @@ function App() {
     <div className="overflow-y-auto">
       {/* {console.log(dataFinTst)} */}
       {/* ================================================== */}
-      <div className="flex items-center justify-center w-full h-80 bg-dark rounded-md">
+      <div
+        className="flex h-80 items-center justify-center w-full bg-dark rounded-md"
+        style={{ height: "320px" }}
+      >
         <input
           type="file"
           accept=".xlsx, .xls"
@@ -328,6 +346,7 @@ function App() {
           Adauga
         </button>
       </div>
+      {!produse.length && "test"}
       {/* ================================================== */}
       {produse.length > 0 && (
         <div>

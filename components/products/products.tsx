@@ -133,13 +133,19 @@ export default function Products({ products }: ProductsTypes) {
             >
               <Image
                 className="rounded-md aspect-square"
-                src={product.productImages[0].url}
+                src={
+                  product.productImages.filter((img) => img.order === 0)[0].url
+                }
                 width={720}
                 height={480}
                 alt={product.productVariants[0].product.title}
                 loading="lazy"
               />
-              <Tagz variantTags={product.productVariants[0]} page="choosing" />
+              <Tagz
+                variantTags={product.productVariants[0]}
+                page="choosing"
+                title={product.title}
+              />
               <div className="flex justify-between gap-2">
                 <div className="font-medium">
                   <h2 className="text-2xl font-gothamBlack">

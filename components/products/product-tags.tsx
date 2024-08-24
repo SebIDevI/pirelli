@@ -387,9 +387,9 @@ export default function ProductTags({
                                 ({type.numb}){" "}
                               </label>
                               <Checkbox
-                                onCheckedChange={() => {
-                                  setFilter(type.val);
-                                }}
+                                // onCheckedChange={() => {
+                                //   setFilter(type.val);
+                                // }}
                                 id={`checkbox` + index}
                                 className="w-6 h-6 me-1.5"
                                 disabled={type.numb == 0 ? true : false}
