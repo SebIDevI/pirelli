@@ -68,3 +68,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.hoverAnim {
+  background-image: linear-gradient(black, black);
+  background-size: 0% 3px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 400ms ease-in-out;
+
+  text-decoration: none;
+}
+
+.hoverAnim:hover {
+  background-size: 100% 3px;
+}

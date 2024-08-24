@@ -177,32 +177,37 @@ async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] bg-fixed font-gotham pb-10">
-      <div className="w-full h-auto text-primary-foreground relative overflow-hidden py-6">
-        <div className="w-full h-full absolute top-0 left-0 bg-black">
-          <Image src={tyre} alt="Tyre" className="absolute right-0 scale-90" />
+      <div className="w-full h-auto min-h-[50vh] text-secondary-foreground relative overflow-hidden py-6">
+        <div className="w-full h-full absolute top-0 left-0 bg-secondary">
+          <div className="absolute w-full h-full bg-secondary/30 z-10"></div>
+          <Image
+            src={tyre}
+            alt="Tyre"
+            className="absolute right-0 top-full -translate-y-1/2 md:scale-[.8] z-0"
+          />
         </div>
-        <div className="w-full h-full relative mt-10 container">
+        <div className="w-full h-full relative mt-10 container z-10">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col justify-between w-full h-full">
               <div className="md:w-1/2">
                 <p className="font-gothamLight uppercase text-sm">
                   <Link
                     href={"/"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
                   >
                     Homepage
                   </Link>{" "}
                   /{" "}
                   <Link
                     href={"/catalog"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
                   >
                     Catalog anvelope
                   </Link>{" "}
                   /{" "}
                   <Link
                     href={"/catalog"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
                   >
                     Mărime
                   </Link>

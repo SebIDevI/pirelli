@@ -175,13 +175,14 @@ async function Page({ params }: { params: { slug: string } }) {
     <div className="bg-gradient-to-b to-[#ffffff] from-[#e0e0e0] bg-fixed font-gotham pb-10">
       <div className="w-full h-auto min-h-[50vh] text-secondary-foreground relative overflow-hidden py-6">
         <div className="w-full h-full absolute top-0 left-0 bg-secondary">
+          <div className="absolute w-full h-full bg-secondary/30 z-10"></div>
           <Image
             src={tyre}
             alt="Tyre"
-            className="absolute right-0 scale-[.8]"
+            className="absolute right-0 top-full -translate-y-1/2 md:scale-[.8] z-0"
           />
         </div>
-        <div className="w-full h-full relative mt-10 container">
+        <div className="w-full h-full relative mt-10 container z-10">
           <div className="w-full h-full flex items-center py-14 gap-2">
             <div className="flex flex-col justify-between w-full h-full">
               <div className="md:w-1/2">

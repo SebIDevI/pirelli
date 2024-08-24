@@ -19,15 +19,15 @@ function Head() {
   return (
     <div className="relative h-screen w-full bg-gradient-to-l dark:from-[#000000] dark:to-[#202020] from-[#ffffff] to-[#dadada] flex items-center overflow-x-hidden overflow-y-clip">
       <motion.div
-        style={{ rotate: scale }}
-        className="absolute w-full h-auto origin-center lg:top-[15%] lg:left-[30%] flex items-center justify-center px-6 md:px-12"
+        style={{ rotate: scale, translateY: "-54%" }}
+        className="absolute w-full h-auto origin-center lg:top-full lg:-translate-y-full lg:left-[30%] top-[98%] flex items-center justify-center px-6 md:px-12"
       >
         <Image
           src={roata}
           alt={"Wheel pzero"}
           width={1000}
           height={1000}
-          className="lg:w-4/5 lg:h-4/5 w-3/5 h-3/5 pt-20"
+          className="lg:w-4/5 lg:h-4/5 w-full h-full pt-20"
         />
       </motion.div>
       <div className="absolute block lg:hidden w-full h-full dark:bg-[#00000064] bg-[#ffffff9d]"></div>

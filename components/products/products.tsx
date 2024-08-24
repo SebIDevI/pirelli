@@ -132,7 +132,7 @@ export default function Products({ products }: ProductsTypes) {
               href={`/products/${product.title}?id=${product.productVariants[0].id}&productID=${product.id}&price=${product.productVariants[0].price}&title=${product.title}&type=${product.productVariants[0].productType}&image=${product.productImages[0].url}`}
             >
               <Image
-                className="rounded-md aspect-square"
+                className="rounded-md aspect-square bg-white"
                 src={
                   product.productImages.filter((img) => img.order === 0)[0].url
                 }
@@ -149,8 +149,10 @@ export default function Products({ products }: ProductsTypes) {
               <div className="flex justify-between gap-2">
                 <div className="font-medium">
                   <h2 className="text-2xl font-gothamBlack">
-                    {product.productVariants[0].product.title} -{" "}
-                    {product.productVariants[0].size}
+                    <span className="hoverAnim">
+                      {product.productVariants[0].product.title} -{" "}
+                      {product.productVariants[0].size}
+                    </span>
                   </h2>
                 </div>
                 <div>
