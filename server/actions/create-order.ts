@@ -23,6 +23,8 @@ export const createOrder = action(
         userID: user.user.id,
       })
       .returning();
+
+    console.log("order: " + order);
     const orderProducts = products.map(
       async ({
         productID,
@@ -41,6 +43,7 @@ export const createOrder = action(
         });
       }
     );
+    console.log("orderProducts: " + orderProducts);
     return { success: "Order has been added" };
   }
 );
