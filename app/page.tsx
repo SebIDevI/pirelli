@@ -13,7 +13,7 @@ export const revalidate = 0;
 
 export default async function Home() {
   return (
-    <main>
+    <main className="dark">
       {/* <Algolia /> */}
       {/* <ProductTags />
       <Products products={data} /> */}

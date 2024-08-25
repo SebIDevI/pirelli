@@ -54,12 +54,12 @@ export default function RootLayout({
       <body
         className={`${gotham.variable} ${gothamBlack.variable} ${gothamXLight.variable} ${gothamLight.variable} ${gothamThin.variable} ${gothamBook.variable}`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Nav />
-          <Toaster />
-          {children}
-          <Footer />
-        </ThemeProvider>
+        {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
+        <Nav />
+        <Toaster />
+        {children}
+        <Footer />
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

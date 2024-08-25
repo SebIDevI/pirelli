@@ -8,6 +8,7 @@ export const NavWrapper = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
+  const pathname = window.location.pathname;
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +29,8 @@ export const NavWrapper = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        isScrolled ? "py-5 bg-secondary" : "py-8 bg-transparent",
+        isScrolled ? `py-5 bg-secondary` : "py-8 bg-transparent",
+        `${pathname === "/" ? "dark" : ""}`,
         className
       )}
       {...props}

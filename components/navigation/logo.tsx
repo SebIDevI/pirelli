@@ -21,7 +21,7 @@ export default function Logo() {
         width={130}
         className="h-auto scale-[1.45] origin-top-left"
       /> */}
-      <div className="h-full sm:w-[140px] bg-[url('/raceboxLogo.png')] dark:bg-[url('/racebox_logo.svg')] dark:scale-[1.4] origin-top-left bg-contain bg-no-repeat scale-[1.20] xs:w-[90px] w-[70px]" />
+      <div className="h-full sm:w-[140px] bg-[url('/raceboxLogo.png')] dark:bg-[url('/racebox_logo.svg')] dark:scale-[1.3] origin-top-left bg-contain bg-no-repeat scale-[1.20] xs:w-[90px] w-[70px]" />
     </div>
   );
 }

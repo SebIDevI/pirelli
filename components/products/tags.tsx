@@ -62,7 +62,7 @@ const Tagz: React.FC<VariantTagsFullSize> = ({ variantTags, page, title }) => {
         ref={ulRef}
         className={`flex relative flex-wrap ${
           page && page === "choosing" ? "h-11 overflow-hidden" : ""
-        } gap-2 py-2 text-secondary-foreground dark:text-secondary`}
+        } gap-2 py-2 text-secondary-foreground`}
       >
         {/* <GiRaceCar className="text-4xl text-yellow-400" /> */}
         {/* CAR */}

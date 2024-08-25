@@ -191,21 +191,21 @@ async function Page({ params }: { params: { slug: string } }) {
                 <p className="font-gothamLight uppercase text-sm">
                   <Link
                     href={"/"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
                   >
                     Homepage
                   </Link>{" "}
                   /{" "}
                   <Link
                     href={"/catalog"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
                   >
                     Catalog anvelope
                   </Link>{" "}
                   /{" "}
                   <Link
                     href={"/catalog"}
-                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-secondary-foreground hover:after:w-full after:transition-all after:duration-500"
+                    className="uppercase relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
                   >
                     Familie
                   </Link>

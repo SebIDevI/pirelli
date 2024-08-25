@@ -24,6 +24,7 @@ export const UserButton = ({ user }: Session) => {
   const { setTheme, theme } = useTheme();
   const [checked, setChecked] = useState(false);
   const router = useRouter();
+  const pathname = window.location.pathname;
 
   function switchState() {
     switch (theme) {
@@ -65,7 +66,10 @@ export const UserButton = ({ user }: Session) => {
               </Suspense>
             </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-64 p-6" align="end">
+          <DropdownMenuContent
+            align="end"
+            className={`${pathname === "/" ? "dark" : ""} w-64 p-6`}
+          >
             <div className="mb-4 p-4 flex flex-col items-center rounded-lg bg-primary/10">
               {user?.image && (
                 <Image
@@ -111,7 +115,7 @@ export const UserButton = ({ user }: Session) => {
               />{" "}
               Setări
             </DropdownMenuItem>
-            {theme && (
+            {/* {theme && (
               <DropdownMenuItem className="py-2 font-medium cursor-pointer transition-all duration-500">
                 <div
                   onClick={(e) => e.stopPropagation()}
@@ -141,7 +145,7 @@ export const UserButton = ({ user }: Session) => {
                   />
                 </div>
               </DropdownMenuItem>
-            )}
+            )} */}
             <DropdownMenuItem
               onClick={() => signOut()}
               className="group focus:bg-destructive/30 py-2 font-medium cursor-pointer"
