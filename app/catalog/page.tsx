@@ -75,7 +75,7 @@ function Home() {
 
   return (
     <div className="bg-secondary font-gotham">
-      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden p-6 bg-black">
+      <div className="w-full md:h-[90vh] xs:h-screen min-h-[90vh] md:min-h-full text-white relative overflow-hidden py-6 bg-black">
         <div className="w-full h-full absolute top-0 left-0 scale-[1.5]">
           <Video />
         </div>
