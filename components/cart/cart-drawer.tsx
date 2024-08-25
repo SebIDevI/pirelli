@@ -19,8 +19,8 @@ export default function CartDrawer() {
   const { cart, checkoutProgress, cartOpen, setCartOpen } = useCartStore();
   return (
     <Drawer open={cartOpen} onOpenChange={setCartOpen}>
-      <DrawerTrigger>
-        <div className="relative px-2">
+      <DrawerTrigger className="p-2 rounded-lg overflow-hidden hover:bg-slate-600/50">
+        <div className="relative">
           <AnimatePresence>
             {cart.length > 0 && (
               <motion.span

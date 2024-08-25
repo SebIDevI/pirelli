@@ -14,6 +14,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { redirect } from "next/navigation";
+import Link from "next/link";
 
 const prods = [
   {
@@ -21,18 +23,21 @@ const prods = [
     name: "Scroprion",
     desc: "Cea mai bună în condiții umede, rezistență la rulare și confort pentru condus",
     img: scorpion,
+    link: "/catalog/linie-de-produse/scorpion",
   },
   {
     mini: "cele mai iubite",
     name: "P ZERO",
     desc: "Opțiunea perfectă pentru toate performanțele pe care doriți să le obțineți",
     img: pzero,
+    link: "/catalog/linie-de-produse/p-zero",
   },
   {
     mini: "pentru mașini și crossovers",
     name: "Cinturato P7",
     desc: "Cea mai bună în condiții umede, rezistență la rulare și confort pentru condus",
     img: cinturato,
+    link: "/catalog/linie-de-produse/cinturato",
   },
 ];
 
@@ -45,7 +50,11 @@ function Products() {
         </h3>
         <div className="lg:grid hidden grid-cols-3 gap-4">
           {prods.map((prod, i) => (
-            <div className="md:basis-[500px] basis-full h-full" key={i}>
+            <Link
+              href={prod.link}
+              className="md:basis-[500px] basis-full h-full"
+              key={i}
+            >
               <div className="flex flex-col justify-between bg-secondary max-w-[500px] shadow-lg font-gotham text-center p-6 pb-0 gap-6 h-full">
                 <div className="space-y-6">
                   <h5 className="uppercase text-primary font-gothamBlack">
@@ -60,7 +69,7 @@ function Products() {
                 </div>
                 <Image src={prod.img} alt={`Tyre ${prod.name}`} />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
         <div className="w-full h-full lg:hidden">

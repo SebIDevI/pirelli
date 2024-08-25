@@ -33,7 +33,6 @@ export default function Indici({
 
     return rimA.localeCompare(rimB);
   });
-  console.log(sortedVariants);
   const noDupsVariants = variants.filter((variant, index, arr) => {
     if (index === 0) return true; // Keep the first element
     const previousVariant = arr[index - 1];

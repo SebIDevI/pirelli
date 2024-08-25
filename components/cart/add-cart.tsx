@@ -62,7 +62,7 @@ export default function AddCart() {
       >
         Adăugați în coș
       </Button>
-      <div className="h-20"></div>
+      <div className="lg:h-20"></div>
     </>
   );
 }

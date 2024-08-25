@@ -28,7 +28,7 @@ function Footer() {
             <b>Pirelli</b>
           </p>
           <div className="flex gap-4 items-center">
-            <p className="font-gothamBook">Urmați-ne</p>
+            <p className="font-gothamBook">Urmăriți-ne</p>
             <div className="flex gap-4 items-center text-2xl">
               <Link
                 href="https://www.facebook.com/Racebox.ro/?locale=ro_RO"

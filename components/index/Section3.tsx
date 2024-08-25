@@ -11,6 +11,7 @@ import ferrari from "@/public/ferrari.png";
 import brabus from "@/public/brabus.png";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 function Section3() {
   const dates = [
@@ -19,41 +20,47 @@ function Section3() {
       header: "LAMBORGHINI URUS",
       text: "Urus a fost expediat din Ungaria pentru o schimbare completă: Full 1016industries Vision Widebody, cu roți VELOS de 23 inchi și înveliș complet cu pragurile ușii în mov Bespoke Satin.",
       img: dubai,
+      link: "https://www.instagram.com/reel/C3AVWMhKKhz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "ROLLS ROYCE",
       header: "ROLLS ROYCE CULLINAN MANSORY",
       text: "Una dintre numeroasele construcții Mansory, dar preferata noastră, gri pe portocaliu nu dezamăgește niciodată.",
       img: dreaming,
+      link: "https://www.instagram.com/p/C8EyFjEqjae/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "MAYBACH BRABUS",
       header: "MAYBACH BRABUS S580",
       text: "Primul din lume. Din Bulgaria, acest Maybach a primit tratamentul complet Brabus cu Monoblock M de 21” și un Wrap TwoTone.",
       img: racetrack,
+      link: "https://www.instagram.com/p/Cou8pNbKrrX/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "PORSCHE",
       header: "992 TURBO S TECHART",
       text: "Primul Techart 992 Turbo S din lume, și fostul deținător al recordului mondial pentru cel mai rapid 992 Turbo S: 4,0 100-200 KMH, 2,2 0-100 KMH, 9,5 1/4 mile în 2021.",
       img: porsche,
+      link: "https://www.instagram.com/p/Ctmo7bKq8Wf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "FERRARI",
       header: "FERRARI F8 TRIBUTO",
       text: "Project Car-ul nostru 2021-2022, Ferrari F8 Tributo cu un kit de caroserie complet 1016industries, evacuare Capristo și roți forjate Yido de 21-22 inci.",
       img: ferrari,
+      link: "https://www.instagram.com/p/CxNMVLrqaZQ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "BRABUS",
       header: "BRABUS G800 SQUARED WIDESTAR",
       text: "Primul din lume. Primul client a livrat kit-ul Widestar pentru G63 4x4 Squared. Împreună cu FI Exhaust ULTRA și Stage 2 Tune-ul nostru, ajungând până la 800 CP, împreună cu un set de roți VOSSEN LC3-01T de 24 inchi.",
       img: brabus,
+      link: "https://www.instagram.com/p/CzQ_mjlK0kR/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
   ];
 
   return (
-    <div className="pb-20 px-6 md:px-12 py-20 bg-secondary">
+    <div className="pb-20 py-20 bg-secondary">
       <div className="container">
         <p className="mb-8">
           <span className="relative text-secondary-foreground py-2 uppercase text-sm before:absolute before:top-0 before:left-0 before:w-2/3 before:h-full before:border-b-2 before:border-primary">
@@ -102,9 +109,15 @@ function Section3() {
                 >
                   {date.text}
                 </motion.p>
-                <Button variant={"pirelli"} className="my-8">
-                  <span className="z-20">Read the story</span>
-                </Button>
+                <div className="my-8 flex isolate">
+                  <Link
+                    href={date.link}
+                    target="_blank"
+                    className="py-2 px-8 rounded-none uppercase font-bold text-base border-primary border bg-transparent text-primary hover:text-primary-foreground hover:border-primary transition-all duration-500 flex items-center gap-2 relative after:w-0 after:h-full after:absolute after:top-0 after:-translate-x-1/2 after:left-1/2 after:bg-primary after:z-10 hover:after:w-full after:transition-all after:duration-500 after:origin-center"
+                  >
+                    <span className="z-20">Read the story</span>
+                  </Link>
+                </div>
               </TabsContent>
             ))}
           </div>

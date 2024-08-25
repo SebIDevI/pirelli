@@ -75,35 +75,33 @@ function Sel() {
   return (
     <div className="flex flex-col lg:flex-row w-full gap-4">
       {select.map((types, index) => (
-        <>
-          <DropdownMenu modal={false}>
-            <div className="relative w-full">
-              <DropdownMenuTrigger asChild className="w-full">
-                <Button
-                  className="w-full rounded-none h-16 bg-transparent border-2 text-lg font-medium border-primary hover:bg-primary text-primary hover:text-primary-foreground text-left px-10 uppercase flex items-center justify-between transition-all duration-300 ease-in-out"
-                  ref={triggerRef}
-                >
-                  {types.title} <ChevronDown size={18} />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                style={{ width: contentWidth || "auto" }}
-                className={`bg-black/90 rounded-none text-primary border-primary`}
+        <DropdownMenu modal={false} key={index}>
+          <div className="relative w-full">
+            <DropdownMenuTrigger asChild className="w-full">
+              <Button
+                className="w-full rounded-none h-16 bg-transparent border-2 text-lg font-medium border-primary hover:bg-primary text-primary hover:text-primary-foreground text-left px-10 uppercase flex items-center justify-between transition-all duration-300 ease-in-out"
+                ref={triggerRef}
               >
-                {types.subselect.map((type, index) => (
-                  <DropdownMenuItem
-                    key={index}
-                    className={`text-md uppercase relative cursor-pointer rounded-none hover:bg-primary hover:text-black focus:bg-primary focus:text-black h-14 px-8 m-1`}
-                  >
-                    <Link href={type.link} className="w-full">
-                      {type.text}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </div>
-          </DropdownMenu>
-        </>
+                {types.title} <ChevronDown size={18} />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              style={{ width: contentWidth || "auto" }}
+              className={`bg-black/90 rounded-none text-primary border-primary`}
+            >
+              {types.subselect.map((type, index) => (
+                <DropdownMenuItem
+                  key={index}
+                  className={`text-md uppercase relative cursor-pointer rounded-none hover:bg-primary hover:text-black focus:bg-primary focus:text-black h-14 px-8 m-1`}
+                >
+                  <Link href={type.link} className="w-full">
+                    {type.text}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </div>
+        </DropdownMenu>
       ))}
       <Link
         href={"/catalog/marime"}

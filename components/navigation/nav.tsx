@@ -18,7 +18,7 @@ export default async function Nav() {
               <Logo />
             </Link>
           </li>
-          <li className="relative flex items-center pb-1 hover:bg-muted">
+          <li className="relative flex items-center">
             <CartDrawer />
           </li>
           {!session ? (

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 import pzero from "@/public/index/logo_pzero_world.svg";
-import roata from "@/public/index/roata_pzero.png";
+import roata from "@/public/index/roata_pzero_copy_v3.png";
 import { GiCarWheel } from "react-icons/gi";
 import { Button } from "../ui/button";
 
@@ -20,14 +20,14 @@ function Head() {
     <div className="relative h-screen w-full bg-gradient-to-l dark:from-[#000000] dark:to-[#202020] from-[#ffffff] to-[#dadada] flex items-center overflow-x-hidden overflow-y-clip">
       <motion.div
         style={{ rotate: scale, translateY: "-54%" }}
-        className="absolute w-full h-auto origin-center lg:top-full lg:-translate-y-full lg:left-[30%] top-[98%] flex items-center justify-center px-6 md:px-12"
+        className="absolute w-full h-auto origin-center lg:top-full lg:-translate-y-full lg:left-[30%] top-[98%] flex items-center justify-center p-6 md:p-12 aspect-square"
       >
         <Image
           src={roata}
           alt={"Wheel pzero"}
           width={1000}
           height={1000}
-          className="lg:w-4/5 lg:h-4/5 w-full h-full pt-20"
+          className="lg:w-4/5 lg:h-4/5 w-full h-full aspect-square scale-[0.8]"
         />
       </motion.div>
       <div className="absolute block lg:hidden w-full h-full dark:bg-[#00000064] bg-[#ffffff9d]"></div>

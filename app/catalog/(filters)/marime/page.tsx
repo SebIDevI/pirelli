@@ -120,7 +120,7 @@ function Home() {
       ],
     },
     {
-      size: "R14",
+      size: "R17",
       types: [
         "205/40 R17",
         "205/45 R17",

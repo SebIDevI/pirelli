@@ -111,7 +111,7 @@ export default async function Page({
             </span>
           </div>
         </h2>
-        <div className="flex flex-col gap-16 w-full 2xl:flex-row items-start justify-between font-gothamLight">
+        <div className="flex flex-col gap-16 w-full lg:flex-row items-start justify-between font-gothamLight">
           <div className="w-full flex-1">
             <div className="w-full flex">
               <ProductShowcase images={images} />
@@ -122,22 +122,24 @@ export default async function Page({
                 title={variantWID!.product.title}
               />
             </div>
-            <h1 className="text-secondary-foreground font-gothamBlack italic text-5xl py-4">
-              {variantWID!.product.title}
-            </h1>
-            <h3
-              dangerouslySetInnerHTML={{
-                __html: variantWID!.product.description,
-              }}
-              className="text-secondary-foreground text-lg font-gothamBook pb-8"
-            />
-            <p className="text-secondary-foreground font-gothamLight text-lg">
-              <span className="font-gotham">{searchParams.name}</span>{" "}
-              {searchParams.features}
-            </p>
-            <Performance variantWID={variantWID!} />
+            <div className="hidden lg:block">
+              <h1 className="text-secondary-foreground font-gothamBlack italic text-5xl py-4">
+                {variantWID!.product.title}
+              </h1>
+              <h3
+                dangerouslySetInnerHTML={{
+                  __html: variantWID!.product.description,
+                }}
+                className="text-secondary-foreground text-lg font-gothamBook pb-8"
+              />
+              <p className="text-secondary-foreground font-gothamLight text-lg">
+                <span className="font-gotham">{searchParams.name}</span>{" "}
+                {searchParams.features}
+              </p>
+              <Performance variantWID={variantWID!} />
+            </div>
           </div>
-          <div className="font-medium w-full flex-1 text-secondary-foreground sticky top-24">
+          <div className="font-medium w-full flex-1 text-secondary-foreground lg:sticky top-24">
             <h1 className="text-5xl pb-2 font-gothamBlack">
               {variantWID!.product.title}
             </h1>
@@ -215,6 +217,22 @@ export default async function Page({
               </p>
             </div>
             <AddCart />
+          </div>
+          <div className="lg:hidden block">
+            <h1 className="text-secondary-foreground font-gothamBlack italic text-5xl py-4">
+              {variantWID!.product.title}
+            </h1>
+            <h3
+              dangerouslySetInnerHTML={{
+                __html: variantWID!.product.description,
+              }}
+              className="text-secondary-foreground text-lg font-gothamBook pb-8"
+            />
+            <p className="text-secondary-foreground font-gothamLight text-lg">
+              <span className="font-gotham">{searchParams.name}</span>{" "}
+              {searchParams.features}
+            </p>
+            <Performance variantWID={variantWID!} />
           </div>
         </div>
         <Technology variantWID={variantWID!} />
