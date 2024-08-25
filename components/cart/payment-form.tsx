@@ -25,6 +25,7 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
 
   const { execute } = useAction(createOrder, {
     onSuccess: (data) => {
+      console.log("am primit datele");
       if (errorMessage) {
         console.log("errorMessage");
         console.log(errorMessage);
