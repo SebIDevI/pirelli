@@ -20,7 +20,7 @@ function Head() {
     <div className="relative h-screen w-full bg-gradient-to-l dark:from-[#000000] dark:to-[#202020] from-[#ffffff] to-[#dadada] flex items-center overflow-x-hidden overflow-y-clip">
       <motion.div
         style={{ rotate: scale, translateY: "-54%" }}
-        className="absolute w-full h-auto origin-center lg:top-full lg:-translate-y-full lg:left-[30%] top-[98%] flex items-center justify-center p-6 md:p-12 aspect-square"
+        className="absolute w-full h-auto origin-center lg:top-full lg:-translate-y-full lg:left-[30%] top-[98%] flex items-center justify-center p-6 aspect-square"
       >
         <Image
           src={roata}

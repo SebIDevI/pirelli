@@ -81,7 +81,10 @@ function Products() {
             <CarouselContent>
               {prods.map((prod, i) => (
                 <CarouselItem className="sm:basis-1/2 basis-full" key={i}>
-                  <div className="flex flex-col bg-secondary max-w-[500px] shadow-lg font-gotham justify-between text-center p-6 pb-0 gap-6 h-full">
+                  <Link
+                    href={prod.link}
+                    className="flex flex-col bg-secondary max-w-[500px] shadow-lg font-gotham justify-between text-center p-6 pb-0 gap-6 h-full"
+                  >
                     <div className="space-y-6">
                       <h5 className="uppercase text-primary font-gothamBlack">
                         {prod.mini}
@@ -94,7 +97,7 @@ function Products() {
                       </p>
                     </div>
                     <Image src={prod.img} alt={`Tyre ${prod.name}`} />
-                  </div>
+                  </Link>
                 </CarouselItem>
               ))}
             </CarouselContent>
