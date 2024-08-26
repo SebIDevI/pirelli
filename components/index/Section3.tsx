@@ -4,6 +4,12 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import dubai from "@/public/urus.png";
+import urusBG from "@/public/urus-mov-full.jpg";
+import rollsBG from "@/public/rolls-royce-full.jpg";
+import maybachBG from "@/public/maybach-full.jpg";
+import porscheBG from "@/public/turbo-s-full.jpg";
+import ferrariBG from "@/public/f8-full.jpg";
+import goptsuteBG from "@/public/g800-full.jpg";
 import dreaming from "@/public/rolls.png";
 import racetrack from "@/public/maybach.png";
 import porsche from "@/public/porsche.png";
@@ -19,42 +25,42 @@ function Section3() {
       title: "lamborghini",
       header: "LAMBORGHINI URUS",
       text: "Urus a fost expediat din Ungaria pentru o schimbare completă: Full 1016industries Vision Widebody, cu roți VELOS de 23 inchi și înveliș complet cu pragurile ușii în mov Bespoke Satin.",
-      img: dubai,
+      img: [dubai, urusBG],
       link: "https://www.instagram.com/reel/C3AVWMhKKhz/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "ROLLS ROYCE",
       header: "ROLLS ROYCE CULLINAN MANSORY",
       text: "Una dintre numeroasele construcții Mansory, dar preferata noastră, gri pe portocaliu nu dezamăgește niciodată.",
-      img: dreaming,
+      img: [dreaming, rollsBG],
       link: "https://www.instagram.com/p/C8EyFjEqjae/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "MAYBACH BRABUS",
       header: "MAYBACH BRABUS S580",
       text: "Primul din lume. Din Bulgaria, acest Maybach a primit tratamentul complet Brabus cu Monoblock M de 21” și un Wrap TwoTone.",
-      img: racetrack,
+      img: [racetrack, maybachBG],
       link: "https://www.instagram.com/p/Cou8pNbKrrX/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "PORSCHE",
       header: "992 TURBO S TECHART",
       text: "Primul Techart 992 Turbo S din lume, și fostul deținător al recordului mondial pentru cel mai rapid 992 Turbo S: 4,0 100-200 KMH, 2,2 0-100 KMH, 9,5 1/4 mile în 2021.",
-      img: porsche,
+      img: [porsche, porscheBG],
       link: "https://www.instagram.com/p/Ctmo7bKq8Wf/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "FERRARI",
       header: "FERRARI F8 TRIBUTO",
       text: "Project Car-ul nostru 2021-2022, Ferrari F8 Tributo cu un kit de caroserie complet 1016industries, evacuare Capristo și roți forjate Yido de 21-22 inci.",
-      img: ferrari,
+      img: [ferrari, ferrariBG],
       link: "https://www.instagram.com/p/CxNMVLrqaZQ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
     {
       title: "BRABUS",
       header: "BRABUS G800 SQUARED WIDESTAR",
       text: "Primul din lume. Primul client a livrat kit-ul Widestar pentru G63 4x4 Squared. Împreună cu FI Exhaust ULTRA și Stage 2 Tune-ul nostru, ajungând până la 800 CP, împreună cu un set de roți VOSSEN LC3-01T de 24 inchi.",
-      img: brabus,
+      img: [brabus, goptsuteBG],
       link: "https://www.instagram.com/p/CzQ_mjlK0kR/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
     },
   ];
@@ -136,17 +142,48 @@ function Section3() {
                   className="relative w-full h-full"
                 >
                   <Image
-                    src={date.img}
+                    src={date.img[0]}
                     alt={`${date.header} story`}
                     className={`lg:absolute h-auto w-full lg:w-auto ${
                       date.title === "MAYBACH BRABUS"
                         ? "-top-16 -right-10"
                         : date.title === "PORSCHE"
                         ? "-top-10 right-20"
+                        : date.title === "lamborghini"
+                        ? "-right-10"
                         : "-top-0 right-0"
                     } ${date.title === "FERRARI" && "scale-75"} ${
                       date.title === "lamborghini" && "scale-90"
                     } ${date.title === "BRABUS" && "scale-[0.85]"}`}
+                  />
+                  <Image
+                    src={date.img[1]}
+                    alt={`${date.header} story`}
+                    className={`lg:absolute h-auto w-full lg:w-auto ${
+                      date.title === "MAYBACH BRABUS"
+                        ? "-top-16 -right-10"
+                        : date.title === "PORSCHE"
+                        ? "-top-10 right-20"
+                        : date.title === "lamborghini"
+                        ? "-right-10"
+                        : "-top-0 right-0"
+                    } ${date.title === "FERRARI" && "scale-75"} ${
+                      date.title === "lamborghini" && "scale-90"
+                    } ${date.title === "BRABUS" && "scale-[0.85]"} ${
+                      date.title === "MAYBACH BRABUS"
+                        ? "[clip-path:polygon(10%_15%,75%_0,75%_85%,10%_75%)]"
+                        : date.title === "lamborghini"
+                        ? "[clip-path:polygon(0%_0%,80%_10%,80%_85%,0%_100%)]"
+                        : date.title === "ROLLS ROYCE"
+                        ? "[clip-path:polygon(0%_10%,70%_20%,70%_85%,0%_100%)]"
+                        : date.title === "PORSCHE"
+                        ? "[clip-path:polygon(15%_25%,80%_40%,80%_80%,15%_100%)]"
+                        : date.title === "FERRARI"
+                        ? "[clip-path:polygon(0%_0%,100%_0,85%_80%,15%_80%)]"
+                        : date.title === "BRABUS"
+                        ? "[clip-path:polygon(0%_0%,70%_20%,70%_80%,0%_100%)]"
+                        : ""
+                    }`}
                   />
                 </motion.div>
               </AnimatePresence>

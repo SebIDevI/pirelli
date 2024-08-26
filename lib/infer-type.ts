@@ -46,6 +46,18 @@ export type TotalOrders = InferResultType<
   }
 >;
 
+export type AllOrders = InferResultType<
+  "orders",
+  {
+    orderProduct: {
+      with: {
+        product: { with: { productImages: true } };
+        productVariants: true;
+      };
+    };
+  }
+>;
+
 export type TagsWithVariantsAndAll = InferResultType<
   "variantTags",
   {

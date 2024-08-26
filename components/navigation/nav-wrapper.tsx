@@ -8,9 +8,10 @@ export const NavWrapper = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const pathname = window.location.pathname;
+  const [pathname, setPathname] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
+    setPathname(window.location.pathname);
     const handleScroll = () => {
       if (window.scrollY >= 80) {
         setIsScrolled(true);

@@ -5,6 +5,9 @@ import { createSafeActionClient } from "next-safe-action";
 import { auth } from "../auth";
 import { db } from "..";
 import { orderProduct, orders } from "../schema";
+import { generateOrderXML } from "./xml-generate/generate-order-xml";
+import { eq } from "drizzle-orm";
+import { uploadXml } from "@/app/api/xml/upload-xml";
 
 const action = createSafeActionClient();
 
@@ -42,6 +45,22 @@ export const createOrder = action(
         });
       }
     );
+
+    const theOrder = await db.query.orders.findFirst({
+      where: eq(orders.id, order[0].id),
+      with: {
+        orderProduct: {
+          with: {
+            product: { with: { productImages: true } },
+            productVariants: true,
+          },
+        },
+      },
+    });
+
+    const generatedXML = generateOrderXML({ order: theOrder! });
+    await uploadXml(generatedXML);
+
     return { success: "Order has been added" };
   }
 );

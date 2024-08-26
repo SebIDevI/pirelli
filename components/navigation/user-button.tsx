@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import Image from "next/image";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { LogOut, Moon, Settings, Sun, TruckIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Switch } from "../ui/switch";
@@ -24,7 +24,7 @@ export const UserButton = ({ user }: Session) => {
   const { setTheme, theme } = useTheme();
   const [checked, setChecked] = useState(false);
   const router = useRouter();
-  const pathname = window.location.pathname;
+  const [pathname, setPathname] = useState("");
 
   function switchState() {
     switch (theme) {
@@ -36,7 +36,9 @@ export const UserButton = ({ user }: Session) => {
         return setChecked(false);
     }
   }
-
+  useEffect(() => {
+    setPathname(window.location.pathname);
+  }, []);
   if (user)
     return (
       <div>

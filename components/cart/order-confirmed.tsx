@@ -9,6 +9,7 @@ import orderConfirmed from "@/public/order-confirmed.json";
 
 export default function OrderConfirmed() {
   const { setCheckoutProgress, setCartOpen } = useCartStore();
+
   return (
     <div className="flex flex-col items-center gap-4">
       <motion.div
@@ -19,16 +20,26 @@ export default function OrderConfirmed() {
         <Lottie className="h-56 my-4" animationData={orderConfirmed} />
       </motion.div>
       <h2 className="text-2xl font-medium">Mulțumim pentru achiziție</h2>
-      <Link href={"/dashboard/orders"}>
-        <Button
+      <div className="flex gap-4">
+        <Link
+          href={"/dashboard/orders"}
           onClick={() => {
             setCheckoutProgress("cart-page");
             setCartOpen(false);
           }}
         >
-          Vedeți comanda
+          <Button>Vedeți comanda</Button>
+        </Link>
+
+        <Button
+          onClick={() => {
+            setCheckoutProgress("cart-page");
+          }}
+          variant={"outline"}
+        >
+          Cancel
         </Button>
-      </Link>
+      </div>
     </div>
   );
 }

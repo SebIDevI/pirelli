@@ -64,6 +64,7 @@ export default function ProductTags({
   const [tech, setTech] = useState<string[]>([]);
   const [fam, setFam] = useState<string[]>([]);
   const [util, setUtil] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // season=ALL%20SEASON&vehicleType=CAR,%20SUV
 
@@ -266,9 +267,12 @@ export default function ProductTags({
         <div className="text-secondary">
           <div className="w-full text-secondary-foreground flex items-center gap-4 mt-4">
             <div className="w-full flex gap-0">
-              <Sheet>
+              <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <div className="h-full">
-                  <SheetTrigger className="border-2 lg:rounded-l-xl rounded-xl lg:rounded-none dark:bg-yellow-500 bg-yellow-400 dark:border-yellow-500 border-yellow-400 relative text-secondary-foreground dark:hover:bg-yellow-600 dark:hover:border-yellow-600 hover:bg-yellow-500 hover:border-yellow-500 px-3 text-base font-gothamBook flex items-center justify-between p-2 gap-3 transition">
+                  <SheetTrigger
+                    onClick={() => setIsOpen(true)}
+                    className="border-2 lg:rounded-l-xl rounded-xl lg:rounded-none dark:bg-yellow-500 bg-yellow-400 dark:border-yellow-500 border-yellow-400 relative text-secondary-foreground dark:hover:bg-yellow-600 dark:hover:border-yellow-600 hover:bg-yellow-500 hover:border-yellow-500 px-3 text-base font-gothamBook flex items-center justify-between p-2 gap-3 transition"
+                  >
                     <p>Toate filtrele</p> <RxMixerHorizontal />
                   </SheetTrigger>
                   <SheetContent className="lg:w-[600px] max-w-none bg-[#e0e0e0] dark:bg-[#1f1f1f] border-0 text-secondary-foreground px-0 h-auto">
@@ -322,6 +326,7 @@ export default function ProductTags({
                                             <Checkbox
                                               onCheckedChange={() => {
                                                 setFilter(type.val);
+                                                setIsOpen(false);
                                               }}
                                               className="w-6 h-6"
                                               disabled={
