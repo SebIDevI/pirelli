@@ -24,6 +24,7 @@ export default function Payment() {
           amount: totalRoundedPrice,
           mode: "payment",
           currency: "ron",
+          locale: "ro",
           appearance: { theme: theme === "dark" ? "night" : "flat" },
         }}
       >

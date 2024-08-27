@@ -7,12 +7,17 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+import { StripeElementLocale } from "@stripe/stripe-js";
 import { Button } from "../ui/button";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { createPaymentIntent } from "@/server/actions/create-payment-intent";
 import { useAction } from "next-safe-action/hooks";
 import { createOrder } from "@/server/actions/create-order";
 import { toast } from "sonner";
+import { Switch } from "../ui/switch";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from "../ui/input";
 
 export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
   const stripe = useStripe();
@@ -20,6 +25,9 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
   const { cart, setCheckoutProgress, clearCart } = useCartStore();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isJuridic, setIsJuridic] = useState(false);
+  const [firmName, setFirmName] = useState("");
+  const [cui, setCui] = useState("");
 
   // const totalRoundedPrice = Math.round(+(totalPrice * 100).toFixed(2)) / 100;
 
@@ -101,13 +109,73 @@ export default function PaymentForm({ totalPrice }: { totalPrice: number }) {
     }
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsJuridic(e.target.value === "juridic");
+  };
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <AddressElement options={{ mode: "shipping" }} />
+      <div className="py-4">
+        <RadioGroup
+          defaultValue="fizic"
+          className="flex gap-4 items-center justify-start"
+          onValueChange={(e) => setIsJuridic(e === "juridic")}
+        >
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="fizic" id="option-one" />
+            <Label htmlFor="option-one">Persoană fizică</Label>
+          </div>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value="juridic" id="option-two" />
+            <Label htmlFor="option-two">Persoană juridică</Label>
+          </div>
+        </RadioGroup>
+      </div>
+      {isJuridic && (
+        <div className="pb-2 space-y-1">
+          <div>
+            <label className="space-y-1">
+              <span>Numele companiei</span>
+              <Input
+                className="bg-muted border-muted text-base p-4 h-auto py-3 ring-0 focus-visible:ring-0 focus-visible:"
+                placeholder="Numele firmei"
+                type="text"
+                name="companyName"
+                onChange={(e) => setFirmName(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div>
+            <label className="space-y-1">
+              <span>CUI</span>
+              <Input
+                className="bg-muted border-muted text-base p-4 h-auto py-3 ring-0 focus-visible:ring-0 focus-visible:"
+                placeholder="CUI-ul firmei"
+                type="text"
+                name="cui"
+                onChange={(e) => setCui(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+        </div>
+      )}
+      <AddressElement
+        options={{
+          autocomplete: {
+            mode: "automatic",
+          },
+          mode: "shipping",
+          allowedCountries: ["RO"],
+          fields: { phone: "always" },
+        }}
+      />
       <Button
         className="my-4 w-full"
-        disabled={!stripe || !elements || isLoading}
+        disabled={
+          !stripe || !elements || isLoading || (isJuridic && !firmName && !cui)
+        }
       >
         {isLoading ? "Procesăm comanda..." : "Plătiți acum"}
       </Button>

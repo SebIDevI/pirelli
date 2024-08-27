@@ -156,7 +156,7 @@ export default function Products({ products }: ProductsTypes) {
                   </h2>
                 </div>
                 <div>
-                  <Badge className="text-base" variant={"secondaryLocal"}>
+                  <Badge className="text-base" variant={"default"}>
                     {formatPrice(product.productVariants[0].price)}
                   </Badge>
                 </div>
