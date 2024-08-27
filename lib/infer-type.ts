@@ -70,3 +70,10 @@ export type TagsWithVariantsAndAll = InferResultType<
     };
   }
 >;
+
+export type ReviewsWithUser = InferResultType<
+  "reviews",
+  {
+    user: true;
+  }
+>;

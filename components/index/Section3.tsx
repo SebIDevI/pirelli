@@ -84,7 +84,7 @@ function Section3() {
             <TabsList className="rounded-none flex-wrap">
               {dates.map((date, index) => (
                 <TabsTrigger
-                  className="text-lg rounded-none p-3 px-5 text-secondary-foreground hover:text-secondary-foreground hover:bg-background uppercase"
+                  className="text-base rounded-none p-3 px-5 text-secondary-foreground hover:text-secondary-foreground hover:bg-background uppercase sm:text-lg"
                   value={date.title}
                   key={index}
                 >
@@ -142,9 +142,16 @@ function Section3() {
                   className="relative w-full h-full"
                 >
                   <Image
+                    width={5}
+                    height={5}
                     src={date.img[0]}
                     alt={`${date.header} story`}
-                    className={`lg:absolute h-auto w-full lg:w-auto ${
+                    className={`h-auto w-full lg:w-auto opacity-0 lg:hidden`}
+                  />
+                  <Image
+                    src={date.img[0]}
+                    alt={`${date.header} story`}
+                    className={`absolute top-0 h-auto w-full lg:w-auto ${
                       date.title === "MAYBACH BRABUS"
                         ? "-top-16 -right-10"
                         : date.title === "PORSCHE"
@@ -159,7 +166,7 @@ function Section3() {
                   <Image
                     src={date.img[1]}
                     alt={`${date.header} story`}
-                    className={`lg:absolute h-auto w-full lg:w-auto ${
+                    className={`absolute top-0 h-auto w-full lg:w-auto ${
                       date.title === "MAYBACH BRABUS"
                         ? "-top-16 -right-10"
                         : date.title === "PORSCHE"

@@ -34,7 +34,9 @@ export default function AddCart() {
         >
           <Minus size={18} strokeWidth={3} />
         </Button>
-        <Button className="flex-1">Cantitate: {quantity}</Button>
+        <Button className="flex-1" variant={"secondary"}>
+          Cantitate: {quantity}
+        </Button>
         <Button variant={"secondary"} className="text-primary">
           <Plus
             onClick={() => {
@@ -58,7 +60,7 @@ export default function AddCart() {
             image,
           });
         }}
-        className="w-1/2 min-w-20"
+        className="w-1/2 min-w-20 text-lg"
       >
         Adăugați în coș
       </Button>

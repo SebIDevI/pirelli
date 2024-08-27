@@ -11,6 +11,9 @@ import Tagz from "@/components/products/tags";
 import Indici from "@/components/products/indici";
 import Performance from "@/components/products/performance";
 import Technology from "@/components/products/technology";
+import Reviews from "@/components/reviews/reviews";
+import { getReviewAverage } from "@/lib/review-average";
+import Stars from "@/components/reviews/stars";
 
 export const revalidate = 60 * 60;
 
@@ -39,6 +42,7 @@ export default async function Page({
     with: {
       product: {
         with: {
+          reviews: true,
           productVariants: {
             with: { variantTags: true },
           },
@@ -87,48 +91,143 @@ export default async function Page({
     acc[item.rim].push(item); // Push the item into the corresponding array
     return acc;
   }, {} as Record<string, VariantsWithImagesTags[]>);
-  return (
-    <div className="bg-white dark:bg-black pt-10">
-      <div className="container">
-        <h2 className="w-full pt-20 mb-6 text-secondary-foreground font-gothamXLight text-xl">
-          <div className="font-gothamBook uppercase text-sm">
-            <Link
-              href={"/"}
-              className="uppercase font-normal relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
-            >
-              Homepage
-            </Link>{" "}
-            /{" "}
-            <Link
-              href={"/catalog"}
-              className="uppercase font-normal relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
-            >
-              Catalog anvelope
-            </Link>{" "}
-            /{" "}
-            <span className="font-gothamBlack">
-              {variantWID!.product.title}
-            </span>
-          </div>
-        </h2>
-        <div className="flex flex-col gap-16 w-full lg:flex-row items-start justify-between font-gothamLight">
-          <div className="w-full flex-1">
-            <div className="w-full flex">
-              <ProductShowcase images={images} />
+
+  if (variantWID) {
+    const reviewAvg = getReviewAverage(
+      variantWID.product.reviews.map((r) => r.rating)
+    );
+    return (
+      <div className="bg-white dark:bg-black pt-10">
+        <div className="container">
+          <h2 className="w-full pt-20 mb-6 text-secondary-foreground font-gothamXLight text-xl">
+            <div className="font-gothamBook uppercase text-sm">
+              <Link
+                href={"/"}
+                className="uppercase font-normal relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
+              >
+                Homepage
+              </Link>{" "}
+              /{" "}
+              <Link
+                href={"/catalog"}
+                className="uppercase font-normal relative after:absolute after:w-0 after:h-px after:bottom-0 after:left-0 after:bg-primary hover:after:w-full after:transition-all after:duration-500"
+              >
+                Catalog anvelope
+              </Link>{" "}
+              /{" "}
+              <span className="font-gothamBlack">
+                {variantWID.product.title}
+              </span>
             </div>
-            <div className="pt-4">
-              <Tagz
-                variantTags={variantWID!}
-                title={variantWID!.product.title}
+          </h2>
+          <div className="flex flex-col gap-16 w-full lg:flex-row items-start justify-between font-gothamLight">
+            <div className="w-full flex-1">
+              <div className="w-full flex">
+                <ProductShowcase images={images} />
+              </div>
+              <div className="pt-4">
+                <Tagz
+                  variantTags={variantWID!}
+                  title={variantWID.product.title}
+                />
+              </div>
+              <div className="hidden lg:block">
+                <h1 className="text-secondary-foreground font-gothamBlack italic text-5xl py-4">
+                  {variantWID.product.title}
+                </h1>
+                <h3
+                  dangerouslySetInnerHTML={{
+                    __html: variantWID.product.description,
+                  }}
+                  className="text-secondary-foreground text-lg font-gothamBook pb-8"
+                />
+                <p className="text-secondary-foreground font-gothamLight text-lg">
+                  <span className="font-gotham">{searchParams.name}</span>{" "}
+                  {searchParams.features}
+                </p>
+                <Performance variantWID={variantWID} />
+              </div>
+            </div>
+            <div className="font-medium w-full flex-1 text-secondary-foreground lg:sticky top-24">
+              <h1 className="text-5xl pb-2 font-gothamBlack">
+                {variantWID.product.title}
+              </h1>
+              <div
+                className="py-2 text-xl"
+                dangerouslySetInnerHTML={{
+                  __html: variantWID!.product.smalldesc,
+                }}
               />
+              <Stars
+                rating={reviewAvg}
+                totalReviews={variantWID.product.reviews.length}
+              />
+              <p className="my-2">
+                Mărime selectată:{" "}
+                <span className="bg-secondary-foreground/10 px-3 py-0.5 rounded-full">
+                  {variantWID.size}
+                </span>
+              </p>
+              <div className="space-y-4 my-6">
+                <div className="space-y-2">
+                  <p className="">Alegeți altă mărime: </p>
+                  <div className="flex gap-2">
+                    <TransformedRims
+                      transformedRims={transformedRims}
+                      title={variantWID.product.title}
+                      imageUrl={images[0].url}
+                    />
+                  </div>
+                </div>
+                <Indici
+                  variants={variants}
+                  fullSize={variantWID.fullSize}
+                  omologare={
+                    variantWID!.variantTags.filter((v) =>
+                      v.tag.includes("Omologare: ")
+                    ).length
+                      ? variantWID.variantTags
+                          .filter((v) => v.tag.includes("Omologare: "))[0]
+                          .tag.replace("Omologare: ", "")
+                      : "-"
+                  }
+                  tech={
+                    variantWID.variantTags.filter(
+                      (v) =>
+                        v.tag === "s-i" ||
+                        v.tag === "r-f" ||
+                        v.tag === "ncs" ||
+                        v.tag === "elect"
+                    ).length
+                      ? variantWID.variantTags.filter(
+                          (v) =>
+                            v.tag === "s-i" ||
+                            v.tag === "r-f" ||
+                            v.tag === "ncs" ||
+                            v.tag === "elect"
+                        )[0].tag
+                      : "-"
+                  }
+                />
+              </div>
+              <div className="flex gap-2 pt-4">
+                <p className="font-bold text-secondary-foreground font-gotham text-2xl">
+                  <span className="text-sm text-secondary-foreground font-gotham">
+                    PREȚ:{" "}
+                  </span>
+                  {/* {loading && " Loading..."} */}
+                  {variantWID.price && formatPrice(variantWID!.price)}
+                </p>
+              </div>
+              <AddCart />
             </div>
-            <div className="hidden lg:block">
+            <div className="lg:hidden block">
               <h1 className="text-secondary-foreground font-gothamBlack italic text-5xl py-4">
-                {variantWID!.product.title}
+                {variantWID.product.title}
               </h1>
               <h3
                 dangerouslySetInnerHTML={{
-                  __html: variantWID!.product.description,
+                  __html: variantWID.product.description,
                 }}
                 className="text-secondary-foreground text-lg font-gothamBook pb-8"
               />
@@ -136,107 +235,13 @@ export default async function Page({
                 <span className="font-gotham">{searchParams.name}</span>{" "}
                 {searchParams.features}
               </p>
-              <Performance variantWID={variantWID!} />
+              <Performance variantWID={variantWID} />
             </div>
           </div>
-          <div className="font-medium w-full flex-1 text-secondary-foreground lg:sticky top-24">
-            <h1 className="text-5xl pb-2 font-gothamBlack">
-              {variantWID!.product.title}
-            </h1>
-            <div
-              className="py-2 text-xl"
-              dangerouslySetInnerHTML={{
-                __html: variantWID!.product.smalldesc,
-              }}
-            />
-            <p className="my-2">
-              Mărime selectată:{" "}
-              <span className="bg-secondary-foreground/10 px-3 py-0.5 rounded-full">
-                {variantWID!.size}
-              </span>
-            </p>
-            <div className="space-y-4 my-6">
-              <div className="space-y-2">
-                <p className="">Alegeți altă mărime: </p>
-                <div className="flex gap-2">
-                  <TransformedRims
-                    transformedRims={transformedRims}
-                    title={variantWID!.product.title}
-                    imageUrl={images[0].url}
-                  />
-                </div>
-              </div>
-              <Indici
-                variants={variants}
-                fullSize={variantWID!.fullSize}
-                omologare={
-                  variantWID!.variantTags.filter((v) =>
-                    v.tag.includes("Omologare: ")
-                  ).length
-                    ? variantWID!.variantTags
-                        .filter((v) => v.tag.includes("Omologare: "))[0]
-                        .tag.replace("Omologare: ", "")
-                    : "-"
-                }
-                tech={
-                  variantWID!.variantTags.filter(
-                    (v) =>
-                      v.tag === "s-i" ||
-                      v.tag === "r-f" ||
-                      v.tag === "ncs" ||
-                      v.tag === "elect"
-                  ).length
-                    ? variantWID!.variantTags.filter(
-                        (v) =>
-                          v.tag === "s-i" ||
-                          v.tag === "r-f" ||
-                          v.tag === "ncs" ||
-                          v.tag === "elect"
-                      )[0].tag
-                    : "-"
-                }
-              />
-            </div>
-            {/* <p className="py-2">
-              Omologare:{" "}
-              {variantWID!.variantTags.filter((v) =>
-                v.tag.includes("Omologare: ")
-              ).length
-                ? variantWID!.variantTags
-                    .filter((v) => v.tag.includes("Omologare: "))[0]
-                    .tag.replace("Omologare: ", "")
-                : "-"}
-            </p> */}
-            <div className="flex gap-2 pt-4">
-              <p className="font-bold text-secondary-foreground font-gotham text-2xl">
-                <span className="text-sm text-secondary-foreground font-gotham">
-                  PREȚ:{" "}
-                </span>
-                {/* {loading && " Loading..."} */}
-                {variantWID!.price && formatPrice(variantWID!.price)}
-              </p>
-            </div>
-            <AddCart />
-          </div>
-          <div className="lg:hidden block">
-            <h1 className="text-secondary-foreground font-gothamBlack italic text-5xl py-4">
-              {variantWID!.product.title}
-            </h1>
-            <h3
-              dangerouslySetInnerHTML={{
-                __html: variantWID!.product.description,
-              }}
-              className="text-secondary-foreground text-lg font-gothamBook pb-8"
-            />
-            <p className="text-secondary-foreground font-gothamLight text-lg">
-              <span className="font-gotham">{searchParams.name}</span>{" "}
-              {searchParams.features}
-            </p>
-            <Performance variantWID={variantWID!} />
-          </div>
+          <Technology variantWID={variantWID} />
+          <Reviews productID={variantWID.productID} />
         </div>
-        <Technology variantWID={variantWID!} />
       </div>
-    </div>
-  );
+    );
+  }
 }

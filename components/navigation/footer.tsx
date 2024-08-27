@@ -19,6 +19,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+import Image from "next/image";
+
+import anpc1 from "@/public/sol_clar.png";
+import anpc2 from "@/public/anpc_clar_1.png";
+
 function Footer() {
   return (
     <div className="w-full h-auto font-gotham bg-secondary-foreground text-primary-foreground min-h-40 pt-6">
@@ -208,6 +213,26 @@ function Footer() {
           >
             Eticheta europeana
           </Link>
+        </div>
+        <div className="flex flex-wrap w-full gap-4 items-center justify-center pb-8">
+          <Image src={anpc1} alt={"ANPC 1"} />
+          <Image src={anpc2} alt={"ANPC 2"} />
+        </div>
+      </div>
+      <div className="w-full bg-secondary-foreground">
+        <div className="bg-black/40 w-full h-full font-gothamBook p-4 text-center">
+          <div className="container">
+            <p>
+              Prowdly powered by{" "}
+              <Link
+                href="https://www.embassy-agency.com"
+                className="font-gotham hover:underline"
+              >
+                Embassy Network
+              </Link>{" "}
+              | © 2024 All rights reseverd
+            </p>
+          </div>
         </div>
       </div>
     </div>

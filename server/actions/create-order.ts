@@ -15,7 +15,7 @@ export const createOrder = action(
   createOrderSchema,
   async ({ products, status, total, paymentIntentID }) => {
     const user = await auth();
-    if (!user) return { error: "user not found" };
+    if (!user) return { error: "User-ul nu a fost găsit" };
 
     const order = await db
       .insert(orders)
@@ -61,6 +61,6 @@ export const createOrder = action(
     const generatedXML = generateOrderXML({ order: theOrder! });
     await uploadXml(generatedXML);
 
-    return { success: "Order has been added" };
+    return { success: "Comanda a fost plasată!" };
   }
 );

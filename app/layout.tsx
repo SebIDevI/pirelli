@@ -5,7 +5,7 @@ import "./globals.css";
 import Nav from "@/components/navigation/nav";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "sonner";
 import Footer from "@/components/navigation/footer";
 
 const gotham = Gotham({
@@ -56,7 +56,7 @@ export default function RootLayout({
       >
         {/* <ThemeProvider attribute="class" defaultTheme="system" enableSystem> */}
         <Nav />
-        <Toaster />
+        <Toaster richColors />
         {children}
         <Footer />
         {/* </ThemeProvider> */}
