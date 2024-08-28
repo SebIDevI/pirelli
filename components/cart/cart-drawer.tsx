@@ -43,7 +43,12 @@ export default function CartDrawer() {
         <CartProgress />
         <div className="overflow-auto p-4">
           {checkoutProgress === "cart-page" && <CartItems />}
-          {checkoutProgress === "payment-page" && <Payment />}
+          {checkoutProgress === "payment-page" && (
+            <>
+              <Payment />
+              <div className="h-[50vh] md:hidden"></div>
+            </>
+          )}
           {checkoutProgress === "confirmation-page" && <OrderConfirmed />}
         </div>
       </DrawerContent>
