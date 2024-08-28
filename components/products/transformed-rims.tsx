@@ -49,7 +49,7 @@ const TransformedRims: React.FC<TransformedRimsProps> = ({
           </SheetTrigger>
         );
       })}
-      <SheetContent className="lg:w-[600px] max-w-none bg-[#e0e0e0] dark:bg-[#1f1f1f] border-0 text-secondary-foreground px-0 h-auto sm:max-w-[500px]">
+      <SheetContent className="lg:w-[600px] max-w-none bg-[#e0e0e0] dark:bg-[#1f1f1f] border-0 text-secondary-foreground px-0 h-screen sm:max-w-[500px]">
         <SheetHeader className="px-6 py-2">
           <SheetTitle className="uppercase font-gothamBlack text-2xl text-secondary-foreground">
             Selectează mărimea
@@ -236,7 +236,7 @@ const TransformedRims: React.FC<TransformedRimsProps> = ({
             </SheetContent>
           </Sheet>
         </div>
-        <Tabs defaultValue={defVal}>
+        <Tabs defaultValue={defVal} className="h-full">
           <div className="px-6">
             <TabsList className="w-full">
               {Object.keys(transformedRims).map((rim2, k) => (
@@ -250,7 +250,11 @@ const TransformedRims: React.FC<TransformedRimsProps> = ({
             const aFost: string[] = [];
 
             return (
-              <TabsContent value={rim2} key={k}>
+              <TabsContent
+                value={rim2}
+                key={k}
+                className="h-full overflow-y-scroll"
+              >
                 {transformedRims[rim2].map((tr, l) => {
                   if (!aFost.includes(tr.size)) {
                     aFost.push(tr.size);

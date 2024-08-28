@@ -59,24 +59,33 @@ export default function ProductTags({
   const router = useRouter();
   const params = useSearchParams();
   const { slug } = useParams();
-  const [season, setSeason] = useState<string[]>([]);
-  const [vehicleType, setVehicleType] = useState<string[]>([]);
-  const [tech, setTech] = useState<string[]>([]);
-  const [fam, setFam] = useState<string[]>([]);
-  const [util, setUtil] = useState<string[]>([]);
+  const [season, setSeason] = useState<Set<string>>(new Set());
+  const [vehicleType, setVehicleType] = useState<Set<string>>(new Set());
+  const [tech, setTech] = useState<Set<string>>(new Set());
+  const [fam, setFam] = useState<Set<string>>(new Set());
+  const [util, setUtil] = useState<Set<string>>(new Set());
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  // season=ALL%20SEASON&vehicleType=CAR,%20SUV
-
   const setFilter = (type: string) => {
+    const newSeason = new Set(season);
+    const newVehicleType = new Set(vehicleType);
+    const newTech = new Set(tech);
+    const newFam = new Set(fam);
+    const newUtil = new Set(util);
+
+    const toggleSet = (set: Set<string>, value: string) => {
+      if (set.has(value)) {
+        set.delete(value);
+      } else {
+        set.add(value);
+      }
+    };
+
     if (type === "ALL SEASON" || type === "WINTER" || type === "SUMMER") {
-      if (season.includes(type)) season.splice(season.indexOf(type), 1);
-      else season.push(type);
+      toggleSet(newSeason, type);
     }
     if (type === "CARZ" || type === "SUV" || type === "VAN") {
-      if (vehicleType.includes(type))
-        vehicleType.splice(vehicleType.indexOf(type), 1);
-      else vehicleType.push(type);
+      toggleSet(newVehicleType, type);
     }
     if (
       type === "r-f" ||
@@ -86,12 +95,10 @@ export default function ProductTags({
       type === "s-i" ||
       type === "rfwd"
     ) {
-      if (tech.includes(type)) tech.splice(tech.indexOf(type), 1);
-      else tech.push(type);
+      toggleSet(newTech, type);
     }
     if (type === "Sport") {
-      if (util.includes(type)) util.splice(util.indexOf(type), 1);
-      else util.push(type);
+      toggleSet(newUtil, type);
     }
     if (
       type === "POWERGY" ||
@@ -100,28 +107,25 @@ export default function ProductTags({
       type === "SCORPION" ||
       type === "CARRIER"
     ) {
-      if (fam.includes(type)) fam.splice(fam.indexOf(type), 1);
-      else fam.push(type);
+      toggleSet(newFam, type);
     }
 
-    let string = "?";
-    if (season.length) string += `season=${season.join(", ")}`;
-    if (vehicleType.length) {
-      string += `${string !== "?" ? "&" : ""}vehicleType=${vehicleType.join(
-        ", "
-      )}`;
-    }
-    if (tech.length) {
-      string += `${string !== "?" ? "&" : ""}tech=${tech.join(", ")}`;
-    }
-    if (fam.length) {
-      string += `${string !== "?" ? "&" : ""}family=${fam.join(", ")}`;
-    }
-    if (util.length) {
-      string += `${string !== "?" ? "&" : ""}utils=${util.join(", ")}`;
-    }
+    setSeason(newSeason);
+    setVehicleType(newVehicleType);
+    setTech(newTech);
+    setFam(newFam);
+    setUtil(newUtil);
 
-    router.push(string, { scroll: false });
+    const params = new URLSearchParams();
+
+    if (newSeason.size) params.set("season", Array.from(newSeason).join(", "));
+    if (newVehicleType.size)
+      params.set("vehicleType", Array.from(newVehicleType).join(", "));
+    if (newTech.size) params.set("tech", Array.from(newTech).join(", "));
+    if (newFam.size) params.set("family", Array.from(newFam).join(", "));
+    if (newUtil.size) params.set("utils", Array.from(newUtil).join(", "));
+
+    router.push(`?${params.toString()}`, { scroll: false });
   };
 
   const filtersLocal = [
