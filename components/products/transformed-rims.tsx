@@ -36,10 +36,11 @@ const TransformedRims: React.FC<TransformedRimsProps> = ({
 }) => {
   const [defVal, setDefVal] = useState<string>();
   const [currSize, setCurrSize] = useState("size1");
+  const [isOpen, setIsOpen] = useState(false);
 
   const MImage = useMemo(() => motion(Image), []);
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       {Object.keys(transformedRims).map((rim, i) => {
         return (
           <SheetTrigger key={i} onClick={() => setDefVal(rim)}>
@@ -238,9 +239,9 @@ const TransformedRims: React.FC<TransformedRimsProps> = ({
         </div>
         <Tabs defaultValue={defVal} className="h-full">
           <div className="px-6">
-            <TabsList className="w-full">
+            <TabsList className="w-full flex gap-3 flex-wrap sm:flex-nowrap justify-center">
               {Object.keys(transformedRims).map((rim2, k) => (
-                <TabsTrigger value={rim2} key={k} className="w-full">
+                <TabsTrigger value={rim2} key={k} className="sm:w-full">
                   {rim2.replaceAll("R", "")}&quot;
                 </TabsTrigger>
               ))}
@@ -254,6 +255,7 @@ const TransformedRims: React.FC<TransformedRimsProps> = ({
                 value={rim2}
                 key={k}
                 className="h-full overflow-y-scroll"
+                onClick={() => setIsOpen(false)}
               >
                 {transformedRims[rim2].map((tr, l) => {
                   if (!aFost.includes(tr.size)) {
