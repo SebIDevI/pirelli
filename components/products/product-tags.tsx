@@ -31,6 +31,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useLoadingStore } from "@/lib/filter-store";
 
 export default function ProductTags({
   tagCount,
@@ -65,6 +66,8 @@ export default function ProductTags({
   const [fam, setFam] = useState<Set<string>>(new Set());
   const [util, setUtil] = useState<Set<string>>(new Set());
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const { setIsLoading } = useLoadingStore();
 
   const setFilter = (type: string) => {
     const newSeason = new Set(season);
@@ -329,6 +332,7 @@ export default function ProductTags({
                                             ({type.numb}){" "}
                                             <Checkbox
                                               onCheckedChange={() => {
+                                                setIsLoading(true);
                                                 setFilter(type.val);
                                                 setIsOpen(false);
                                               }}
@@ -396,9 +400,9 @@ export default function ProductTags({
                                 ({type.numb}){" "}
                               </label>
                               <Checkbox
-                                // onCheckedChange={() => {
-                                //   setFilter(type.val);
-                                // }}
+                                onCheckedChange={() => {
+                                  setIsLoading(true);
+                                }}
                                 id={`checkbox` + index}
                                 className="w-6 h-6 me-1.5"
                                 disabled={type.numb == 0 ? true : false}

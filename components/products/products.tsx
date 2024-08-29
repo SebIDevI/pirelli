@@ -1,21 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { ProductVariantsWithImagesTags } from "@/lib/infer-type";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import formatPrice from "@/lib/format-price";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useParams, useSearchParams } from "next/navigation";
 import { ProductsTypes, ProductTypes } from "@/types/filtering-types";
 import NoProduct from "./no-product";
-import { GiRaceCar } from "react-icons/gi";
-import { PiCarProfileFill, PiVanFill } from "react-icons/pi";
-import { BsFillSunFill, BsSnow } from "react-icons/bs";
-import { LuSunSnow } from "react-icons/lu";
-import { FaFlagCheckered } from "react-icons/fa";
 import Tagz from "./tags";
+import { useLoadingStore } from "@/lib/filter-store";
+import { useEffect, useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 export const revalidate = 10;
 
@@ -24,6 +20,7 @@ type VariantTagsIncludingType = {
   variantID: number;
   tag: string;
 };
+
 function includesAllTags(
   variantTags: VariantTagsIncludingType[],
   tags: string[]
@@ -34,98 +31,141 @@ function includesAllTags(
 }
 
 export default function Products({ products }: ProductsTypes) {
-  let filtered = [] as ProductTypes[];
-  let paramTags: [string[]] = [[]];
-  const tagz: string[] = [];
-  paramTags.splice(0, 1);
+  const [filteredProducts, setFilteredProducts] = useState<ProductTypes[]>([]);
+  const [isOk, setIsOk] = useState(false);
+  const { isLoading, setIsLoading } = useLoadingStore();
 
   const { slug } = useParams();
-
   const searchParams = useSearchParams();
-  if (searchParams.size > 0) {
-    const params = searchParams
-      .toString()
-      .replaceAll("+", " ")
-      .replaceAll("%2C", ",");
 
-    params.split("&").forEach((value) => {
-      paramTags.push(value.split("=")[1].split(", "));
-    });
-  }
+  useEffect(() => {
+    let filtered: ProductTypes[] = [];
+    let paramTags: [string[]] = [[]];
+    const tagz: string[] = [];
 
-  let trueSlug =
-    slug == "p zero" ||
-    slug == "pzero" ||
-    slug == "p-zero" ||
-    slug == "P ZERO" ||
-    slug == "PZERO" ||
-    slug == "P-ZERO"
-      ? "P ZERO"
-      : slug === "all-season"
-      ? "ALL SEASON"
-      : slug === "vara"
-      ? "SUMMER"
-      : slug === "carrier"
-      ? "CARRIER"
-      : (slug as string).toUpperCase();
-  if (trueSlug[0] <= "9" && trueSlug[0] >= "0") trueSlug = "";
-  else
-    paramTags.push([
-      (trueSlug as string).replaceAll("%20", "").replaceAll("_", "/"),
-    ]);
-  products
-    .filter((product) => product.productVariants.length > 0)
-    .forEach((product) => {
-      let badProductVariantID: number[] = [];
-      let unProdMin = false;
+    paramTags.splice(0, 1); // Clear the initial empty array
 
-      badProductVariantID.splice(0, 1);
-      product.productVariants.forEach((productVariant) => {
-        tagz.splice(0, tagz.length);
-        let ok = true;
-        productVariant.variantTags.forEach((tag) => {
-          tagz.push(tag.tag);
-        });
-        paramTags.forEach((row) => {
-          if (row[0][0] < "0" || row[0][0] > "9") {
-            let orIndex = 0;
-            row.forEach((ptag) => {
-              if (
-                tagz.includes(ptag === "CARZ" ? "CAR" : ptag) ||
-                (ptag === "Sport" &&
-                  productVariant.fullSize.split(" ")[1].includes("W"))
-              )
-                orIndex++;
-            });
-            if (!orIndex) ok = false;
+    if (searchParams.size > 0) {
+      const params = searchParams
+        .toString()
+        .replaceAll("+", " ")
+        .replaceAll("%2C", ",");
+
+      params.split("&").forEach((value) => {
+        paramTags.push(value.split("=")[1].split(", "));
+      });
+    }
+
+    let trueSlug =
+      slug == "p zero" ||
+      slug == "pzero" ||
+      slug == "p-zero" ||
+      slug == "P ZERO" ||
+      slug == "PZERO" ||
+      slug == "P-ZERO"
+        ? "P ZERO"
+        : slug === "all-season"
+        ? "ALL SEASON"
+        : slug === "vara"
+        ? "SUMMER"
+        : slug === "carrier"
+        ? "CARRIER"
+        : (slug as string).toUpperCase();
+
+    if (trueSlug[0] <= "9" && trueSlug[0] >= "0") trueSlug = "";
+    else
+      paramTags.push([
+        (trueSlug as string).replaceAll("%20", "").replaceAll("_", "/"),
+      ]);
+
+    products
+      .filter((product) => product.productVariants.length > 0)
+      .forEach((product) => {
+        let badProductVariantID: number[] = [];
+        let unProdMin = false;
+
+        badProductVariantID.splice(0, 1); // Clear the initial empty array
+        product.productVariants.forEach((productVariant) => {
+          tagz.splice(0, tagz.length); // Clear the tags array
+          let ok = true;
+          productVariant.variantTags.forEach((tag) => {
+            tagz.push(tag.tag);
+          });
+          paramTags.forEach((row) => {
+            if (row[0][0] < "0" || row[0][0] > "9") {
+              let orIndex = 0;
+              row.forEach((ptag) => {
+                if (
+                  tagz.includes(ptag === "CARZ" ? "CAR" : ptag) ||
+                  (ptag === "Sport" &&
+                    productVariant.fullSize.split(" ")[1].includes("W"))
+                )
+                  orIndex++;
+              });
+              if (!orIndex) ok = false;
+            }
+          });
+          if (
+            (!tagz.includes(trueSlug as string) && trueSlug !== "") ||
+            !(!filtered[0] || filtered[filtered.length - 1].id !== product.id)
+          ) {
+            ok = false;
+          }
+          if (!ok) {
+            badProductVariantID.push(productVariant.id);
+          } else {
+            unProdMin = true;
           }
         });
-        if (
-          (!tagz.includes(trueSlug as string) && trueSlug !== "") ||
-          !(!filtered[0] || filtered[filtered.length - 1].id !== product.id)
-        ) {
-          ok = false;
-        }
-        if (!ok) {
-          badProductVariantID.push(productVariant.id);
-        } else {
-          unProdMin = true;
+        if (unProdMin) {
+          filtered.push(product);
+          if (badProductVariantID.length > 0) {
+            filtered[filtered.length - 1].productVariants =
+              product.productVariants.filter(
+                (variant) => !badProductVariantID.includes(variant.id)
+              );
+          }
         }
       });
-      if (unProdMin) {
-        filtered.push(product);
-        if (badProductVariantID.length > 0) {
-          filtered[filtered.length - 1].productVariants =
-            product.productVariants.filter(
-              (variant) => !badProductVariantID.includes(variant.id)
-            );
-        }
-      }
-    });
+
+    setFilteredProducts(filtered);
+    setIsOk(true);
+    setIsLoading(false); // Set loading to false after filtering is done
+  }, [products, slug, searchParams]); // Dependencies for useEffect
+
+  if (isLoading) {
+    return (
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12 lg:grid-cols-3 mt-16">
+        {[...Array(3)].map((_, index) => (
+          <div key={index} className="space-y-4">
+            <Skeleton
+              key={index}
+              className="w-full rounded-xl aspect-square bg-[#e6e6e6]"
+            />
+            <div className="flex gap-4">
+              <Skeleton
+                key={index}
+                className="w-full rounded-full h-6 bg-[#e6e6e6]"
+              />
+              <Skeleton
+                key={index}
+                className="w-[30%] rounded-full h-6 bg-[#e6e6e6]"
+              />
+            </div>
+            <Skeleton
+              key={index}
+              className="w-full rounded-full h-6 bg-[#e6e6e6]"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <main className="grid sm:grid-cols-1 md:grid-cols-2 gap-12 lg:grid-cols-3">
-      {filtered.length > 0 ? (
-        filtered.map((product) => (
+      {filteredProducts.length > 0 ? (
+        filteredProducts.map((product) => (
           <div key={product.id}>
             <Link
               className="pt-2 text-secondary-foreground dark:text-secondary"
