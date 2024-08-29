@@ -31,7 +31,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useLoadingStore } from "@/lib/filter-store";
+import { useLoadingStore } from "@/lib/search-store";
 
 export default function ProductTags({
   tagCount,

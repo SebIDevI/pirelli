@@ -92,9 +92,12 @@ function Sel() {
               {types.subselect.map((type, index) => (
                 <DropdownMenuItem
                   key={index}
-                  className={`text-md uppercase relative cursor-pointer rounded-none hover:bg-primary hover:text-black focus:bg-primary focus:text-black h-14 px-8 m-1`}
+                  className={`text-md uppercase relative cursor-pointer rounded-none hover:bg-primary hover:text-black focus:bg-primary focus:text-black h-14 px-0 py-0`}
                 >
-                  <Link href={type.link} className="w-full">
+                  <Link
+                    href={type.link}
+                    className="w-full h-full px-8 flex items-center justify-start"
+                  >
                     {type.text}
                   </Link>
                 </DropdownMenuItem>
