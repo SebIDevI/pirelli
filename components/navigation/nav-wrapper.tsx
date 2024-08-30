@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ButtonProps } from "../ui/button";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
 export const NavWrapper = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const [pathname, setPathname] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
   useEffect(() => {
-    setPathname(window.location.pathname);
     const handleScroll = () => {
       if (window.scrollY >= 80) {
         setIsScrolled(true);
@@ -25,13 +25,19 @@ export const NavWrapper = React.forwardRef<
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [pathname]);
   return (
     <div
       ref={ref}
       className={cn(
         isScrolled ? `py-5 bg-secondary` : "py-8 bg-transparent",
-        `${pathname === "/" ? "dark" : ""}`,
+        `${
+          pathname === "/" ||
+          pathname === "/catalog" ||
+          pathname === "/catalog/marime"
+            ? "dark"
+            : ""
+        }`,
         className
       )}
       {...props}

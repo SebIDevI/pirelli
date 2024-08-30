@@ -14,8 +14,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { redirect } from "next/navigation";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const prods = [
   {
@@ -42,15 +42,26 @@ const prods = [
 ];
 
 function Products() {
+  const MotionLink = motion(Link);
   return (
     <div className="pt-8 lcontainer bg-[#f0f0f0] dark:bg-[#0e0e0e] text-secondary-foreground px-6 md:px-12 pb-8">
       <div className="container">
-        <h3 className="font-gotham text-center text-5xl mb-16 py-10 uppercase">
+        <motion.h3
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ ease: "linear", delay: 0.3 }}
+          viewport={{ margin: "-100px" }}
+          className="font-gotham text-center text-5xl mb-16 py-10 uppercase opacity-0"
+        >
           Anvelope populare
-        </h3>
+        </motion.h3>
         <div className="lg:grid hidden grid-cols-3 gap-4">
           {prods.map((prod, i) => (
-            <Link
+            <MotionLink
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ ease: "linear", delay: i === 1 ? 0.3 : 0.4 }}
+              viewport={{ margin: "-100px" }}
               href={prod.link}
               className="md:basis-[500px] basis-full h-full"
               key={i}
@@ -69,7 +80,7 @@ function Products() {
                 </div>
                 <Image src={prod.img} alt={`Tyre ${prod.name}`} />
               </div>
-            </Link>
+            </MotionLink>
           ))}
         </div>
         <div className="w-full h-full lg:hidden">

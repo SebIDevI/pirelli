@@ -50,7 +50,7 @@ export const ContactForm = () => {
   };
   return (
     <div className="mb-20">
-      <div className="min-h-[400px] bg-secondary-foreground text-secondary pt-40 pb-20">
+      <div className="min-h-[400px] bg-secondary text-secondary-foreground pt-40 pb-20">
         <div className="container">
           <p className="uppercase text-sm">
             <Link

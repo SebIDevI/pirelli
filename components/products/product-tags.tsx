@@ -21,7 +21,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import { useState } from "react";
 import {
   DropdownMenu,
@@ -32,6 +32,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useLoadingStore } from "@/lib/search-store";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { Label } from "../ui/label";
 
 export default function ProductTags({
   tagCount,
@@ -129,6 +132,26 @@ export default function ProductTags({
     if (newUtil.size) params.set("utils", Array.from(newUtil).join(", "));
 
     router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  const clearFilters = () => {
+    setSeason(new Set());
+    setVehicleType(new Set());
+    setTech(new Set());
+    setFam(new Set());
+    setUtil(new Set());
+    setIsLoading(false);
+    router.push(`?`, { scroll: false });
+  };
+
+  const hasFilters = () => {
+    return (
+      season.size > 0 ||
+      vehicleType.size > 0 ||
+      tech.size > 0 ||
+      fam.size > 0 ||
+      util.size > 0
+    );
   };
 
   const filtersLocal = [
@@ -319,8 +342,8 @@ export default function ProductTags({
                                     <ul className="text-lg flex flex-col gap-2 font-gothamLight">
                                       {filter.types.map((type, index) => (
                                         <li key={index}>
-                                          <div
-                                            className="flex w-full items-center justify-between aria-disabled:text-muted-foreground"
+                                          <Label
+                                            className="flex w-full items-center justify-between aria-disabled:text-muted-foreground text-lg cursor-pointer"
                                             aria-disabled={
                                               type.numb == 0 ? true : false
                                             }
@@ -353,7 +376,7 @@ export default function ProductTags({
                                                   : false
                                               }
                                             />
-                                          </div>
+                                          </Label>
                                         </li>
                                       ))}
                                     </ul>
@@ -367,7 +390,7 @@ export default function ProductTags({
                   </SheetContent>
                 </div>
               </Sheet>
-              <div className="md:flex hidden w-[768px]">
+              <div className="lg:flex hidden w-[625px]">
                 {filtersLocal.map(
                   (filter, i) =>
                     filter.name !== avoid && (
@@ -421,6 +444,21 @@ export default function ProductTags({
                     )
                 )}
               </div>
+              {hasFilters() && (
+                <Button className="ms-2 text-black" variant={"link"}>
+                  <Link
+                    href={"?"}
+                    onClick={() => {
+                      setIsLoading(true);
+                      clearFilters();
+                    }}
+                    scroll={false}
+                    className="inline-flex items-center gap-2 font-gothamXLight"
+                  >
+                    <X size={12} /> Șterge filtrele
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         </div>

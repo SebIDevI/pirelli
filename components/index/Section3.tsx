@@ -16,7 +16,6 @@ import porsche from "@/public/porsche.png";
 import ferrari from "@/public/ferrari.png";
 import brabus from "@/public/brabus.png";
 import { AnimatePresence, motion } from "framer-motion";
-import { Button } from "../ui/button";
 import Link from "next/link";
 
 function Section3() {
@@ -65,20 +64,45 @@ function Section3() {
     },
   ];
 
+  const MotionTabs = motion(Tabs);
+
   return (
-    <div className="pb-20 py-20 bg-secondary">
+    <div className="pb-20 py-20 bg-secondary text-secondary-foreground">
       <div className="container">
         <p className="mb-8">
-          <span className="relative text-secondary-foreground py-2 uppercase text-sm before:absolute before:top-0 before:left-0 before:w-2/3 before:h-full before:border-b-2 before:border-primary">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ ease: "linear", delay: 0.3 }}
+            viewport={{ margin: "-100px" }}
+            className="relative py-2 uppercase text-sm opacity-0"
+          >
             racebox
-          </span>
+            <motion.span
+              initial={{ width: 0 }}
+              whileInView={{ width: "66%" }}
+              transition={{ ease: "easeInOut", duration: 0.4, delay: 0.3 }}
+              viewport={{ margin: "-100px" }}
+              className="absolute h-full top-0 left-0 w-0 border-b-2 border-primary"
+            ></motion.span>
+          </motion.span>
         </p>
-        <h2 className="text-center my-10 text-5xl font-gotham text-secondary-foreground uppercase">
+        <motion.h2
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ ease: "linear", delay: 0.3 }}
+          viewport={{ margin: "-100px" }}
+          className="text-center my-10 text-5xl font-gotham text-secondary-foreground uppercase opacity-0"
+        >
           Ultimele proiecte
-        </h2>
-        <Tabs
+        </motion.h2>
+        <MotionTabs
           defaultValue={dates[0].title}
-          className="font-gotham grid lg:grid-cols-2 gap-8 "
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ ease: "linear", delay: 0.3 }}
+          viewport={{ margin: "-100px" }}
+          className="font-gotham grid lg:grid-cols-2 gap-8 opacity-0"
         >
           <div className="me-8">
             <TabsList className="rounded-none flex-wrap">
@@ -196,7 +220,7 @@ function Section3() {
               </AnimatePresence>
             </TabsContent>
           ))}
-        </Tabs>
+        </MotionTabs>
       </div>
     </div>
   );

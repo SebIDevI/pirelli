@@ -3,6 +3,8 @@ import { withUt } from "uploadthing/tw";
 
 const defaultTheme = require("tailwindcss/defaultTheme");
 
+let plugin = require("tailwindcss/plugin");
+
 const config = withUt({
   darkMode: ["class"],
   content: [
@@ -14,6 +16,8 @@ const config = withUt({
   prefix: "",
   theme: {
     screens: {
+      md900: "900px",
+      md830: "830px",
       xs: "400px",
       ...defaultTheme.screens,
     },
@@ -98,7 +102,12 @@ const config = withUt({
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ addVariant }: { addVariant: any }) {
+      addVariant("onelast", "&:nth-last-of-type(-n+2)");
+    }),
+  ],
 }) satisfies Config;
 
 export default config;
