@@ -210,13 +210,44 @@ export const ContactForm = () => {
               </Button>
             </form>
           </Form>
-          <div className="relative">
-            <div className="bg-secondary-foreground text-secondary lg:w-fit p-4 rounded-md mx-auto">
+          <div className="relative space-y-4">
+            <div className="bg-secondary-foreground text-secondary lg:w-full max-w-80 p-4 rounded-md mx-auto">
               <p className="font-gotham text-lg">Racebox Romania</p>
               <p className="font-gotham py-3 text-lg">
                 Calea Ion Zăvoi 8, București 077190
               </p>
-              <p className="">Contact: +40 (747) 859 859</p>
+              <div className="">
+                Contact:{" "}
+                <Link href="tel:+40737540746" className="hover:underline">
+                  +40 (737) 540 746
+                </Link>
+              </div>
+            </div>
+            <div className="bg-secondary-foreground text-secondary lg:w-full max-w-80 p-4 rounded-md mx-auto">
+              <p className="font-gotham text-xl pb-4">Program:</p>
+              <ul className="space-y-1">
+                <li className="flex items-center justify-between">
+                  Luni <span className="font-gotham">10 AM-7 PM</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  Marți <span className="font-gotham">10 AM-7 PM</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  Miercuri <span className="font-gotham">10 AM-7 PM</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  Joi <span className="font-gotham">10 AM-7 PM</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  Vineri <span className="font-gotham">10 AM-7 PM</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  Sâmbătă <span className="font-gotham uppercase">Închis</span>
+                </li>
+                <li className="flex items-center justify-between">
+                  Duminică <span className="font-gotham uppercase">Închis</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
