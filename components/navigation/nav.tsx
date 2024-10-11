@@ -20,7 +20,11 @@ export default async function Nav() {
             <PhoneSideNav />
           </li>
           <li className="flex flex-1 items-center justify-start">
-            <Link href={"/"} aria-label="Pirelli Logo">
+            <Link
+              href={"/"}
+              aria-label="Pirelli Logo"
+              className="hidden sm:block"
+            >
               <Logo />
             </Link>
           </li>

@@ -16,6 +16,7 @@ import { Separator } from "../ui/separator";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import roata from "@/public/hexagoane-multe.svg";
+import Logo from "./logo";
 
 export default function PhoneSideNav() {
   const pathname = usePathname();
@@ -32,7 +33,10 @@ export default function PhoneSideNav() {
       >
         <SheetHeader className="px-6 py-2">
           <SheetTitle className="uppercase font-gothamBlack text-2xl text-secondary-foreground">
-            Pirelli
+            <p className="hidden sm:block">Pirelli</p>
+            <div className="sm:hidden flex flex-1 items-center justify-start">
+              <Logo />
+            </div>
           </SheetTitle>
         </SheetHeader>
         <Separator className="mt-4 bg-yellow-400" />

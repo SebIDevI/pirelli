@@ -46,20 +46,24 @@ export const createOrder = action(
       }
     );
 
-    const theOrder = await db.query.orders.findFirst({
-      where: eq(orders.id, order[0].id),
-      with: {
-        orderProduct: {
-          with: {
-            product: { with: { productImages: true } },
-            productVariants: true,
-          },
-        },
-      },
-    });
+    // ================= UNCOMMENT WHEN YOU HAVE THE SERVER CREDENTIALS ==========================
+    //
+    //
+    //
+    // const theOrder = await db.query.orders.findFirst({
+    //   where: eq(orders.id, order[0].id),
+    //   with: {
+    //     orderProduct: {
+    //       with: {
+    //         product: { with: { productImages: true } },
+    //         productVariants: true,
+    //       },
+    //     },
+    //   },
+    // });
 
-    const generatedXML = generateOrderXML({ order: theOrder! });
-    await uploadXml(generatedXML);
+    // const generatedXML = generateOrderXML({ order: theOrder! });
+    // await uploadXml(generatedXML);
 
     return { success: "Comanda a fost plasată!" };
   }
